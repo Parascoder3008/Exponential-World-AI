@@ -1,0 +1,102 @@
+//@version=5
+// Prev-Day POC Pullback — "Nolan model" from the reel:
+// draw a fixed-range volume profile over the PREVIOUS trading day,
+// extend its Point of Control (POC) into today, and trade the first
+// clean rejection of that line in the direction of the higher-timeframe bias.
+strategy("Prev-Day POC Pullback",
+     overlay = true,
+     initial_capital = 10000,
+     default_qty_type = strategy.percent_of_equity,
+     default_qty_value = 5,
+     commission_type = strategy.commission.percent,
+     commission_value = 0.01,
+     calc_on_every_tick = false)
+
+// ── Inputs ─────────────────────────────────────────────────────────────
+rows      = input.int(50,  "Volume profile rows",            minval = 10, maxval = 200)
+useBias   = input.bool(true, "Require higher-timeframe bias")
+htfTf     = input.timeframe("240", "Bias timeframe")
+emaLen    = input.int(50,  "Bias EMA length",                minval = 5)
+stopMode  = input.string("Rejection candle", "Stop placement", options = ["Rejection candle", "ATR buffer"])
+atrMult   = input.float(1.0, "ATR buffer multiple",          step = 0.25, minval = 0.25)
+rr        = input.float(2.0, "Reward : risk target",         step = 0.5,  minval = 0.5)
+maxPerDay = input.int(1,   "Max trades per day",             minval = 1,  maxval = 5)
+tolTicks  = input.float(0, "POC touch tolerance (ticks)",    minval = 0)
+
+// ── Collect the current day's bars so the profile can be built at day end ──
+var barHi  = array.new_float()
+var barLo  = array.new_float()
+var barVol = array.new_float()
+
+var float poc        = na
+var int  tradesToday = 0
+
+newDay = ta.change(time("D")) != 0
+
+if newDay
+    n = array.size(barVol)
+    if n > 0
+        dayHi = array.max(barHi)
+        dayLo = array.min(barLo)
+        if dayHi > dayLo
+            binSize = (dayHi - dayLo) / rows
+            bins = array.new_float(rows, 0.0)
+            for i = 0 to n - 1
+                h = array.get(barHi, i)
+                l = array.get(barLo, i)
+                v = array.get(barVol, i)
+                b1 = math.max(0, math.min(rows - 1, math.floor((l - dayLo) / binSize)))
+                b2 = math.max(0, math.min(rows - 1, math.floor((h - dayLo) / binSize)))
+                span = b2 - b1 + 1
+                for b = b1 to b2
+                    array.set(bins, b, array.get(bins, b) + v / span)
+            maxIdx = 0
+            for b = 1 to rows - 1
+                if array.get(bins, b) > array.get(bins, maxIdx)
+                    maxIdx := b
+            poc := dayLo + (maxIdx + 0.5) * binSize
+    array.clear(barHi)
+    array.clear(barLo)
+    array.clear(barVol)
+    tradesToday := 0
+
+array.push(barHi, high)
+array.push(barLo, low)
+array.push(barVol, nz(volume))
+
+// ── Higher-timeframe bias ──────────────────────────────────────────────
+htfEma  = request.security(syminfo.tickerid, htfTf, ta.ema(close, emaLen), lookahead = barmerge.lookahead_off)
+bullBias = close > htfEma
+bearBias = close < htfEma
+
+// ── Rejection setups at the POC ────────────────────────────────────────
+atr = ta.atr(14)
+tol = tolTicks * syminfo.mintick
+
+// price pushes up into the POC and closes back under it → short rejection
+rejectShort = high >= poc - tol and close < poc and open < poc
+// price dips into the POC and closes back above it → long rejection
+rejectLong  = low <= poc + tol and close > poc and open > poc
+
+canTrade = not na(poc) and tradesToday < maxPerDay and strategy.position_size == 0
+
+if canTrade and rejectShort and (not useBias or bearBias)
+    stopPx = stopMode == "ATR buffer" ? poc + atr * atrMult : high + syminfo.mintick
+    risk = stopPx - close
+    if risk > 0
+        strategy.entry("Short", strategy.short)
+        strategy.exit("Short exit", "Short", stop = stopPx, limit = close - rr * risk)
+        tradesToday := tradesToday + 1
+
+if canTrade and rejectLong and (not useBias or bullBias)
+    stopPx = stopMode == "ATR buffer" ? poc - atr * atrMult : low - syminfo.mintick
+    risk = close - stopPx
+    if risk > 0
+        strategy.entry("Long", strategy.long)
+        strategy.exit("Long exit", "Long", stop = stopPx, limit = close + rr * risk)
+        tradesToday := tradesToday + 1
+
+// ── Visuals ────────────────────────────────────────────────────────────
+plot(poc, "Prev-day POC", color = color.red, linewidth = 2, style = plot.style_linebr)
+plot(useBias ? htfEma : na, "HTF bias EMA", color = color.new(color.orange, 40))
+bgcolor(rejectShort and bearBias ? color.new(color.red, 85) : rejectLong and bullBias ? color.new(color.green, 85) : na)
