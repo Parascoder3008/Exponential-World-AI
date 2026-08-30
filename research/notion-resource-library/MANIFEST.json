@@ -1,0 +1,713 @@
+[
+  {
+    "slug": "50-claude-agents-for-dtc-creative-production",
+    "title": "50 Claude Agents For DTC Creative Production",
+    "page_id": "3bc92e2e92e980c99dc8fee51f4fa743",
+    "layer": "skills",
+    "chars": 85007,
+    "sha1": "ee370f0a4e00",
+    "duplicate_of": null
+  },
+  {
+    "slug": "claude-for-dtc-creative",
+    "title": "Claude For DTC Creative",
+    "page_id": "3be92e2e92e98068ae1ddb05cc08a921",
+    "layer": "production",
+    "chars": 25491,
+    "sha1": "bac1e30793e1",
+    "duplicate_of": null
+  },
+  {
+    "slug": "claude-mcp-for-ad-reporting-the-beginner-s-guide",
+    "title": "Claude MCP for Ad Reporting: The Beginner's Guide",
+    "page_id": "35592e2e92e981019a8af8e67169cd67",
+    "layer": "skills",
+    "chars": 18674,
+    "sha1": "e30a15afa098",
+    "duplicate_of": null
+  },
+  {
+    "slug": "estefania-freites-resource-library",
+    "title": "Estefania Freites - Resource Library \ud83d\udce6",
+    "page_id": "35292e2e92e980eb8f14ca219b521462",
+    "layer": "index",
+    "chars": 11171,
+    "sha1": "71703f88b19f",
+    "duplicate_of": null
+  },
+  {
+    "slug": "higgsfield-academy-module-1",
+    "title": "Higgsfield Academy Module 1",
+    "page_id": "3a792e2e92e9805dbba7d7346252ed7e",
+    "layer": "production",
+    "chars": 30727,
+    "sha1": "af4533ad82eb",
+    "duplicate_of": null
+  },
+  {
+    "slug": "how-to-ship-50k-100k-static-ads",
+    "title": "How to Ship $50K-$100K Static Ads",
+    "page_id": "39f92e2e92e980e4953cf1bd2b06bfa0",
+    "layer": "production",
+    "chars": 31112,
+    "sha1": "0f56f3fc62a5",
+    "duplicate_of": null
+  },
+  {
+    "slug": "kling-3-0-native-4k-production-guide",
+    "title": "Kling 3.0 Native 4K Production Guide",
+    "page_id": "34d92e2e92e981d59febf5e256e0d098",
+    "layer": "production",
+    "chars": 17591,
+    "sha1": "401a66651ddf",
+    "duplicate_of": null
+  },
+  {
+    "slug": "my-20-best-claude-agents-to-run-your-entire-dtc-creative-operation",
+    "title": "My 20 Best Claude Agents To Run Your Entire DTC Creative Operation",
+    "page_id": "3ba92e2e92e9801fbe71d63260cf37fa",
+    "layer": "skills",
+    "chars": 33664,
+    "sha1": "bfe9ef995899",
+    "duplicate_of": null
+  },
+  {
+    "slug": "seedance-2-0-ad-production-guide-9-plug-and-play-prompts-testing-framewo",
+    "title": "Seedance 2.0 Ad Production Guide \u2014 9 Plug-and-Play Prompts + Testing Framework",
+    "page_id": "35192e2e92e9813abec6e91d431226d6",
+    "layer": "production",
+    "chars": 21499,
+    "sha1": "642ac9288aff",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-1-chat-ad-system",
+    "title": "The 1-Chat Ad System",
+    "page_id": "3c992e2e92e980378cc4f49006c92207",
+    "layer": "strategy",
+    "chars": 22793,
+    "sha1": "13177c216d18",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-1-photo-to-6-shots-system",
+    "title": "The 1-Photo-to-6-Shots System",
+    "page_id": "39492e2e92e980588d08f9ddd466441b",
+    "layer": "production",
+    "chars": 29879,
+    "sha1": "15c83d8ef3b6",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-10-claude-skills-for-paid-ads",
+    "title": "The 10 Claude Skills for Paid Ads",
+    "page_id": "39a92e2e92e9804c9b66c60301adb96c",
+    "layer": "skills",
+    "chars": 28046,
+    "sha1": "f5190df932e6",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-12-hour-meta-ads-research-killer",
+    "title": "The 12-Hour Meta Ads Research Killer",
+    "page_id": "3c692e2e92e98026918ede45061d858c",
+    "layer": "research",
+    "chars": 23411,
+    "sha1": "317e1ec77421",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-3-layer-cinematic-ad-system-color-coded-storyboards-ipa-facs-for-see",
+    "title": "The 3-Layer Cinematic Ad System: Color-Coded Storyboards + IPA + FACS for Seedance 2.0",
+    "page_id": "36e92e2e92e980828994fed619b55a01",
+    "layer": "production",
+    "chars": 29466,
+    "sha1": "fec9e3dfdb3b",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-33-day-seedance-unlimited-blitz",
+    "title": "The 33-Day Seedance UNLIMITED Blitz",
+    "page_id": "3b992e2e92e980e0bce6f2f88839259a",
+    "layer": "production",
+    "chars": 20068,
+    "sha1": "eb7b2080e632",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-4-step-claude-ecom-ad-system",
+    "title": "The 4-Step Claude Ecom Ad System",
+    "page_id": "38092e2e92e980dc90e6c7ee85260737",
+    "layer": "production",
+    "chars": 26214,
+    "sha1": "ba611ea6e68f",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-4-tool-e-commerce-ad-production-line-claude-gpt-image-2-higgsfield-s",
+    "title": "The 4-Tool E-Commerce Ad Production Line: Claude + GPT Image 2 + Higgsfield + Seedance 2.0",
+    "page_id": "37c92e2e92e980139cb7df8983f87901",
+    "layer": "production",
+    "chars": 32241,
+    "sha1": "562da75241cb",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-5-tool-agency-replacement-stack",
+    "title": "The 5-Tool Agency Replacement Stack",
+    "page_id": "38b92e2e92e980ab9085e3d8d017e976",
+    "layer": "production",
+    "chars": 28933,
+    "sha1": "37e82b63731b",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-50-hook-library-claude-mcp-setup-higgsfield-hooks",
+    "title": "The 50-Hook Library + Claude MCP Setup (Higgsfield Hooks)",
+    "page_id": "38292e2e92e980289a2ad57f16d250a2",
+    "layer": "research",
+    "chars": 33576,
+    "sha1": "0e6f2ef839db",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-50-hook-library-claude-mcp-setup-higgsfield-hooks",
+    "title": "The 50-Hook Library + Claude MCP Setup (Higgsfield Hooks)",
+    "page_id": "35b92e2e92e980c79805e8e7eda98dd3",
+    "layer": "research",
+    "chars": 33576,
+    "sha1": "0e6f2ef839db",
+    "duplicate_of": "the-50-hook-library-claude-mcp-setup-higgsfield-hooks"
+  },
+  {
+    "slug": "the-6-angle-ecommerce-model-shoot-system",
+    "title": "The 6-Angle Ecommerce Model Shoot System",
+    "page_id": "37b92e2e92e980d592abd7ce15b1820b",
+    "layer": "production",
+    "chars": 28610,
+    "sha1": "3e080bd79989",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-9-panel-lifestyle-commercial-system-gpt-image-2-seedance-2-0-higgsfi",
+    "title": "The 9-Panel Lifestyle Commercial System: GPT Image 2 + Seedance 2.0 + Higgsfield",
+    "page_id": "36992e2e92e9808eb09eccf4181c2956",
+    "layer": "production",
+    "chars": 29105,
+    "sha1": "837037418da6",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-ai-creative-department",
+    "title": "The AI Creative Department",
+    "page_id": "39a92e2e92e980058cc2dd69dd059ce6",
+    "layer": "strategy",
+    "chars": 37195,
+    "sha1": "258cb26bd590",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-ai-swarm-ugc-system",
+    "title": "The AI Swarm UGC System",
+    "page_id": "38492e2e92e98030b599dec23cd61b10",
+    "layer": "ugc",
+    "chars": 29617,
+    "sha1": "8b3520879e9c",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-ai-ugc-factory-system",
+    "title": "The AI UGC Factory System",
+    "page_id": "38692e2e92e98078b7c1c60346e781c8",
+    "layer": "ugc",
+    "chars": 29654,
+    "sha1": "4bb1f71de6ed",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-cinematic-ad-production-board-system-chatgpt-image-2-seedance-2-0",
+    "title": "The Cinematic Ad Production Board System: ChatGPT Image 2 + Seedance 2.0",
+    "page_id": "3af92e2e92e98023931fda2655f8b3aa",
+    "layer": "production",
+    "chars": 33725,
+    "sha1": "3ed0fbd62ad8",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-cinematic-ad-production-board-system-chatgpt-image-2-seedance-2-0-1",
+    "title": "The Cinematic Ad Production Board System: ChatGPT Image 2 + Seedance 2.0 (1)",
+    "page_id": "36792e2e92e9805c8b32f6f2754ad8df",
+    "layer": "production",
+    "chars": 33725,
+    "sha1": "3ed0fbd62ad8",
+    "duplicate_of": "the-cinematic-ad-production-board-system-chatgpt-image-2-seedance-2-0"
+  },
+  {
+    "slug": "the-cinematic-production-board-system-1-storyboard-15-scene-premium-ad-i",
+    "title": "The Cinematic Production Board System: 1 Storyboard \u2192 15-Scene Premium Ad in 30 Minutes",
+    "page_id": "36392e2e92e980a4b8e9c10572fa1a38",
+    "layer": "production",
+    "chars": 31667,
+    "sha1": "8335b5d7a864",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-claude-higgsfield-creative-agency-system",
+    "title": "The Claude + Higgsfield Creative Agency System",
+    "page_id": "35992e2e92e9810e887ad6b5b1150b3a",
+    "layer": "strategy",
+    "chars": 25215,
+    "sha1": "6396f933523a",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-claude-higgsfield-roas-system",
+    "title": "The Claude + Higgsfield ROAS System",
+    "page_id": "38892e2e92e98034ad05df288a8fa795",
+    "layer": "reporting",
+    "chars": 34635,
+    "sha1": "989388e7da8a",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-claude-higgsfield-roas-system-performance-intelligence-for-meta-ads",
+    "title": "The Claude + Higgsfield ROAS System: Performance Intelligence for Meta Ads",
+    "page_id": "37092e2e92e98066a4edd6ca0ae895a7",
+    "layer": "reporting",
+    "chars": 15992,
+    "sha1": "44baa66c1c51",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-claude-meta-ads-audit-playbook",
+    "title": "The Claude + Meta Ads Audit Playbook",
+    "page_id": "3a092e2e92e9806786fcd3c5931dabc3",
+    "layer": "research",
+    "chars": 25326,
+    "sha1": "5851d2251d93",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-claude-seedance-2-hyper-real-prompt-system",
+    "title": "The Claude + Seedance 2 Hyper-Real Prompt System",
+    "page_id": "37492e2e92e9800f86d3fe97ed7b7f46",
+    "layer": "production",
+    "chars": 26817,
+    "sha1": "cd97801fd736",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-claude-4-8-meta-ads-research-strategist",
+    "title": "The Claude 4.8 Meta Ads Research Strategist",
+    "page_id": "37992e2e92e980389fe6c755a43e451c",
+    "layer": "research",
+    "chars": 29638,
+    "sha1": "5d65b38ca7d4",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-claude-ad-creative-agent-5-step-subagent-pipeline-for-end-to-end-ad",
+    "title": "The Claude Ad Creative Agent: 5-Step Subagent Pipeline for End-to-End Ad Creation",
+    "page_id": "37392e2e92e98008b0c3cc307eedf8e4",
+    "layer": "skills",
+    "chars": 32001,
+    "sha1": "a77de17ca20a",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-claude-amazon-listing-system",
+    "title": "The Claude Amazon Listing System",
+    "page_id": "3bf92e2e92e980009229d8ac948b0b61",
+    "layer": "production",
+    "chars": 31408,
+    "sha1": "8a55afa426f1",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-claude-amazon-listing-system",
+    "title": "The Claude Amazon Listing System",
+    "page_id": "38592e2e92e980c598f8d0d0bd58fb4d",
+    "layer": "production",
+    "chars": 31408,
+    "sha1": "8a55afa426f1",
+    "duplicate_of": "the-claude-amazon-listing-system"
+  },
+  {
+    "slug": "the-claude-code-meta-ads-mcp-playbook-replace-your-5k-creative-strategis",
+    "title": "The Claude Code + Meta Ads MCP Playbook: Replace Your $5K Creative Strategist in 15 Minutes",
+    "page_id": "36292e2e92e9809f8f5bda7dd7813d8c",
+    "layer": "skills",
+    "chars": 29809,
+    "sha1": "a05abc30ce72",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-claude-creative-strategist-trained-on-30m-in-ad-spend",
+    "title": "The Claude Creative Strategist: Trained on $30M in Ad Spend",
+    "page_id": "36d92e2e92e98044b634efca830ec8c1",
+    "layer": "strategy",
+    "chars": 27430,
+    "sha1": "e0b1b05159aa",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-claude-dtc-creative-plugin",
+    "title": "The Claude DTC Creative Plugin",
+    "page_id": "3c292e2e92e980f996cae0b2bf55c4ff",
+    "layer": "skills",
+    "chars": 42548,
+    "sha1": "eef60620ade1",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-claude-hook-system-10-prompts-that-beat-meta-s-andromeda-entity-id-c",
+    "title": "The Claude Hook System: 10 Prompts That Beat Meta's Andromeda Entity ID Cap",
+    "page_id": "36692e2e92e980ed8a47cb381e0564fd",
+    "layer": "research",
+    "chars": 30469,
+    "sha1": "65142870a0a0",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-cozy-lifestyle-commercial-storyboard-system",
+    "title": "The Cozy Lifestyle Commercial Storyboard System",
+    "page_id": "3a592e2e92e980c28dc2fe8f61588ad8",
+    "layer": "production",
+    "chars": 32442,
+    "sha1": "2eb13c42ddf4",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-dtc-ad-engine",
+    "title": "The DTC Ad Engine",
+    "page_id": "39a92e2e92e9806981abd8bcb0cbcc7d",
+    "layer": "strategy",
+    "chars": 27034,
+    "sha1": "247646e49df5",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-dtc-brand-memory-schema-how-to-ship-50-consistent-ai-assets-across-e",
+    "title": "The DTC Brand Memory Schema: How to Ship 50+ Consistent AI Assets Across Every Touchpoint",
+    "page_id": "36c92e2e92e980869ebfd7daa7a2006a",
+    "layer": "brain",
+    "chars": 32986,
+    "sha1": "ccf7741a9c53",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-dtc-creative-engine",
+    "title": "The DTC Creative Engine",
+    "page_id": "3bb92e2e92e980e8bdaff37cd511e91c",
+    "layer": "production",
+    "chars": 30472,
+    "sha1": "94bec817a29e",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-exploded-view-vfx-system-how-to-ship-50k-premium-product-shots",
+    "title": "The Exploded-View VFX System: How to Ship $50K Premium Product Shots",
+    "page_id": "39692e2e92e980d3b37bcac0277d33ed",
+    "layer": "production",
+    "chars": 31618,
+    "sha1": "bd37f48b87a6",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-fable-5-higgsfield-system",
+    "title": "The Fable 5 + Higgsfield System",
+    "page_id": "39292e2e92e9802eae7fd076109e7d41",
+    "layer": "production",
+    "chars": 29399,
+    "sha1": "21122e0477bd",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-fable-5-director-system",
+    "title": "The Fable 5 Director System",
+    "page_id": "39592e2e92e9809e8c0fc90e9334f5d1",
+    "layer": "production",
+    "chars": 33540,
+    "sha1": "7e608bdc5cc6",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-fpv-drone-tracking-shot-system-draw-the-camera-path-let-seedance-fly",
+    "title": "The FPV Drone Tracking Shot System: Draw the Camera Path, Let Seedance Fly It",
+    "page_id": "37592e2e92e9804481c6d2a8028c1108",
+    "layer": "production",
+    "chars": 27505,
+    "sha1": "d394b6b91012",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-grwm-ai-workflow-gpt-image-2-seedance-2-0",
+    "title": "The GRWM AI Workflow: GPT Image 2 + Seedance 2.0",
+    "page_id": "36192e2e92e980f2a4b1cfa33dbef407",
+    "layer": "production",
+    "chars": 28021,
+    "sha1": "24c9d0a0725e",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-higgsfield-mcp-claude-agentic-campaign-system-ship-ad-creatives-soci",
+    "title": "The Higgsfield MCP + Claude Agentic Campaign System: Ship Ad Creatives, Social, Video, and Transitions in 1 Chat",
+    "page_id": "37892e2e92e980938527d0d8991b73b8",
+    "layer": "skills",
+    "chars": 30672,
+    "sha1": "7ec9bb5b1a09",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-hyper-real-ai-ugc-workflow",
+    "title": "The Hyper-Real AI UGC Workflow",
+    "page_id": "3c292e2e92e98051a560cf94987ba77c",
+    "layer": "ugc",
+    "chars": 26650,
+    "sha1": "c7763bcc5757",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-hyper-real-ugc-system-gpt-image-2-seedance-2-makeugc",
+    "title": "The Hyper-Real UGC System: GPT Image 2 + Seedance 2 + MakeUGC",
+    "page_id": "35f92e2e92e980c99c53ccdd5d90612c",
+    "layer": "ugc",
+    "chars": 29348,
+    "sha1": "36ac9d0ab50e",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-in-house-dtc-creative-system",
+    "title": "The In-House DTC Creative System",
+    "page_id": "3b092e2e92e9809f9648c4e025ca07ea",
+    "layer": "production",
+    "chars": 21225,
+    "sha1": "16f62fc8334e",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-lip-sync-performance-system",
+    "title": "The Lip-Sync Performance System",
+    "page_id": "3a392e2e92e980129b8ad7d29a31c665",
+    "layer": "production",
+    "chars": 30842,
+    "sha1": "07e11de67d51",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-lovart-storyboard-skill-seedance-2-0-system-from-phone-snap-to-15-sh",
+    "title": "The Lovart Storyboard Skill + Seedance 2.0 System: From Phone Snap to 15-Shot 4K Cinematic in 10 Minutes",
+    "page_id": "37a92e2e92e980608490ea8816cf7fff",
+    "layer": "production",
+    "chars": 30043,
+    "sha1": "e4a3af8e8c22",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-luxury-footwear-commercial-system",
+    "title": "The Luxury Footwear Commercial System",
+    "page_id": "3ac92e2e92e980d5b0c6d1aeb92ad9d3",
+    "layer": "production",
+    "chars": 31922,
+    "sha1": "0ee44f15d0dc",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-luxury-pitch-deck-storyboard-system-gpt-image-2-seedance-2-0-6-secti",
+    "title": "The Luxury Pitch Deck Storyboard System: GPT Image 2 + Seedance 2.0 + 6-Section UI Scaffolding",
+    "page_id": "36f92e2e92e980b3a4b9d1f2ee4180e2",
+    "layer": "production",
+    "chars": 35033,
+    "sha1": "9e9ce2b5a01e",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-maxfusion-ugc-flow-system-from-1-product-image-to-a-full-campaign",
+    "title": "The Maxfusion UGC Flow System: From 1 Product Image to a Full Campaign",
+    "page_id": "35d92e2e92e9814db173f98ff45cf098",
+    "layer": "ugc",
+    "chars": 25221,
+    "sha1": "c51e2a416b98",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-morphic-workflow-setup",
+    "title": "The Morphic Workflow Setup",
+    "page_id": "38c92e2e92e980f8b78ac5bb30889f42",
+    "layer": "production",
+    "chars": 26672,
+    "sha1": "22df2e074f18",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-morphic-workflow-system-ai-content-at-scale-in-2026",
+    "title": "The Morphic Workflow System: AI Content at Scale in 2026",
+    "page_id": "35692e2e92e981a583b4cebfdacb48e9",
+    "layer": "production",
+    "chars": 15288,
+    "sha1": "d79321a20409",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-multi-style-animated-ad-system",
+    "title": "The Multi-Style Animated Ad System",
+    "page_id": "3a692e2e92e980c09dc0e852d32989c2",
+    "layer": "production",
+    "chars": 26669,
+    "sha1": "7267e69e4aec",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-nano-banana-hero-shot-system",
+    "title": "The Nano Banana Hero Shot System",
+    "page_id": "3a292e2e92e980c0b907ef83e631ec9d",
+    "layer": "production",
+    "chars": 30713,
+    "sha1": "3119c376827d",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-narrative-commercial-production-board-4-tool-workflow-for-2-characte",
+    "title": "The Narrative Commercial Production Board: 4-Tool Workflow for 2-Character Cinematic Ads in 30 Minutes",
+    "page_id": "37192e2e92e9809ca743e5292c323793",
+    "layer": "production",
+    "chars": 36469,
+    "sha1": "08b09e726399",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-one-take-cinematic-system",
+    "title": "The One-Take Cinematic System",
+    "page_id": "39092e2e92e9803cb2f9c3ef94847b41",
+    "layer": "production",
+    "chars": 28342,
+    "sha1": "d88a34b66d6e",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-pixar-style-brand-story-ad-system-gpt-image-2-seedance-2-0",
+    "title": "The Pixar-Style Brand Story Ad System: GPT Image 2 + Seedance 2.0",
+    "page_id": "35a92e2e92e9810da53ef11ec8648229",
+    "layer": "production",
+    "chars": 30262,
+    "sha1": "354646b2f9a9",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-premium-commercial-storyboard-system",
+    "title": "The Premium Commercial Storyboard System",
+    "page_id": "3ad92e2e92e9804da704cf64920abfa3",
+    "layer": "production",
+    "chars": 32945,
+    "sha1": "d9cb82460ea1",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-premium-product-campaign-poster-system-gpt-image-2-hero-posters-in-6",
+    "title": "The Premium Product Campaign Poster System: GPT Image 2 Hero Posters in 60 Seconds",
+    "page_id": "37f92e2e92e980d69cb5eea0ccb5484a",
+    "layer": "production",
+    "chars": 31831,
+    "sha1": "4f1c43ecb85b",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-replicate-migration-guide",
+    "title": "The Replicate Migration Guide",
+    "page_id": "3af92e2e92e9808eabd0ef6d130eee2b",
+    "layer": "production",
+    "chars": 27811,
+    "sha1": "380b81352677",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-seedance-2-0-prompting-bible",
+    "title": "The Seedance 2.0 Prompting Bible",
+    "page_id": "35892e2e92e980b08a32eae2d7ed916c",
+    "layer": "production",
+    "chars": 13358,
+    "sha1": "ce05207cc9fc",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-seedance-omni-vfx-system",
+    "title": "The Seedance Omni VFX System",
+    "page_id": "3a192e2e92e980b48300fc39f7a87cc2",
+    "layer": "production",
+    "chars": 29891,
+    "sha1": "d8fb8eec0ee7",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-slice-of-life-cinematic-system",
+    "title": "The Slice-of-Life Cinematic System",
+    "page_id": "39d92e2e92e980efaf07c3b4b9ff6db0",
+    "layer": "production",
+    "chars": 34881,
+    "sha1": "ccb324d726d4",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-sound-designed-cinematic-system-15-shot-luxury-product-ads-with-per",
+    "title": "The Sound-Designed Cinematic System: 15-Shot Luxury Product Ads With Per-Shot SFX Direction",
+    "page_id": "37e92e2e92e98005b7f3d63793b8454e",
+    "layer": "production",
+    "chars": 33306,
+    "sha1": "3f221f84a655",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-travel-cinematic-system",
+    "title": "The Travel Cinematic System",
+    "page_id": "3a992e2e92e9805aa1fdda179ad747fd",
+    "layer": "production",
+    "chars": 33629,
+    "sha1": "48ca9c0b6bdd",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-ugc-creator-replacement-kit",
+    "title": "The UGC Creator Replacement Kit",
+    "page_id": "35092e2e92e981adb2bce04acc0169d8",
+    "layer": "ugc",
+    "chars": 19903,
+    "sha1": "065299ada575",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-ugc-in-60-seconds-system-higgsfield-seedance-2-0",
+    "title": "The UGC in 60 Seconds System: Higgsfield + Seedance 2.0",
+    "page_id": "35492e2e92e98108af07e09e0c60337f",
+    "layer": "ugc",
+    "chars": 17289,
+    "sha1": "e4732081ef62",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-ultimate-dtc-marketing-engine",
+    "title": "The Ultimate DTC Marketing Engine",
+    "page_id": "3c592e2e92e9801d8f8de5c9b621fbe2",
+    "layer": "strategy",
+    "chars": 33167,
+    "sha1": "e5319d43ae90",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-under-1-ai-ugc-stack",
+    "title": "The Under-$1 AI UGC Stack",
+    "page_id": "38992e2e92e9801b95d1db45ac967ccd",
+    "layer": "ugc",
+    "chars": 28742,
+    "sha1": "ff2c7595b81a",
+    "duplicate_of": null
+  },
+  {
+    "slug": "the-viral-reaction-ugc-system",
+    "title": "The Viral Reaction UGC System",
+    "page_id": "38e92e2e92e980368bbbc4e82c54b7d6",
+    "layer": "ugc",
+    "chars": 28559,
+    "sha1": "637f66044706",
+    "duplicate_of": null
+  }
+]
