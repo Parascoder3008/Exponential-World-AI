@@ -66,7 +66,7 @@ Content Pack (the nine) · Commerce Pack (lead engine, funnel, webinar, nurture)
 
 That is the argument for the gate. Every one of those is expensive to guess and free to observe.
 
-**The architectural bet already made:** P2 (Tenant Brain) is a per-client Brand Brain. Because K1 is a *document agents read* rather than instructions baked into each agent, multi-tenancy is pointing at a different document — a path change, not a rewrite. That decision was made in Phase 0 specifically to make this phase cheap.
+**The architectural bet already made:** P2 (Tenant Brain) is a per-client Brand Brain. Because K1 is a *document agents read* rather than instructions baked into each agent, multi-tenancy is pointing at a different document — a path change, not a rewrite. That decision was made in Sprint 0 specifically to make this phase cheap.
 
 **Layer 4 agents:** Install Agent (P1), Tenant Brain (P2), Usage/Billing (P3), Client Success (P4).
 

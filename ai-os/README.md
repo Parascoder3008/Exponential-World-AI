@@ -4,54 +4,68 @@ The operating system for a business that runs on agents instead of headcount.
 
 Built by Paras Arora, in public, on his own business first.
 
+> **v2.** This plan was rebuilt after a board review and market research against the real numbers — ₹1–5L/month, 10–100K subscribers, 3–6 months runway, two offers already proven cold. The architecture survived. The sequencing did not. [What changed and why](06-evidence/board-review.md).
+
 ---
 
 ## Read this in five minutes
 
-**The idea in one line:** every agent gets built once and monetised twice — once by running Exponential World on it, once by selling it to someone else.
+### Start here: the first 30 days are about cash, not building
 
-That single rule decides everything else in this folder. It is why the roadmap starts with Paras's own YouTube channel rather than with a product. It is why "build in public" is not marketing bolted on — it is the QA process, made public. And it is why no agent enters the sellable product until it has run this business for 30 days without breaking.
+At 3–6 months of runway with a monetisable audience sitting idle and two proven offers, the most expensive available move is to spend a month on infrastructure.
+
+**[Sprint 0](02-roadmap/sprint-0-cash.md) comes before everything.** Three tracks, thirty days, using only what already exists:
+
+| Track | What | Target |
+|---|---|---|
+| **A — Corporate training** | Sell the Nippon/Wingsway shape at benchmark price (₹1.5–4L/day), warm and referral | 1 engagement closed |
+| **B — Audience harvest** | Run the webinar that already exists; build the rungs above ₹5,000; reactivate non-buyers | 1 webinar run, ladder live |
+| **C — Foundation** | Brand Brain, four lanes, scorecard, tracking — in the margins, ~6 hrs/week | Ready for Phase 1 |
+
+Then the system gets built, funded by the sprint.
+
+### The idea in one line
+
+**Every agent gets built once and monetised twice** — once by running Exponential World, once by selling it.
+
+That rule decides everything else. It's why the build happens on Paras's own business, why "build in public" is the QA process rather than marketing, and why no agent enters the product until it has run this business for 30 days.
+
+### What kind of business this is
+
+Not an AI agency that also trains. **A training-led enablement business that installs.**
+
+The research is blunt: *in-housing is the defining agency churn factor of 2026.* Execution providers lose clients to the clients' own AI tools; firms that teach the client's team report **28% lower voluntary churn.** Being a trainer looked like a weakness. It's the durable 2026 position — and it means the ₹1.5–4L workshop is the highest-value first sale, not a loss-leader.
 
 ### The three frameworks are one system
 
-They exist separately today. They are not separate.
-
 | Framework | What it actually is |
 |---|---|
-| **4C** — Code, Content, Capital, Collaboration | The **diagnostic**. How you read any business, including your own. |
-| **Content OS / Commerce OS / Money OS** | The **product**. What you build and sell. |
-| **learn → earn → help → train → invest** | The **journey**. Where a customer sits, and where you sit. |
+| **4C** — Code, Content, Capital, Collaboration | The **diagnostic**, and now the **product name** |
+| **Content OS / Commerce OS / Money OS** | The **product** |
+| **learn → earn → help → train → invest** | The **journey** |
 
-The mapping:
-
-```
-        4C                    The 3 OS's                    The ladder
-  ┌──────────────┐      ┌────────────────────┐      ┌────────────────────┐
-  │ CONTENT      │─────▶│  CONTENT OS        │      │ learn              │
-  │              │      │  attention         │      │   ↓                │
-  │ CAPITAL      │─────▶│  COMMERCE OS       │      │ earn               │
-  │              │      │  revenue           │      │   ↓                │
-  │ CAPITAL²     │─────▶│  MONEY OS          │      │ help               │
-  │              │      │  compounding       │      │   ↓                │
-  │ CODE         │═════▶│  the substrate all │      │ train              │
-  │              │      │  three run on      │      │   ↓                │
-  │ COLLABORATION│═════▶│  the orchestrator: │      │ invest             │
-  │              │      │  humans + agents   │      │                    │
-  └──────────────┘      └────────────────────┘      └────────────────────┘
-```
-
-Code and Collaboration are not two more products. Code is the substrate — landing pages, automations, the agent infrastructure itself. Collaboration is the orchestrator layer, where four humans and thirty-odd agents meet. They are *how* the three OS's exist, not things sold alongside them.
+Code is the substrate all three run on; Collaboration is the orchestrator layer where four humans and thirty-odd agents meet. Neither is a fourth product.
 
 ### The two-sided engine
 
 ```
-  FRONT END (brand)                          BACK END (business)
-  content ──▶ audience ──▶ community  ────▶  free audit ──▶ low ticket ──▶ high ticket
-     ▲                                                                          │
-     └──────────────── case studies ◀── delivery ◀── consulting ◀── DFY ◀───────┘
+  FRONT END (brand)                        BACK END (business)
+  content ──▶ audience ──▶ community ───▶  4C audit ──▶ workshop ──▶ programme
+     ▲                                                                  │
+     └────────── case studies ◀── retainer ◀── install ◀────────────────┘
 ```
 
-The loop closes because delivery produces case studies and case studies are content. A business that cannot feed its own front end from its own back end is two businesses badly run.
+The loop closes because delivery produces case studies and case studies are content.
+
+---
+
+## The one decision that shapes everything
+
+Both offers have sold cold. That's validation — and a trap. Two audiences is two businesses, and at this runway that's unaffordable.
+
+> **SMB AI is the business. Trading funds Sprint 0, then goes on maintenance.**
+
+Full reasoning in [`positioning-and-icp.md`](00-strategy/positioning-and-icp.md).
 
 ---
 
@@ -59,22 +73,23 @@ The loop closes because delivery produces case studies and case studies are cont
 
 | You want to | Read |
 |---|---|
-| Understand the model properly | [`00-strategy/business-model.md`](00-strategy/business-model.md) |
+| Know what to do Monday | [`02-roadmap/sprint-0-cash.md`](02-roadmap/sprint-0-cash.md) |
+| See the prices | [`00-strategy/offer-ladder.md`](00-strategy/offer-ladder.md) |
+| Understand the model | [`00-strategy/business-model.md`](00-strategy/business-model.md) |
 | Know who this is for | [`00-strategy/positioning-and-icp.md`](00-strategy/positioning-and-icp.md) |
-| See what gets sold, at what price | [`00-strategy/offer-ladder.md`](00-strategy/offer-ladder.md) |
-| Know what could kill this | [`00-strategy/risks-and-constraints.md`](00-strategy/risks-and-constraints.md) |
+| Know what could kill it | [`00-strategy/risks-and-constraints.md`](00-strategy/risks-and-constraints.md) |
 | See every agent | [`01-architecture/agent-roster.md`](01-architecture/agent-roster.md) |
-| Understand how agents get orchestrated | [`01-architecture/orchestrator.md`](01-architecture/orchestrator.md) |
-| Know what each of the four hires does | [`01-architecture/human-layer.md`](01-architecture/human-layer.md) |
-| Know what to do on Monday | [`02-roadmap/90-day-sprint-board.md`](02-roadmap/90-day-sprint-board.md) |
+| See how they're orchestrated | [`01-architecture/orchestrator.md`](01-architecture/orchestrator.md) |
+| Know what each hire does | [`01-architecture/human-layer.md`](01-architecture/human-layer.md) |
 | Turn the build into content | [`03-build-in-public/content-series-plan.md`](03-build-in-public/content-series-plan.md) |
 | Know if it's working | [`05-metrics/scorecard.md`](05-metrics/scorecard.md) |
+| See the evidence | [`06-evidence/market-research.md`](06-evidence/market-research.md) · [`06-evidence/board-review.md`](06-evidence/board-review.md) |
 
 ---
 
 ## The first nine agents
 
-The full roster maps about 34 agents. **You will build nine.** Six of them already exist as skills, so Phase 1 is mostly wiring, not building.
+The roster maps 38. **You build nine** — and six already exist, so Phase 1 is mostly wiring.
 
 | # | Agent | Status | Layer |
 |---|---|---|---|
@@ -88,23 +103,25 @@ The full roster maps about 34 agents. **You will build nine.** Six of them alrea
 | 8 | Publish | wire (`paras-publishing-package`) | Content OS |
 | 9 | Scorekeeper | **build** (thin) | Kernel |
 
-Those nine form one closed loop: **idea → published → measured**. Nothing else gets built until that loop runs for a full week without Paras touching it except to be on camera and to approve.
+One closed loop: **idea → published → measured.** Nothing else starts until it runs a full week hands-off.
 
 ---
 
 ## The four humans
 
-Everyone gets one lane, one input, one output, one SLA. Humans are agents with a queue.
+Humans are agents with a queue — one lane, one input, one output, one SLA.
 
 | Person | Lane | Fed by | Feeds |
 |---|---|---|---|
-| Video editor | Edit + render | Editor Brief agent | Publish agent |
-| Meta ads manager | Paid distribution | Ad Creative agent | Scorekeeper |
-| VA (web) | Pages, forms, tracking | Funnel agent | Commerce OS |
-| Social media manager | **OS Operator** — runs the queue, QAs every output, escalates | Chief of Staff | Paras |
+| Video editor | Edit + render | Editor Brief | Publish |
+| Meta ads manager | Paid distribution | Ad Creative | Scorekeeper |
+| VA (web) | Pages, forms, tracking | Funnel | Commerce OS |
+| Social media manager | **OS Operator** — runs the queue, QAs every output | Chief of Staff | Paras |
 | Paras | Camera, offers, sales calls, judgment | Scorekeeper | Everything |
 
-The standing rule: **Paras only does what only Paras can do.** Everything else is agent-first, human-QA'd.
+Standing rule: **Paras only does what only Paras can do.**
+
+One cheap, unused lever: **teams where five or more people post consistently get 3–5× the organic reach of a single founder.** Get the operator, ads manager and VA posting under their own names about the build.
 
 ---
 
@@ -112,18 +129,17 @@ The standing rule: **Paras only does what only Paras can do.** Everything else i
 
 | Phase | Window | What lands |
 |---|---|---|
-| **0 — Foundation** | 30 days | Brand Brain, Chief of Staff, scorecard, four lanes handed over. Lead Engine run manually for cash. |
-| **1 — Content OS** | 90 days | Nine agents in one loop on the Tue/Fri rhythm. Ads handed to the ads manager. |
-| **2 — Commerce OS** | 90 days | Lead gen, funnel, webinar, nurture, sales automated. First paid *installs* of Content OS into client businesses. |
-| **3 — Money OS** | 90 days | Unit economics, allocation rules, then the trading side — education and own capital only. |
-| **4 — Productize** | 12 months+ | Agent packs → installed OS → licensed dashboard. In that order, no skipping. |
+| **Sprint 0 — Cash** | Days 1–30 | 1 corporate engagement, 1 webinar run, ladder priced, lanes live |
+| **1 — Content OS** | Days 31–120 | Nine agents in one loop. One hands-off week. |
+| **2 — Commerce OS** | Days 121–210 | Lead gen, funnel, nurture, delivery automated. Ten paid installs. |
+| **3 — Money OS** | Days 211–300 | Unit economics, then the market side — education and own capital only. |
+| **4 — Productize** | 12mo+ | Agent packs → installed OS → licensed dashboard. Gate: ten installs first. |
 
 ---
 
 ## How to use this folder
 
-It is a working document, not a manifesto. Three rules:
-
 1. **When something is wrong, change the file.** A plan nobody edits is a plan nobody follows.
-2. **When an agent ships, update its spec in `04-agents/` and its row in the roster.** The roster is the source of truth for what exists.
-3. **When a number moves, it goes in `05-metrics/scorecard.md`.** Opinions about what's working are not a substitute for the weekly numbers.
+2. **When an agent ships, update its spec and its roster row.** The roster is the source of truth for what exists.
+3. **When a number moves, it goes in the scorecard.** Opinions about what's working don't substitute for the weekly numbers.
+4. **Re-run the research every 90 days.** Benchmarks move — churn data, pricing, webinar conversion, and the SEBI position especially.

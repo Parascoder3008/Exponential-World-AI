@@ -1,4 +1,4 @@
-# Phase 1 — Content OS (90 days)
+# Phase 1 — Content OS (days 31–120)
 
 **Goal:** one closed loop — idea → published → measured — running on the Tue/Fri rhythm without Paras touching anything except camera and final approval.
 
@@ -10,12 +10,12 @@
 
 | # | Agent | Status | Weeks |
 |---|---|---|---|
-| 1 | Brand Brain | done in Phase 0 | — |
-| 2 | Chief of Staff | done in Phase 0 | — |
+| 1 | Brand Brain | done in Sprint 0 | — |
+| 2 | Chief of Staff | done in Sprint 0 | — |
 | 3 | Research | wire `paras-research` | 1–2 |
 | 4 | Script | wire `paras-script-writer` | 2–3 |
 | 5 | Packaging | wire `paras-titles-thumbnails` | 3–4 |
-| 6 | **Editor Brief** | built in Phase 0, harden | 4–5 |
+| 6 | **Editor Brief** | built in Sprint 0, harden | 4–5 |
 | 7 | Repurpose | wire `paras-repurpose` | 5–6 |
 | 8 | Publish | wire `paras-publishing-package` | 6–7 |
 | 9 | Scorekeeper | harden from v1 | 7–8 |
@@ -72,9 +72,10 @@ See [`../03-build-in-public/content-series-plan.md`](../03-build-in-public/conte
 
 Content OS does not sell anything. Revenue comes from three places while it is being built:
 
-1. **Lead Engine, manual** — carried over from Phase 0, still 30 min/day, still Paras-reviewed
-2. **The Wednesday workshop** — now also the build session, and a natural place for the low-ticket offer
-3. **First DFY installs**, sold manually — the *high-ticket manual version of the thing being automated*
+1. **4C Workshops and Programmes** — the Sprint 0 motion, continued. ₹1.5–4L and ₹8–25L per engagement at benchmark, warm and referral. Highest ticket, fastest close.
+2. **Lead Engine, manual** — carried over from Sprint 0, still 30 min/day, still Paras-reviewed
+3. **The Wednesday workshop** — now also the live build session, and where enterprise buyers self-qualify
+4. **First 4C Installs**, sold manually — the *high-ticket manual version of the thing being automated*
 
 Point 3 is the model working as intended: sell the manual version while building the automated one. Revenue arrives first, and every install is a live test of agents that eventually become product.
 
@@ -82,6 +83,7 @@ Point 3 is the model working as intended: sell the manual version while building
 
 ## Exit criteria
 
+0. **Revenue moved.** Monthly revenue is materially above the ₹1–5L it started at, from workshops, programmes and the first install. This is criterion zero because at 3–6 months of runway a quarter that produces systems but not revenue shortens the runway by a quarter.
 1. **The loop ran one full week hands-off** — Paras on camera and approvals only
 2. **Two publishes a week held for 13 weeks.** Missed publishes are the failure signal, not slow builds
 3. Every one of the nine has a current spec in `04-agents/` and a named human QA

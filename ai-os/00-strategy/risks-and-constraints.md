@@ -1,112 +1,129 @@
 # Risks and Constraints
 
-The things most likely to kill this, written plainly and kept near the front. If any of these stops being true, the roadmap changes.
+The things most likely to kill this. If any stops being true, the roadmap changes.
 
 ---
 
-## 1. The channel is the bottleneck, not the technology
+## 1. Runway is the governing constraint
 
-No audience → no leads → no capital → no product. Every part of this plan depends on attention arriving, and attention is the slowest-moving input in the system.
+**3–6 months across Paras and four hires, at ₹1–5L/month.** Every other decision in this plan is downstream of that number.
 
-Code is the enjoyable problem and the wrong first priority. The temptation will be to spend a fortnight making the orchestrator elegant while nothing publishes. The counter is structural: the Tue/Fri publish rhythm is treated as non-negotiable, and any week where a publish slips because of build work is a failed week regardless of what got built.
+It is why [Sprint 0](../02-roadmap/sprint-0-cash.md) exists, why the market order flipped to India/UAE, and why productisation is twelve months out. A plan that ignores runway is a plan for a business that has some.
 
-**Signal that this is going wrong:** more commits than videos in any given week.
+**Recalculate monthly.** If runway drops below three months, stop Phase 1 and run a second cash sprint. That is not failure — it is the plan working as designed.
 
----
-
-## 2. Thirty-four agents at four people is how nothing ships
-
-The full roster maps about 34 agents. That is a map, not a build list. **Nine in the first 90 days.**
-
-The failure mode is not that too many get built — it is that twenty get started, none get finished, and none get used. A half-built agent has negative value: it costs the attention of remembering it exists.
-
-**The rule:** an agent is not "built" until it has produced real output that went live, and until the human who QAs it can run it without Paras present.
+**Signal that this is going wrong:** a month passes where more agents shipped than invoices went out.
 
 ---
 
-## 3. Don't build the product before the clients
+## 2. The channel is the bottleneck, not the technology
+
+No audience → no leads → no capital. Attention is the slowest-moving input in the system, which is why Content OS is the first *build* even though it isn't the first *action*.
+
+Code is the enjoyable problem and the wrong priority. The Tue/Fri publish rhythm is non-negotiable — a week where a publish slipped for build work is a failed week regardless of what got built.
+
+**Signal:** more commits than videos in a week.
+
+---
+
+## 3. Thirty-eight agents at four people is how nothing ships
+
+The roster is a map, not a build list. **Nine in the first 90 days of Phase 1.**
+
+The failure mode isn't building too many — it's starting twenty, finishing none, using none. A half-built agent has negative value: it costs the attention of remembering it exists.
+
+**The rule:** an agent isn't "built" until it has produced output that went live, and the human who QAs it can run it without Paras present.
+
+---
+
+## 4. Don't build the product before the clients
 
 Services fund the product. The product does not fund itself.
 
-A licensed dashboard with no distribution and no proven agents is a support burden attached to zero revenue. The order is services → education → product, and Phase 4 does not start until ten clients are live on Phase 2's installed OS.
+**40% of AI startups fail within 24 months.** A licensed dashboard with no distribution and no proven agents is a support burden attached to zero revenue.
 
-**Signal that this is going wrong:** any conversation about pricing tiers, seat counts, or a signup flow before ten installs exist.
+Phase 4 does not start until ten clients are live on the Phase 2 installed OS.
 
----
-
-## 4. Money OS is the riskiest part and the least valuable to start
-
-It serves a different customer (someone who already has money) at a later ladder stage, it requires the other two to have produced surplus, and it is the only regulated part of the system. It earns its place in Phase 3, not before.
-
-There is also an attention cost: trading content pulls a different audience than SMB AI content. Mixing them too early muddies the channel's positioning at exactly the point where clarity is producing the growth.
+**Signal:** any conversation about pricing tiers, seat counts or a signup flow before ten installs exist.
 
 ---
 
 ## 5. The SEBI boundary
 
-This is a commercial constraint as much as a legal one, so it is written in plain terms rather than buried in a disclaimer.
+**This section corrects the v1 version, which overstated the difficulty of registration.**
 
-**On the safe side of the line:**
+### What changed in 2026
+
+- SEBI **eased the criteria**: graduates of *any* discipline qualify for Investment Adviser and Research Analyst registration, and the **prior-experience requirement has been removed**
+- **NISM certification remains mandatory**, but the base exam no longer needs re-taking
+- **Trading calls have been excluded** from the definition of "investment advice"
+
+With FRM Level-1 and NSE Technical Analyst certification, **RA registration is realistically a NISM exam away.** That makes it a potential *moat* rather than a barrier — a registered analyst teaching AI-assisted research is a category almost no competitor will enter.
+
+### The operating boundary, until registration exists
+
+**Clearly fine:**
 - Teaching a method — how to research, screen, backtest, size a position
 - Selling curriculum, prompts, templates, Pine Script strategies, tooling
 - Trading and investing **Paras's own capital**, and showing the process
-- Talking about markets generally, historically, and educationally
+- Discussing markets generally, historically, educationally
 
-**On the other side of the line, requiring SEBI Research Analyst or Investment Adviser registration:**
+**Requires registration:**
 - Charging for buy / sell / hold recommendations on specific securities
 - Managing, pooling, or directing anyone else's money
-- Anything that functions as personalised investment advice for a fee, whatever it is called
+- Anything functioning as personalised investment advice for a fee
 
-**Also non-negotiable regardless of registration:** no performance guarantees, no "consistent monthly returns", no specific ROI promise. Frame every outcome as skill and process. Any Indian-market campaign carries a market-risk disclaimer; broker-partner campaigns carry whatever the partner requires — confirm rather than assume.
+**Non-negotiable regardless of registration:** no performance guarantees, no "consistent monthly returns", no specific ROI promise. Outcomes framed as skill and process. Market-risk disclaimer on any Indian-market campaign. Broker-partner requirements confirmed, never assumed.
 
-Money OS is scoped as **education plus own capital**, which stays clearly on the safe side. If the ambition later shifts to advisory, that becomes a compliance workstream with its own timeline, not a footnote to a product launch.
-
-*This is a working constraint written by a non-lawyer. Before Money OS ships anything commercial, have it reviewed by someone qualified in Indian securities regulation.*
+*This is a reading of regulatory summaries by a non-lawyer. Confirm both the registration path and the trading-calls exclusion with a securities lawyer before relying on either. The conservative boundary above stands until that confirmation exists.*
 
 ---
 
-## 6. Without attribution, you are flying blind
+## 6. In-housing — the 2026 churn killer
 
-Four channels, two audiences, six platforms, and no single view of what produced revenue is the default state of every business this size. It is also why most of them cannot tell which half of their effort to cut.
+**The defining agency churn factor of 2026** is clients bringing AI in-house. Agencies positioned as execution providers lose; those leading with strategic direction and proprietary methodology retain.
 
-Scorekeeper is not optional and it is not a Phase 2 nicety. Minimum viable version by end of Phase 0: UTMs on every link, source tracking in GHL, and one weekly scorecard covering YouTube, Meta, GHL and Skool in a single view.
+This plan is deliberately structured against it — training-led, methodology-named, enablement in the retainer. But the risk is real and shows up specifically at the **4C Install** rung: a client who has been handed a working system and a trained operator can decide they no longer need the retainer.
+
+**Mitigations, all already in the architecture:**
+- Sell the retainer as strategic partnership and governance, not maintenance
+- Build AI enablement into the retainer as a benefit, not a separate SKU
+- Keep the methodology proprietary — the 4C name is doing real work
+- Firms making this shift report **28% lower voluntary churn**
+
+**Accept the honest version:** some clients will graduate. Price the build so that a client who leaves after the install was still profitable. A retainer that is nice-to-have is fine; a retainer the business depends on to break even is not.
+
+---
+
+## 7. Without attribution, you're flying blind
+
+Four channels, two audiences, six platforms, no single view of what produced revenue. Scorekeeper is not a Phase 2 nicety.
+
+Minimum by end of Sprint 0: UTMs on every link, source tracking in GHL, one weekly scorecard.
 
 **The question it must answer every Monday:** which specific thing produced the last five leads?
 
 ---
 
-## 7. Key-person concentration
+## 8. Key-person concentration
 
-Paras is the face, the closer, the credibility, and the final judgment on every output. That is correct for now — it is the fastest path and the positioning requires a person. It is also the single biggest fragility in the system.
+Paras is the face, the closer, the credibility, and the final judgment. Correct for now — it's the fastest path and the positioning requires a person. It's also the biggest fragility.
 
-Mitigations, in order of when they become possible:
-- The **OS Operator** role (the social media manager) is designed specifically so the daily loop runs without him
-- Avatar and render agents reduce, but never eliminate, camera dependency
-- The Skool community and Wednesday workshop create secondary voices over time
+Mitigations, in order of availability:
+- **Get the team posting under their own names.** 5+ voices produces 3–5× the organic reach of one founder, and it starts decoupling the brand. Cheapest available mitigation and it's currently unused.
+- The **OS Operator** role exists so the daily loop runs without him
+- Avatar and render agents reduce, never eliminate, camera dependency
 - Case studies shift proof from "trust Paras" to "look at these fifteen businesses"
 
-None of these are solved in year one. The realistic goal is that the *system* survives a two-week absence, not that the *brand* does.
+Realistic year-one goal: the *system* survives a two-week absence. Not the brand.
 
 ---
 
-## 8. The US credibility problem
+## 9. Agent output drifts silently
 
-The proof is Indian and Emirati. A US prospect has never heard of Nippon India Mutual Fund.
+Agents don't fail loudly. They produce slightly-worse output for weeks and each piece looks fine.
 
-Do not hide it, and do not present it as though it were a US logo. The honest framing — regulated financial marketing at scale, in a harder market — is the stronger one, and it is already written in `paras-lead-engine/references/outreach.md` under "The credibility bridge". Use it verbatim until reply data says otherwise.
-
-**Signal that this is going wrong:** reply rates under 2% across a full 50-attempt cycle with clean sourcing. That means the bridge is not carrying weight and the market order should be revisited, not that outbound is broken.
-
----
-
-## 9. Agent output quality drifts silently
-
-Agents do not fail loudly. They produce slightly-worse output for weeks and nobody notices because each individual piece looked fine.
-
-Three defences, all built into the architecture:
-- **Brand Guard** as a gate before anything publishes or sends (`paras-compliance-audit`)
-- **Brand Brain** as the single source of voice, offers, pricing, and proof — so drift has one place to be corrected rather than thirty
-- **A human QA on every lane.** Agent-first, never agent-only. The OS Operator's actual job is catching this.
+Three defences, built into the architecture: **Brand Guard** as a gate before anything ships · **Brand Brain** as the single source of voice, offers and proof, so drift has one place to be corrected · **a human QA on every lane.** Agent-first, never agent-only.
 
 ---
 
@@ -114,7 +131,17 @@ Three defences, all built into the architecture:
 
 One editor, one ads manager, one VA, one operator, and Paras. Two videos a week plus shorts plus six-platform repurposing plus outbound plus delivery.
 
-That is tight and it will be the real constraint long before the technology is. Two consequences worth accepting now rather than discovering in week six:
+Two consequences worth accepting now:
 
-- **The editor is the hard ceiling on video volume.** This is why Editor Brief is in the first nine agents rather than a nice-to-have — it is the only lever that raises that ceiling without a second hire.
-- **The first hire made from revenue should be a second editor or an operator**, not a salesperson. Delivery capacity is what converts pipeline into cash.
+- **The editor is the hard ceiling on video volume.** This is why Editor Brief is in the first nine rather than a nice-to-have.
+- **The first hire from revenue should be a second editor or an operator**, not a salesperson. Delivery capacity is what converts pipeline into cash — and at this stage the buyer is buying Paras anyway.
+
+---
+
+## 11. What the research didn't validate
+
+Recorded because unexamined assumptions are the dangerous kind:
+
+- **No evidence** that "AI agent packs" is a proven low-ticket category at scale. Phase 4's first product form is a reasonable bet on existing assets, not a validated model. Treat it as an experiment.
+- **No evidence** either way on US-first versus home-market-first for an operator with no US logos. The market-order reversal is a judgment call on certainty and speed.
+- Creator-economy revenue figures come from sources with an incentive to inflate. Discounted hard throughout, and the sprint math is built from the bottom quartile.

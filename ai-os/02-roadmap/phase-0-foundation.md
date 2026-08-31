@@ -1,80 +1,70 @@
-# Phase 0 — Foundation (30 days)
+# Foundation Checklist
 
-**Goal:** the system has a memory, a router, a scoreboard, and four people who know their lane. Cash comes from running the Lead Engine by hand.
-
-**Not the goal:** building agents. Two get built. Everything else in this phase is writing things down and handing things over.
-
----
-
-## What lands
-
-| # | Deliverable | Owner | Done when |
-|---|---|---|---|
-| 1 | **Brand Brain** written and loaded | Paras | Any agent can be pointed at it and produce on-voice output without extra prompting |
-| 2 | **Chief of Staff** wired to Brand Brain + real pipeline state | Paras | Monday morning it produces a plan that matches reality |
-| 3 | **Scorecard v1** — one weekly view | Operator | Monday's numbers arrive without anyone opening four dashboards |
-| 4 | **Four lanes documented and handed over** | Paras | Each person can describe their input, output and SLA without looking it up |
-| 5 | **Tracking installed** — UTMs, GHL sources, pixel | VA | The question "what produced the last five leads" has an answer |
-| 6 | **Lead Engine running manually**, 30 min/day | Paras | 50 attempts logged, five numbers reviewed |
+> **This was v1's Phase 0 — a standalone 30-day foundation month. It is no longer a phase.**
+>
+> At 3–6 months of runway, a month spent on infrastructure before selling anything is a fifth of the runway. The foundation work now runs as **Track C inside [Sprint 0](sprint-0-cash.md)** — in the margins, roughly six hours a week, alongside the cash tracks.
+>
+> This file holds the detail of *what* foundation means. Sprint 0 holds the *when*.
 
 ---
 
-## Week by week
+## The six items
 
-### Week 1 — Memory
+| # | Item | Owner | Time | Done when |
+|---|---|---|---|---|
+| 1 | **Brand Brain**, with real prices | Paras | 3 hrs | Any agent produces on-voice output from it, unprompted |
+| 2 | **Tracking** — UTMs, GHL sources, pixel | VA | 3 hrs | "What produced the last five leads" has an answer |
+| 3 | **Scorecard v1** | Operator | 2 hrs | Monday's numbers arrive without opening four dashboards |
+| 4 | **Four lanes** documented and handed over | Paras | 2 hrs | Each person states their input/output/SLA back, unaided |
+| 5 | **Chief of Staff** wired to real pipeline state | Paras | 2 hrs | Monday's plan matches reality |
+| 6 | **Editor Brief** shipped | Paras + Editor | 3 hrs | Editor works a video without asking a question |
 
-Write Brand Brain. This is mostly extraction, not invention: identity, credentials and positioning are in `paras-lead-engine`; voice and 3E are in `paras-script-writer`; offers and the value-stack ratio are in `paras-webinar-builder`; ICP and proof are in `references/icp.md`.
+---
 
-The parts that genuinely do not exist yet and must be decided:
-- **Current prices** for every rung. The `paras-webinar-builder` figures are flagged stale. Set them.
-- **The never-say list.** Guarantees, claims without evidence, old prices, anything that would need a lawyer.
+## 1 · Brand Brain
+
+Mostly extraction, not invention. Identity, credentials and positioning are in `paras-lead-engine`; voice and the 3E method in `paras-script-writer`; the offer architecture in `paras-webinar-builder`; ICP and proof in `references/icp.md`.
+
+**What must actually be decided:**
+
+- **Every price.** v2 replaced the `[confirm]` markers with benchmark-backed bands in [`../00-strategy/offer-ladder.md`](../00-strategy/offer-ladder.md). Pick the number inside the band. This is week 1 of Sprint 0 and everything else waits on it.
+- **The never-say list.** Guarantees, unevidenced claims, stale prices.
 - **Open loops.** Every promise made on camera not yet delivered.
 
-Ship `.claude/skills/exp-brand-brain/`. Test: run the Script agent against it and check the output sounds like him without being told to.
+Ships as `Claude Skills/exp-brand-brain/`. Test: run the Script agent against it and check the output sounds like him without being told to.
 
-### Week 2 — Router and scoreboard
+## 2 · Tracking
 
-Wire Chief of Staff (`paras-daily-task`) to Brand Brain and to real pipeline state — what is filmed, edited, scheduled — rather than an assumed cycle position. Add routing by person, not just by task category.
+The one item where being wrong invalidates everything else. Sprint 0 teaches nothing without it.
 
-Build Scorecard v1. Thin on purpose: YouTube (views, CTR, AVD, subs), Meta (spend, CPL, CPA), GHL (leads, source, calls booked), Skool (joins, active), revenue. One tab, one line per week, filled Monday morning. See [`../05-metrics/scorecard.md`](../05-metrics/scorecard.md).
+Checklist for every page and link: UTMs on every inbound link · pixel or GA firing and *verified* · form posting to GHL with source recorded · mobile checked on a real phone · thank-you page or event marking conversion.
 
-VA installs tracking in parallel. Nothing else in the phase matters if this is wrong.
+## 3 · Scorecard v1
 
-### Week 3 — Handover
+Thin on purpose, and **revenue on top** during Sprint 0. One tab, one row per week, filled Monday morning. Detail in [`../05-metrics/scorecard.md`](../05-metrics/scorecard.md).
 
-The four lanes go live. Each person gets: their lane doc from [`../01-architecture/human-layer.md`](../01-architecture/human-layer.md), their input source, their output destination, their SLA, and the escalation rule.
+Start manual. A week of assembling it by hand teaches which numbers actually get used, and automating the wrong five is worse than assembling the right five.
 
-Run one full week on the rhythm with Paras deliberately not filling gaps. Note every time he has to step in — each one is either a missing decision in Brand Brain or an unclear lane, and both are fixable in an hour.
+## 4 · Four lanes
 
-Ship `.claude/skills/exp-editor-brief/`. Test it against a real script and a real edit, then ask the editor the only question that matters: *could you have worked from this without asking me anything?*
+From [`../01-architecture/human-layer.md`](../01-architecture/human-layer.md). Each person gets their lane doc, input source, output destination, SLA, and the escalation rule.
 
-### Week 4 — Cash and correction
+Then run a week with Paras deliberately not filling gaps, and **log every time he has to step in.** Each one is either a missing decision in Brand Brain or an unclear lane — both fixable in an hour.
 
-Lead Engine at 30 focused minutes a day on the existing Mon–Fri cadence: source and verify Monday, diagnose Tuesday, Paras reviews and sends Wednesday, LinkedIn and audits Thursday, follow-ups Friday.
+## 5 · Chief of Staff
 
-Target for the month: 50 attempts, which is the smallest number that says anything. Then review the five numbers — reply rate by signal, reply rate by vertical, audit acceptance, audit-to-call, bounce rate — and nothing else.
+Wire `paras-daily-task` to Brand Brain and to real pipeline state — what's filmed, edited, scheduled — rather than an assumed cycle position. Add routing to people by name, not just task categories.
 
-Close the phase with a correction pass: what did Paras get pulled into that he shouldn't have, and what is now written down so it doesn't recur.
+## 6 · Editor Brief
 
----
+Ships as `Claude Skills/exp-editor-brief/`. Test against a real script and a real edit, then ask the editor the only question that counts: *could you have worked from this without asking me anything?*
 
-## Constraints
-
-- **No new agents beyond the two.** Brand Brain and Editor Brief. The urge to build more is the thing this phase is designed to resist.
-- **Publishing does not pause.** Tue/Fri at 9am through all four weeks. A week with build progress and no publish is a failed week.
-- **Every outbound email is reviewed by Paras before sending.** No exceptions, per the existing Lead Engine standing constraint.
-- **Cap outbound at ~30/day** on a warm domain, fewer on a new one.
+In the first nine because the editor is the hard ceiling on video volume, and this is the only lever that raises it without a second hire.
 
 ---
 
-## Exit criteria
+## What is deliberately *not* here
 
-Phase 1 starts when all five are true:
+No new agents beyond Brand Brain and Editor Brief. No orchestration infrastructure. No landing page rebuild. No product work.
 
-1. Brand Brain exists and agents produce on-voice output from it
-2. Monday's scorecard arrives without manual assembly across four dashboards
-3. Each of the four people ran their lane for a full week unaided
-4. 50 outbound attempts logged with the five numbers reviewed
-5. Editor Brief has produced a brief the editor worked from without questions
-
-If #3 or #5 fails, extend the phase. Starting Phase 1 with unclear lanes means building nine agents on top of a team that doesn't know who approves what.
+The foundation exists to make Phase 1 possible, not to be impressive. Six hours a week, four weeks, done.

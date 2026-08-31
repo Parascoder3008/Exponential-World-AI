@@ -1,104 +1,90 @@
 # The Offer Ladder
 
-Every price in this document is a **band marked `[confirm]`**. The reference figures from the last webinar run (₹5,000 against ₹60,000 stated value) are explicitly flagged stale in `paras-webinar-builder`. What carries forward is the **ratio**, roughly 12:1 stated value to price, not the numbers. Set the numbers before anything ships.
+Every price below is a **benchmark-backed band**, not a guess. Sources in [`../06-evidence/market-research.md`](../06-evidence/market-research.md#7-pricing-benchmarks). Set the exact number inside the band in Sprint 0, week 1.
+
+The v1 version of this file left every rung as `[confirm]`. That was the reason the ladder had one working rung.
 
 ---
 
-## The ladder
+## The 4C Ladder
+
+Name the ladder after the framework. Kennedy's point, and the research on in-housing agrees: **proprietary methodology is what makes an offer non-comparable.** A prospect can price-shop "AI automation." They cannot price-shop a 4C Install.
 
 ```
-  FREE            LOW              MID              HIGH            DFY            INVEST
-  ────────────────────────────────────────────────────────────────────────────────────────
-  Content         Workshop         Cohort           Programme       Installed      Money OS
-  Free audit      Bootcamp         Agent packs      Consulting      OS             Advisory
-  Workshop        3–5 day          6–8 week         3–6 month       Build + run    Partnership
-  ────────────────────────────────────────────────────────────────────────────────────────
-  learn ─────────▶ learn/earn ────▶ earn ──────────▶ help ─────────▶ train ───────▶ invest
+  4C AUDIT      4C WORKSHOP     4C PROGRAMME    4C INSTALL      4C PARTNER
+  free          ₹1.5–4L         ₹8–25L          ₹1.5–3L         retainer
+                                                + retainer      ₹40–80K/mo
+  ──────────────────────────────────────────────────────────────────────────
+  learn ───────▶ learn/earn ───▶ train ────────▶ help/train ───▶ invest
 ```
 
 Two rules govern the whole ladder:
 
-1. **Stage decides the offer, score decides the priority.** A learn-stage buyer offered a retainer says no because they do not yet believe the premise. A train-stage buyer offered a workshop feels talked down to.
-2. **Every rung must be complete on its own.** Nobody should finish a bootcamp feeling that the useful part was withheld for the upsell. That is how you get one sale instead of five.
+1. **Stage decides the offer, score decides the priority.** A learn-stage buyer offered a retainer says no — they don't believe the premise yet. A train-stage buyer offered a workshop feels talked down to.
+2. **Every rung is complete on its own.** Nobody finishes a rung feeling the useful part was withheld for the upsell. That is how one sale becomes five.
 
 ---
 
-## Rung 0 — Free
+## Client side — the business
 
-| Offer | Job | Cost to deliver |
-|---|---|---|
-| YouTube, LinkedIn, IG, Shorts | Attention, positioning | Content OS |
-| **Free 4C audit** | Prove competence before an invoice exists | ~30 min agent + Paras review |
-| Wednesday live workshop | Self-qualification, enterprise discovery | 90 min/week |
-| Skool free tier | Own the audience off-platform | Community agent |
+### 4C Audit · free
 
-The 4C audit is the wedge for the client side and deserves protecting. It is a **real deliverable given away** — scored, evidenced, with a named primary gap and a quoted artifact from their own site. It converts better than a call request because the prospect gets value whether or not they buy, and it makes the first paid conversation a continuation rather than a pitch.
+The wedge, and it stays free. A **real deliverable given away** — scored across all four pillars, evidenced, quoting an artifact from the prospect's own site, naming one primary gap.
 
-Rule: never let the audit degrade into a lead-magnet PDF. The moment it is generic it stops working.
+It converts better than a call request because the prospect gets value whether or not they buy, and it makes the first paid conversation a continuation rather than a pitch.
 
----
+**Protect it:** the moment it degrades into a generic lead-magnet PDF it stops working. High score means high *upside*, never an insult — say so in the document.
 
-## Rung 1 — Low ticket · `[confirm: band]`
+### 4C Workshop · ₹1.5–4L (one day, up to 100 people)
 
-**The 3–5 day workshop / bootcamp.** Live, cohort-based, Hinglish delivery.
+**Benchmark:** Indian corporate AI training runs ₹1,200–12,000 per employee; a one-day awareness workshop for 100 lands at ₹1.5–4L.
 
-The architecture is already proven and documented in `paras-webinar-builder`: 8 blocks, cold-open contrast hook → authority stack → three promises → framework → **the 5-tool walkthrough with a YES/NO poll after each** → live demo → the turn → offer with value stack.
+This is the **highest-ticket, fastest-closing item on the menu**, and v1 treated it as top-of-funnel. It is not. It is what enterprise buys from an outsider — low risk, high perceived value, and it creates the internal champion who later sponsors the build.
 
-Three things make it work, and all three are non-negotiable:
+Already delivered at this shape: Nippon India Mutual Fund (2-day), Wingsway.
 
-- **Demo before offer, always.** The room must have seen a real prompt run and a real result before a price appears.
-- **Poll cadence.** Six engagement beats minimum. They are the retention mechanism, not decoration.
-- **Prompts are the product.** The tool is just the container. Every named prompt ships as copy-paste text in a companion PDF.
+### 4C Programme · ₹8–25L (multi-week, role-specific, hands-on)
 
-Job on the ladder: convert a viewer into a buyer at a price where the decision is easy, and produce the testimonial that makes rung 3 sellable.
+**Benchmark:** a multi-week role-specific programme with hands-on projects for 100 people runs ₹8–25L.
 
----
+The Wingsway shape — training plus a consulting engagement. Sold after a workshop, almost never cold.
 
-## Rung 2 — Mid ticket · `[confirm: band]`
+### 4C Install · ₹1.5–3L build + ₹40–80K/month retainer
 
-**The 6–8 week cohort**, and **agent packs**.
+The done-for-you rung. Build their Brand Brain, wire the Content OS agents to their channels, run it with them 30–60 days, hand over to their operator — or keep the retainer if they'd rather not have one.
 
-The cohort is the bootcamp extended into implementation — people leave with a working thing, not notes. Curriculum splits the way the existing bootcamp does: foundations and core method first, advanced application second, hands-on assignment after every session.
+**Benchmark anchoring:** global SMB AI automation runs $500–3,000 setup plus $300–1,500/month, with median small-to-midmarket retainers at $2,800–7,000/month. The **hybrid model — fixed build fee plus monthly retainer — is the 2026 default.** India pricing sits at the lower end of those bands; **US pricing is 2–3× and should be quoted in dollars**, roughly $3–5K build plus $1.5–3K/month.
 
-**Agent packs** are the first true product: the skills themselves, delivered through Skool, versioned as they improve. Content Pack, Commerce Pack, and later Money Pack. This is the rung where "build once, monetise twice" first pays out literally — the agent that wrote this week's script is the agent in the pack.
+**Price against the headcount it replaces or the revenue it unlocks. Never against hours.**
 
-Constraint: an agent only enters a pack after 30 days running the business. Packs shipping half-tested agents would destroy the thing the whole model rests on.
+### 4C Partner · retainer, priced per engagement
+
+Ongoing advisory for clients past the install. This is the rung that defends against in-housing: strategic judgment, governance, tooling recommendations, and AI enablement built into the retainer as a benefit rather than a separate SKU. Firms doing exactly this report **28% lower voluntary churn**.
 
 ---
 
-## Rung 3 — High ticket · `[confirm: band]`
+## Creator side — the audience
 
-**The 3–6 month programme.** Group or small-group, implementation-led, for people at *help* stage — they have clients and no leverage.
+Kept deliberately shorter, because [the focus decision](positioning-and-icp.md) makes this the secondary track.
 
-Shape: install Content OS in their business, then Commerce OS, with weekly working sessions rather than lectures. Deliverable is a running system and a trained operator, which is exactly what Exponential World itself built.
+| Rung | Offer | Price | Benchmark |
+|---|---|---|---|
+| Free | Content, workshop, Skool free tier | — | |
+| **Low** | 3–5 day bootcamp | **₹5,000–15,000** | Cohorts at ₹3–15K sell 100–1,000 seats per launch |
+| **Mid** | 6–8 week cohort · agent packs | **₹25,000–50,000** | The missing rung — this is what Sprint 0 builds |
+| **High** | 3–6 month programme / internship track | **₹1L+** | For *help*-stage buyers with clients and no leverage |
 
-This is also the natural home for the "internship" idea — a long-form, high-commitment track where participants work inside the system rather than watching it. Worth running once as a cohort before deciding whether it is a product or a hiring pipeline. It may well be both.
+**The ₹25–50K mid-tier is the single most important thing missing today.** A ₹5,000 buyer currently finishes and has nowhere to go, which is where all the LTV leaks out.
 
----
-
-## Rung 4 — Done-for-you · `[confirm: band, likely project + retainer]`
-
-**Installed OS.** Paras's team builds and runs it inside the client's business.
-
-Scoped as: 4C audit → build (agents wired to their stack, their voice, their offers) → 30–60 days of running it with them → handover to their operator, or an ongoing retainer if they would rather not have one.
-
-Pricing shape: a project fee for the build plus a monthly retainer for running and improving. Price against the cost of the headcount it replaces or the revenue it unlocks, never against hours.
-
-This is the highest-margin, fastest-cash rung and it is where Phase 2 revenue concentrates. It is also where case studies come from, which is why `Case Study Capture` is an agent and not an afterthought.
+On the ₹5,000 bootcamp: the ~12:1 value-to-price ratio from the proven deck carries forward. The absolute numbers from the last run do not — they are flagged stale at source.
 
 ---
 
-## Rung 5 — Consulting and enterprise · `[confirm: band]`
+## Money OS · rung 6
 
-The Nippon / Wingsway shape: a paid training programme as the wedge, a roadmap as the deliverable, an implementation proposal as the outcome. Sold through workshops, referral, and speaking — never cold.
+Education and tooling only — curriculum, prompts, screeners, backtesting method, Pine Script strategies. Priced within the creator-side bands.
 
----
-
-## Rung 6 — Money OS
-
-For people who have made money and now want it to work. **Education and tooling only** — curriculum, prompts, screeners, backtesting method, Pine Script strategies.
-
-Hard boundary, stated here because it is a commercial constraint and not only a legal one: **no buy/sell recommendations for a fee, and no managing anyone else's money.** Both require SEBI Research Analyst or Investment Adviser registration. See `risks-and-constraints.md`. The offer is *"here is the method and the tooling, run it on your own capital"* — which is also, conveniently, the honest version.
+**Hard boundary:** no buy/sell recommendations for a fee, no managing anyone else's money. Both require SEBI registration. The offer is *"here is the method and the tooling, run it on your own capital"* — which is also the honest version. See [`risks-and-constraints.md`](risks-and-constraints.md#5-the-sebi-boundary).
 
 ---
 
@@ -106,10 +92,20 @@ Hard boundary, stated here because it is a commercial constraint and not only a 
 
 | Phase | Actively sold | Being built quietly |
 |---|---|---|
-| **0** | Free audit → DFY (manual outbound) | Content OS |
-| **1** | Free audit → DFY, workshop | Content OS agents, first packs |
-| **2** | Workshop → cohort → DFY, first installs | Commerce OS agents |
-| **3** | All of the above + Money OS education | Money OS agents |
-| **4** | Agent packs, licensed OS | The dashboard product |
+| **Sprint 0** | 4C Workshop (warm/referral) · bootcamp to existing audience | The ladder itself |
+| **Phase 1** | Workshop → Programme → Install | Content OS agents |
+| **Phase 2** | All rungs; first installs at scale | Commerce OS agents, first packs |
+| **Phase 3** | + Money OS education | Money OS agents |
+| **Phase 4** | + agent packs, licensed OS | The dashboard |
 
-The pattern: **sell the high-ticket manual version of a thing while building the automated version of it.** Revenue arrives first, the product arrives having already been paid for, and every install is a live test of the agents that eventually become the product.
+The through-line: **sell the manual version of the thing you are building the automated version of.** Revenue arrives first, and the product arrives having already been paid for.
+
+---
+
+## Three things to fix before anything ships
+
+Straight from the board review:
+
+1. **A named guarantee.** There isn't one. For training, the honest version is a completion-and-outcome guarantee, never a performance promise.
+2. **Real scarcity.** Cohort caps and dated starts, not just "first 30 enrolments" bonus limits.
+3. **Two CTAs on the webinar, not one.** Benchmarks show two performs best; the current deck runs a single offer block.

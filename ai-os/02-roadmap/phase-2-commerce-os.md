@@ -1,4 +1,4 @@
-# Phase 2 — Commerce OS (90 days)
+# Phase 2 — Commerce OS (days 121–210)
 
 **Goal:** automate what Phases 0–1 ran by hand, and turn the channel's output into paid installs.
 

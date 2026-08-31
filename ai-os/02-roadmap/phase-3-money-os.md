@@ -1,4 +1,4 @@
-# Phase 3 — Money OS (90 days)
+# Phase 3 — Money OS (days 211–300)
 
 **Goal:** know exactly which money the business makes and where surplus goes, then build the market side as education and own-capital tooling.
 
@@ -47,7 +47,7 @@ Questions it must answer every month:
 | Cost per agent run | Cheap now; will not always be |
 | Runway | The number that decides how brave to be |
 
-Most businesses this size cannot answer any of these and compensate with conviction. The scorecard from Phase 0 already collects the raw inputs — $1 turns them into decisions.
+Most businesses this size cannot answer any of these and compensate with conviction. The scorecard from Sprint 0 already collects the raw inputs — $1 turns them into decisions.
 
 ---
 

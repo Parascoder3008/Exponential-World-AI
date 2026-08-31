@@ -8,8 +8,14 @@ One weekly view. Assembled Monday morning by the Operator, read by Paras, feeds 
 
 ## The weekly row
 
+**Money goes first.** v1 led with content metrics, which is right for a business with runway and wrong for one at 3–6 months. Revenue is the governing number until it isn't.
+
 | Group | Metric | Source | Why it's here |
 |---|---|---|---|
+| **Money** | **Revenue this week** | Paras | The governing number |
+| | **Offers made** | Paras | How many times you asked for money. This is the real ceiling. |
+| | Revenue by rung | Paras | Which rung is working |
+| | Cash position + runway (months) | Paras | Decides how brave to be |
 | **Content** | Videos published | YouTube | The bottleneck metric. Target 2. |
 | | Views (7d) | YouTube | Reach |
 | | **CTR** | YouTube | 4% / 6% / 8% at day 30 / 60 / 90 |
@@ -39,16 +45,17 @@ One weekly view. Assembled Monday morning by the Operator, read by Paras, feeds 
 
 ---
 
-## The four that matter most
+## The five that matter most
 
 Everything else is context.
 
-1. **Videos published.** Two a week. This is the one that fails first and quietest, and everything downstream depends on it.
-2. **Leads by source.** Answers *what produced the last five leads*. Without it, effort allocation is guesswork with confidence.
-3. **CTR.** Gates every downstream number on the channel. The cheapest thing to improve and the most valuable.
-4. **Paras interventions.** The health check on the whole system. Trending down means the OS is working; flat or rising means lanes are unclear or Brand Brain has gaps.
+1. **Revenue and runway.** At 3–6 months, this decides whether the plan continues as written or reverts to a cash sprint. Recalculate runway monthly, not quarterly.
+2. **Offers made.** How many times someone was asked for money. At ₹1–5L/month this number is almost certainly single digits, and it is the real revenue ceiling.
+3. **Videos published.** Two a week. Fails first and quietest, and everything downstream depends on it.
+4. **Leads by source.** Answers *what produced the last five leads*. Without it, effort allocation is guesswork with confidence.
+5. **Paras interventions.** The health check on the whole system. Trending down means the OS is working; flat or rising means lanes are unclear or Brand Brain has gaps.
 
-The fourth is unusual and it is deliberate. Most scorecards measure output. This one also measures whether the business is becoming less dependent on one person, which is the actual project.
+Two of these are unusual and both are deliberate. **Offers made** is an activity metric on a scorecard otherwise full of outcomes — because at this stage the activity is the constraint. **Paras interventions** measures whether the business is becoming less dependent on one person, which is the actual project.
 
 ---
 

@@ -76,19 +76,34 @@ Runs: the `@parasarora_ai` YouTube channel · a Skool community · a weekly Wedn
 
 ## 5. Offers and pricing
 
-**Every price below is `[confirm]`. Set these in Phase 0, week 1.** The ₹5,000 against ₹60,000 stated value from the last webinar run is explicitly stale — what carries forward is the ~12:1 value-to-price ratio, not the numbers.
+**Bands below are benchmark-backed** (sources: `ai-os/06-evidence/market-research.md`). **Pick the exact number inside the band in Sprint 0 week 1 and replace the band with it.** Until then, quote the band, never a number outside it.
+
+### Client side — primary
 
 | Rung | Offer | Price | Stage |
 |---|---|---|---|
-| 0 | Content, **free 4C audit**, Wednesday workshop, Skool free | free | learn |
-| 1 | 3–5 day workshop / bootcamp | `[confirm]` | learn → earn |
-| 2 | 6–8 week cohort · agent packs | `[confirm]` | earn |
-| 3 | 3–6 month programme / internship track | `[confirm]` | help |
-| 4 | **Installed OS (DFY)** — build + run + handover | `[confirm: project + retainer]` | train |
-| 5 | Consulting / enterprise programme | `[confirm]` | train |
-| 6 | Money OS education | `[confirm]` | invest |
+| **4C Audit** | Free diagnostic, scored + evidenced | free | learn |
+| **4C Workshop** | 1 day, up to 100 people | **₹1.5–4L** | learn/earn |
+| **4C Programme** | Multi-week, role-specific, hands-on | **₹8–25L** | train |
+| **4C Install** | Build + 30–60 days running it + handover | **₹1.5–3L build + ₹40–80K/mo** | help/train |
+| **4C Partner** | Ongoing advisory + governance | retainer, per engagement | invest |
+
+**US pricing is 2–3× the India bands and quoted in dollars** — roughly $3–5K build plus $1.5–3K/month for the Install.
+
+### Creator side — secondary
+
+| Rung | Offer | Price |
+|---|---|---|
+| Low | 3–5 day bootcamp | **₹5,000–15,000** |
+| **Mid** | 6–8 week cohort · agent packs | **₹25,000–50,000** |
+| High | 3–6 month programme / internship | **₹1L+** |
+| Money OS | Education + tooling | within creator bands |
+
+**The ₹25–50K mid-tier is the most important missing rung.** A ₹5,000 buyer currently finishes with nowhere to go, and that is where the LTV leaks.
 
 **The free 4C audit is the wedge.** A real deliverable given away — scored, evidenced, with a named primary gap quoting an artifact from their own site. Never let it degrade into a generic lead-magnet PDF; the moment it's generic it stops working.
+
+**Still stale, do not reuse:** the ₹5,000 against ₹60,000 stated value from the last webinar run. The ~12:1 value-to-price *ratio* carries forward; the absolute numbers do not.
 
 ---
 
