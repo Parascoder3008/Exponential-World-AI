@@ -14,7 +14,7 @@ Built by Paras Arora, in public, on his own business first.
 
 At 3–6 months of runway with a monetisable audience sitting idle and two proven offers, the most expensive available move is to spend a month on infrastructure.
 
-**[Sprint 0](02-roadmap/sprint-0-cash.md) comes before everything.** Three tracks, thirty days, using only what already exists:
+**[Sprint 0](02-roadmap/sprint-0-cash.md) comes before everything.** Three tracks, thirty days, using only what already exists. The day-by-day version for **1–30 September** is in [`30-day-detailed-plan.md`](02-roadmap/30-day-detailed-plan.md):
 
 | Track | What | Target |
 |---|---|---|
@@ -73,7 +73,8 @@ Full reasoning in [`positioning-and-icp.md`](00-strategy/positioning-and-icp.md)
 
 | You want to | Read |
 |---|---|
-| Know what to do Monday | [`02-roadmap/sprint-0-cash.md`](02-roadmap/sprint-0-cash.md) |
+| Know what to do tomorrow | [`02-roadmap/30-day-detailed-plan.md`](02-roadmap/30-day-detailed-plan.md) — day by day, 1–30 Sep |
+| Understand why Sprint 0 exists | [`02-roadmap/sprint-0-cash.md`](02-roadmap/sprint-0-cash.md) |
 | See the prices | [`00-strategy/offer-ladder.md`](00-strategy/offer-ladder.md) |
 | Understand the model | [`00-strategy/business-model.md`](00-strategy/business-model.md) |
 | Know who this is for | [`00-strategy/positioning-and-icp.md`](00-strategy/positioning-and-icp.md) |

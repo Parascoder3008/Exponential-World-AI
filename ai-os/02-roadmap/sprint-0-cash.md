@@ -2,6 +2,8 @@
 
 **Goal:** buy the runway that funds everything else, using assets that already exist.
 
+> **Running it 1–30 September 2026?** [`30-day-detailed-plan.md`](30-day-detailed-plan.md) has this sprint mapped day by day against real dates, with the revenue and content paths side by side. This file is the reasoning; that one is the schedule.
+
 **Not the goal:** building anything. Two skills get written in the margins. Nothing else.
 
 ---
