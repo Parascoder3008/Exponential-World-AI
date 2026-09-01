@@ -74,6 +74,7 @@ Full reasoning in [`positioning-and-icp.md`](00-strategy/positioning-and-icp.md)
 | You want to | Read |
 |---|---|
 | Know what to do tomorrow | [`02-roadmap/30-day-detailed-plan.md`](02-roadmap/30-day-detailed-plan.md) — day by day, 1–30 Sep |
+| **Actually run the work** | [`07-runbooks/content-os-runbook.md`](07-runbooks/content-os-runbook.md) · [`07-runbooks/outreach-os-runbook.md`](07-runbooks/outreach-os-runbook.md) |
 | Understand why Sprint 0 exists | [`02-roadmap/sprint-0-cash.md`](02-roadmap/sprint-0-cash.md) |
 | See the prices | [`00-strategy/offer-ladder.md`](00-strategy/offer-ladder.md) |
 | Understand the model | [`00-strategy/business-model.md`](00-strategy/business-model.md) |
