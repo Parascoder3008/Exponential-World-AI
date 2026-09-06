@@ -9,6 +9,8 @@
 export type LeadSource =
   | "meta_lead_ad"
   | "instagram_dm"
+  | "google_ads"
+  | "linkedin_ads"
   | "website"
   | "99acres"
   | "magicbricks"
