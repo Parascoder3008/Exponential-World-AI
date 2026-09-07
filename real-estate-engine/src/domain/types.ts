@@ -20,10 +20,12 @@ export type LeadSource =
   | "referral";
 
 export type Configuration =
+  | "studio"
   | "1bhk"
   | "2bhk"
   | "3bhk"
   | "4bhk_plus"
+  | "villa"
   | "plot"
   | "commercial";
 

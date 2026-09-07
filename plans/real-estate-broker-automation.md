@@ -443,6 +443,41 @@ Extract the client-specific bits into config. Templates, cadences, scoring weigh
 
 ---
 
+## 14b. Implementation status
+
+The domain and pipeline layers are built and tested in
+[`../real-estate-engine/`](../real-estate-engine/) — 247 tests, plus schema
+assertions run against a real Postgres 16. See its
+[README](../real-estate-engine/README.md),
+[Architecture](../real-estate-engine/docs/ARCHITECTURE.md),
+[Integration setup](../real-estate-engine/docs/INTEGRATIONS.md) and
+[Runbook](../real-estate-engine/docs/RUNBOOK.md).
+
+| Section of this plan | Status |
+|---|---|
+| §4 Lead capture — Meta, Google, LinkedIn | built |
+| §4 Lead capture — 99acres / MagicBricks / Housing | built (email path) |
+| §4 Lead capture — website, missed call/IVR, walk-in, referral | built |
+| §5 Qualification — scoring, 7-field WhatsApp flow | built |
+| §6 Assignment + SLA escalation | built |
+| §7 Follow-up cadence | built |
+| §8 Booking, reminders, no-show recovery | built |
+| §9 Retention, revival, referral | built |
+| §13 Metrics | built |
+| Messaging adapters (WhatsApp send/receive) | not built |
+| Postgres `Repository` implementation | not built |
+| Dashboard shell | not built — waits on a named pilot client |
+| §5.4 Voice agent | not built — Phase 3, by design |
+
+**One correction to §4 worth stating plainly.** An earlier read of this plan
+treated portal integration as blocked pending a client, because API access
+depends on their subscription tier. That was wrong, and the table in §4
+already said so: the portal **API** is gated, the portal **email** is not.
+Email parsing is the default path, works on day one for any client, and is
+built. Nothing in the ingest layer is blocked on choosing a broker.
+
+---
+
 ## 15. Immediate next actions
 
 1. Pick **one** pilot broker. Not three. One, with 300+ leads/month and an owner who will enforce process.

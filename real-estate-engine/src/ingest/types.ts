@@ -54,19 +54,16 @@ export interface NormalisedLead {
   unmappedFields: Record<string, string>;
 }
 
-export type IngestResult =
-  | { ok: true; lead: NormalisedLead }
-  | { ok: false; reason: IngestFailure; detail: string };
-
-export type IngestFailure =
-  | "bad_signature"
-  | "unrecognised_payload"
-  | "missing_identity";
-
-/** Thrown for auth failures, which are operational faults rather than data. */
-export class SignatureVerificationError extends Error {
-  constructor(readonly platform: string, detail: string) {
-    super(`${platform} signature verification failed: ${detail}`);
-    this.name = "SignatureVerificationError";
-  }
-}
+/**
+ * Adapters return their own narrow result types rather than a shared union.
+ *
+ * An earlier draft had a generic `IngestResult` here; it was never used,
+ * because each source fails in its own way — a portal email is
+ * `not_a_portal_email | no_identity`, a website form is
+ * `bot_submission | no_identity`, and flattening those into one union loses
+ * exactly the information the operator needs to fix the problem.
+ *
+ * Signature failures are likewise returned as HTTP statuses by the handlers
+ * rather than thrown: an unsigned webhook is hostile traffic, not an
+ * exceptional condition, and it should not produce a stack trace on every hit.
+ */

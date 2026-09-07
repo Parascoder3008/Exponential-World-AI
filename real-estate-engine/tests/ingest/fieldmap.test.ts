@@ -202,3 +202,37 @@ describe("timeline regression cases", () => {
     }
   });
 });
+
+describe("regex audit regressions", () => {
+  it("matches inflected purpose and funding wordings, not just dictionary forms", () => {
+    // Three defects found in a sweep after the same bug appeared three times:
+    //  - "invest" carried a trailing \b, so "investing" never matched
+    //  - "owncstay" was a typo: a dead alternative that could never fire
+    //  - "live" could not match "living"
+    // Stems now take a leading \b only.
+    expect(parsePurpose("investing in property")).toBe("investment");
+    expect(parsePurpose("for rental yield")).toBe("investment");
+    expect(parsePurpose("we will be living there")).toBe("end_use");
+    expect(parsePurpose("own stay")).toBe("end_use");
+    expect(parsePurpose("shifting next year")).toBe("end_use");
+    expect(parseFunding("needs financing")).toBe("loan_needed");
+    expect(parseFunding("will be financed")).toBe("loan_needed");
+    expect(parseFunding("self-funded")).toBe("self");
+  });
+
+  it("recognises the property types Indian forms actually offer", () => {
+    expect(parseConfiguration("Villa")).toBe("villa");
+    expect(parseConfiguration("Row House")).toBe("villa");
+    expect(parseConfiguration("Independent House")).toBe("villa");
+    expect(parseConfiguration("Studio Apartment")).toBe("studio");
+    expect(parseConfiguration("1 RK")).toBe("studio");
+  });
+
+  it("prices a '3 BHK villa' as a villa, not as a 3BHK flat", () => {
+    // Ordering: the villa rule runs before the digit+BHK rule. Getting this
+    // backwards puts the lead in the wrong inventory band entirely, which
+    // then corrupts budget-fit scoring — 25 of the 100 available points.
+    expect(parseConfiguration("3 BHK Villa")).toBe("villa");
+    expect(parseConfiguration("3 BHK")).toBe("3bhk");
+  });
+});

@@ -8,7 +8,9 @@
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test:schema": "bash db/tests/run.sh",
+    "test:all": "npm run typecheck && npm test && npm run test:schema"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",

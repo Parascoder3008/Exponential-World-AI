@@ -14,9 +14,10 @@
  *   3. Any inbound reply pauses all automation instantly.
  */
 
+import { IST_OFFSET_MS, istShift } from "./time.js";
 import type { Tier } from "./types.js";
 
-export const IST_OFFSET_MS = 5.5 * 60 * 60 * 1000;
+export { IST_OFFSET_MS };
 export const CONTACT_WINDOW = { startHour: 9, endHour: 20 } as const;
 export const MIN_HOURS_BETWEEN_MESSAGES = 24;
 
@@ -61,10 +62,6 @@ export const CADENCES: Record<Exclude<Tier, "disqualified">, readonly CadenceSte
     { offsetHours: 912, channel: "whatsapp", label: "completed project walkthrough video", final: true },
   ],
 };
-
-function istShift(d: Date): Date {
-  return new Date(d.getTime() + IST_OFFSET_MS);
-}
 
 /** True if the instant falls inside the IST contact window. */
 export function isInContactWindow(at: Date): boolean {

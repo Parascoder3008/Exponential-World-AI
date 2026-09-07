@@ -154,7 +154,11 @@ function scale(value: number, unit: string | undefined): number {
 export function parseConfiguration(input: string): Configuration | null {
   const s = input.toLowerCase();
   if (/\b(plot|land|nabuild|na plot)\b/.test(s)) return "plot";
-  if (/\b(commercial|office|shop|retail|showroom)\b/.test(s)) return "commercial";
+  if (/\b(commercial|office|shop|retail|showroom|warehouse)\b/.test(s)) return "commercial";
+  // Before the digit rule: "3 BHK villa" is a villa, and pricing a villa as a
+  // 3BHK flat puts the lead in the wrong inventory band entirely.
+  if (/\b(villa|row ?house|bungalow|independent house)\b/.test(s)) return "villa";
+  if (/\b(studio|1 ?rk|one ?rk)\b/.test(s)) return "studio";
 
   const m = s.match(/(\d)\s*(?:\.\d)?\s*bhk/) ?? s.match(/^(\d)\s*$/);
   if (m) {
@@ -210,8 +214,14 @@ export function parseTimeline(input: string): Timeline | null {
 
 export function parsePurpose(input: string): Purpose | null {
   const s = input.toLowerCase();
-  if (/\b(investment|invest|rental|roi|returns|resale)\b/.test(s)) return "investment";
-  if (/\b(end use|enduse|self|own stay|owncstay|family|residence|live|shifting|personal)\b/.test(s))
+  // Whole words keep \b on both sides; stems take a leading \b only, so
+  // "investing" and "living" match. A trailing \b after a stem can never fire.
+  if (/\b(rental|roi|returns|resale|yield)\b|\b(invest|tenan)/.test(s)) return "investment";
+  if (
+    /\b(end use|enduse|self|own stay|ownstay|family|residence|personal|myself)\b|\b(shift|liv|reside|stay)/.test(
+      s,
+    )
+  )
     return "end_use";
   return null;
 }
@@ -219,8 +229,8 @@ export function parsePurpose(input: string): Purpose | null {
 export function parseFunding(input: string): Funding | null {
   const s = input.toLowerCase();
   if (/\b(pre.?approved|sanctioned|approved|already have)\b/.test(s)) return "loan_approved";
-  if (/\b(loan|finance|financing|emi|mortgage|home loan)\b/.test(s)) return "loan_needed";
-  if (/\b(self|cash|own funds|outright|full payment|no loan)\b/.test(s)) return "self";
+  if (/\b(emi|mortgage)\b|\b(loan|financ)/.test(s)) return "loan_needed";
+  if (/\b(self|cash|own funds|outright|full payment|no loan)\b|\bself.?fund/.test(s)) return "self";
   return null;
 }
 
