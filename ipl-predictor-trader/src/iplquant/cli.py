@@ -91,6 +91,22 @@ def cmd_backtest(a):
         print(grid[cols].round(3).to_string(index=False))
 
 
+def cmd_swings(a):
+    import pandas as pd
+    from . import models, report, swings
+    *_, states = models.prepare(a.data)
+    oos = models.walk_forward_inplay(states, a.seasons or report.TEST_SEASONS, with_baseline=False)
+    r = swings.analyse(oos, tuple(a.thresholds))
+    _print(r["lead_changes"])
+    cols = ["threshold", "turnaround_pct", "turnaround_pct_if_prices_fair", "avg_profit_when_turned",
+            "avg_result_when_not_turned", "roi_pct", "matches_in_profit_pct"]
+    with pd.option_context("display.width", 200, "display.max_columns", 20):
+        print("\nAt the model's fair prices:")
+        print(pd.DataFrame(r["fair_prices"])[cols].round(2).to_string(index=False))
+        print("\nAfter a 1-point spread and 5% commission:")
+        print(pd.DataFrame(r["with_costs"])[cols].round(2).to_string(index=False))
+
+
 def cmd_predict_match(a):
     b = _bundle(a)
     r = b.prematch_prob(a.team1, a.team2, a.venue, a.toss_winner, a.toss_decision)
@@ -220,6 +236,10 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("--seasons", type=int, nargs="*"); sp.add_argument("--hold", action="store_true",
                                                                       help="no hedging; hold to result")
     trade_args(sp)
+
+    sp = add("swings", cmd_swings, "how often matches turn around, and what backing both underdogs earns")
+    sp.add_argument("--data"); sp.add_argument("--seasons", type=int, nargs="*")
+    sp.add_argument("--thresholds", type=float, nargs="*", default=[2.5, 3.0, 4.0, 6.0])
 
     sp = add("predict-match", cmd_predict_match, "pre-match win probability")
     sp.add_argument("--team1", required=True); sp.add_argument("--team2", required=True)

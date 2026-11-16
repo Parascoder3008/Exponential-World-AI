@@ -540,5 +540,160 @@
         "prob_profit_pct": 59.45
       }
     ]
+  },
+  "swings": {
+    "lead_changes": {
+      "matches": 415,
+      "both_sides_favourite_at_60": 0.5710843373493976,
+      "both_sides_favourite_at_70": 0.3783132530120482,
+      "both_sides_favourite_at_80": 0.19518072289156627,
+      "both_sides_favourite_at_90": 0.06506024096385542,
+      "winner_was_below_40": 0.5759036144578313,
+      "winner_was_below_30": 0.3927710843373494,
+      "winner_was_below_20": 0.21445783132530122,
+      "winner_was_below_10": 0.09397590361445783
+    },
+    "fair_prices": [
+      {
+        "threshold": 2.5,
+        "matches": 415,
+        "traded": 415,
+        "traded_pct": 100.0,
+        "turnaround_pct": 57.10843373493976,
+        "turnaround_pct_if_prices_fair": 66.66666666666666,
+        "avg_profit_when_turned": 65.77078692364572,
+        "no_turn_first_bet_won_pct": 1.1235955056179776,
+        "avg_result_when_not_turned": -97.15941145164838,
+        "total_pnl": -1706.698737489377,
+        "roi_pct": -4.1125270782876555,
+        "matches_in_profit_pct": 57.59036144578313
+      },
+      {
+        "threshold": 3.0,
+        "matches": 415,
+        "traded": 415,
+        "traded_pct": 100.0,
+        "turnaround_pct": 44.096385542168676,
+        "turnaround_pct_if_prices_fair": 50.0,
+        "avg_profit_when_turned": 123.64423322573052,
+        "no_turn_first_bet_won_pct": 1.7241379310344827,
+        "avg_result_when_not_turned": -94.60631648595611,
+        "total_pnl": 678.2292555668624,
+        "roi_pct": 1.6342873628117167,
+        "matches_in_profit_pct": 45.06024096385542
+      },
+      {
+        "threshold": 4.0,
+        "matches": 415,
+        "traded": 415,
+        "traded_pct": 100.0,
+        "turnaround_pct": 28.674698795180724,
+        "turnaround_pct_if_prices_fair": 33.33333333333333,
+        "avg_profit_when_turned": 240.08626633299485,
+        "no_turn_first_bet_won_pct": 2.027027027027027,
+        "avg_result_when_not_turned": -91.42744844994864,
+        "total_pnl": 1507.7409524415834,
+        "roi_pct": 3.6331107287749,
+        "matches_in_profit_pct": 30.120481927710845
+      },
+      {
+        "threshold": 6.0,
+        "matches": 415,
+        "traded": 415,
+        "traded_pct": 100.0,
+        "turnaround_pct": 15.180722891566264,
+        "turnaround_pct_if_prices_fair": 20.0,
+        "avg_profit_when_turned": 500.99058354844755,
+        "no_turn_first_bet_won_pct": 2.840909090909091,
+        "avg_result_when_not_turned": -81.09768079739764,
+        "total_pnl": 3016.023122868227,
+        "roi_pct": 7.2675255972728365,
+        "matches_in_profit_pct": 17.59036144578313
+      }
+    ],
+    "with_costs": [
+      {
+        "threshold": 2.5,
+        "matches": 415,
+        "traded": 415,
+        "traded_pct": 100.0,
+        "turnaround_pct": 57.10843373493976,
+        "turnaround_pct_if_prices_fair": 66.66666666666666,
+        "avg_profit_when_turned": 59.19958001023704,
+        "no_turn_first_bet_won_pct": 1.1235955056179776,
+        "avg_result_when_not_turned": -97.27894910604762,
+        "total_pnl": -3285.352478450297,
+        "roi_pct": -7.916511996265776,
+        "matches_in_profit_pct": 57.59036144578313
+      },
+      {
+        "threshold": 3.0,
+        "matches": 415,
+        "traded": 415,
+        "traded_pct": 100.0,
+        "turnaround_pct": 44.096385542168676,
+        "turnaround_pct_if_prices_fair": 50.0,
+        "avg_profit_when_turned": 112.65368277745762,
+        "no_turn_first_bet_won_pct": 1.7241379310344827,
+        "avg_result_when_not_turned": -94.86880533237945,
+        "total_pnl": -1393.938888837288,
+        "roi_pct": -3.3588888887645494,
+        "matches_in_profit_pct": 45.06024096385542
+      },
+      {
+        "threshold": 4.0,
+        "matches": 415,
+        "traded": 415,
+        "traded_pct": 100.0,
+        "turnaround_pct": 28.674698795180724,
+        "turnaround_pct_if_prices_fair": 33.33333333333333,
+        "avg_profit_when_turned": 219.27424481932528,
+        "no_turn_first_bet_won_pct": 2.027027027027027,
+        "avg_result_when_not_turned": -91.92354819499919,
+        "total_pnl": -1115.7351322200523,
+        "roi_pct": -2.688518390891692,
+        "matches_in_profit_pct": 30.120481927710845
+      },
+      {
+        "threshold": 6.0,
+        "matches": 415,
+        "traded": 415,
+        "traded_pct": 100.0,
+        "turnaround_pct": 15.180722891566264,
+        "turnaround_pct_if_prices_fair": 20.0,
+        "avg_profit_when_turned": 453.54416687623046,
+        "no_turn_first_bet_won_pct": 2.840909090909091,
+        "avg_result_when_not_turned": -82.48163317369443,
+        "total_pnl": -460.25236393791965,
+        "roi_pct": -1.1090418408142642,
+        "matches_in_profit_pct": 17.59036144578313
+      }
+    ],
+    "by_phase": [
+      {
+        "phase": "1st innings, overs 1-10",
+        "trades": 240,
+        "turnaround_pct": 41.25,
+        "roi_pct": -5.803206106669747
+      },
+      {
+        "phase": "1st innings, overs 11-20",
+        "trades": 116,
+        "turnaround_pct": 48.275862068965516,
+        "roi_pct": 10.258473933449503
+      },
+      {
+        "phase": "2nd innings, overs 1-10",
+        "trades": 57,
+        "turnaround_pct": 47.368421052631575,
+        "roi_pct": 15.0786839760644
+      },
+      {
+        "phase": "2nd innings, overs 11-20",
+        "trades": 2,
+        "turnaround_pct": 50.0,
+        "roi_pct": 10.765379125894654
+      }
+    ]
   }
 }

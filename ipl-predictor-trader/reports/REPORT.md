@@ -82,3 +82,29 @@ Same rule without hedging (value bet, hold to the result):
 
 Rule settings: enter at 4 points of edge, hedge when edge falls under 1 point or locked loss reaches 50% of risk, 0.25 Kelly capped at 2% of bankroll per trade, 5% commission, 1-point back/lay spread. "Chance of profit" resamples matches 2,000 times.
 
+## 5. Turnaround matches
+
+Prices here are the model's fair odds, not market odds.
+
+Of 415 matches, both sides were at some point favourite at 60%+ in 57%, at 70%+ in 38%, at 80%+ in 20% and at 90%+ in 7%. The eventual winner had been below 30% in 39% of matches and below 10% in 9%.
+
+Strategy: back whichever side first reaches the odds threshold (100 units), then back the other side if it later reaches the threshold too, sized so both outcomes pay the same.
+
+| Odds threshold | Matches that turned | Expected if prices are fair | Avg profit when it turned | Avg result when it did not | ROI at fair prices | ROI after spread and commission |
+|---|---|---|---|---|---|---|
+| 2.5 | 57% | 67% | +66 | -97 | -4.1% | -7.9% |
+| 3.0 | 44% | 50% | +124 | -95 | +1.6% | -3.4% |
+| 4.0 | 29% | 33% | +240 | -91 | +3.6% | -2.7% |
+| 6.0 | 15% | 20% | +501 | -81 | +7.3% | -1.1% |
+
+By when the first bet was struck (threshold 3.0, fair prices):
+
+| First bet struck | Trades | Turned | ROI |
+|---|---|---|---|
+| 1st innings, overs 1-10 | 240 | 41% | -5.8% |
+| 1st innings, overs 11-20 | 116 | 48% | +10.3% |
+| 2nd innings, overs 1-10 | 57 | 47% | +15.1% |
+| 2nd innings, overs 11-20 | 2 | 50% | +10.8% |
+
+With about 100 high-variance trades per row, a 10-point ROI difference is roughly one standard error. Treat the phase split as a question to test on real odds, not as a result.
+

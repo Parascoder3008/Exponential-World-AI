@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import brier_score_loss, log_loss, roc_auc_score
 
-from . import backtest, models
+from . import backtest, models, swings
 from .trader import TraderConfig
 
 TEST_SEASONS = list(range(2021, 2027))
@@ -82,6 +82,8 @@ def evaluate(data_dir=None, test_seasons=None) -> dict:
         "simulated_market_grid": json.loads(grid.to_json(orient="records")),
         "hold_to_result_grid": json.loads(hold.to_json(orient="records")),
     }
+    # ---- turnaround matches ------------------------------------------------
+    out["swings"] = swings.analyse(oos)
     return out
 
 
@@ -156,6 +158,35 @@ def to_markdown(r: dict) -> str:
              f"{(c['stop_loss'] or 0)*100:.0f}% of risk, {c['kelly_fraction']:.2f} Kelly capped at "
              f"{c['max_risk_frac']*100:.0f}% of bankroll per trade, {c['commission']*100:.0f}% commission, "
              f"1-point back/lay spread. \"Chance of profit\" resamples matches 2,000 times.\n")
+    sw = r.get("swings")
+    if sw:
+        lc = sw["lead_changes"]
+        L.append("## 5. Turnaround matches\n")
+        L.append("Prices here are the model's fair odds, not market odds.\n")
+        L.append(f"Of {lc['matches']} matches, both sides were at some point favourite at 60%+ in "
+                 f"{lc['both_sides_favourite_at_60']*100:.0f}%, at 70%+ in "
+                 f"{lc['both_sides_favourite_at_70']*100:.0f}%, at 80%+ in "
+                 f"{lc['both_sides_favourite_at_80']*100:.0f}% and at 90%+ in "
+                 f"{lc['both_sides_favourite_at_90']*100:.0f}%. The eventual winner had been below "
+                 f"30% in {lc['winner_was_below_30']*100:.0f}% of matches and below 10% in "
+                 f"{lc['winner_was_below_10']*100:.0f}%.\n")
+        L.append("Strategy: back whichever side first reaches the odds threshold (100 units), then "
+                 "back the other side if it later reaches the threshold too, sized so both "
+                 "outcomes pay the same.\n")
+        L.append("| Odds threshold | Matches that turned | Expected if prices are fair | "
+                 "Avg profit when it turned | Avg result when it did not | ROI at fair prices | "
+                 "ROI after spread and commission |\n|---|---|---|---|---|---|---|")
+        for f, c in zip(sw["fair_prices"], sw["with_costs"]):
+            L.append(f"| {f['threshold']:.1f} | {f['turnaround_pct']:.0f}% | "
+                     f"{f['turnaround_pct_if_prices_fair']:.0f}% | {f['avg_profit_when_turned']:+.0f} | "
+                     f"{f['avg_result_when_not_turned']:+.0f} | {f['roi_pct']:+.1f}% | {c['roi_pct']:+.1f}% |")
+        L.append("\nBy when the first bet was struck (threshold 3.0, fair prices):\n")
+        L.append("| First bet struck | Trades | Turned | ROI |\n|---|---|---|---|")
+        for ph in sw["by_phase"]:
+            L.append(f"| {ph['phase']} | {ph['trades']} | {ph['turnaround_pct']:.0f}% | {ph['roi_pct']:+.1f}% |")
+        L.append("\nWith about 100 high-variance trades per row, a 10-point ROI difference is roughly "
+                 "one standard error. Treat the phase split as a question to test on real odds, "
+                 "not as a result.\n")
     return "\n".join(L) + "\n"
 
 
