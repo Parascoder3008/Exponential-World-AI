@@ -222,10 +222,10 @@
         "green_both_sides_pct": 33.2682926829,
         "red_both_sides_pct": 60.0975609756,
         "held_to_result_pct": 6.6341463415,
-        "max_drawdown": 29594.0326889369,
+        "max_drawdown": 29594.0326889368,
         "pnl_ci90": [
           149889.8409578871,
-          418124.9974086404
+          418124.9974086403
         ],
         "prob_profit_pct": 100.0
       },
@@ -252,8 +252,8 @@
         "held_to_result_pct": 7.4579831933,
         "max_drawdown": 33058.9178497725,
         "pnl_ci90": [
-          180564.8717073849,
-          525720.0214573396
+          180564.8717073848,
+          525720.0214573395
         ],
         "prob_profit_pct": 100.0
       },
@@ -298,7 +298,7 @@
         "matches": 415,
         "matches_traded": 402,
         "trades": 836,
-        "pnl": 43703.3447045385,
+        "pnl": 43703.3447045384,
         "pnl_pct_bankroll": 43.7033447045,
         "roi_on_risk_pct": 2.9145018467,
         "win_rate_pct": 25.0,
@@ -364,7 +364,7 @@
         "held_to_result_pct": 14.8148148148,
         "max_drawdown": 66256.549326903,
         "pnl_ci90": [
-          -137623.0211470455,
+          -137623.0211470456,
           86254.0292589938
         ],
         "prob_profit_pct": 35.8
@@ -538,6 +538,64 @@
           91665.7659384859
         ],
         "prob_profit_pct": 59.45
+      }
+    ],
+    "stale_score_test": [
+      {
+        "score_lag_balls": 0,
+        "guard": "off",
+        "trades": 508,
+        "roi_on_risk_pct": 8.6159037497,
+        "prob_profit_pct": 100.0
+      },
+      {
+        "score_lag_balls": 0,
+        "guard": "on",
+        "trades": 508,
+        "roi_on_risk_pct": 8.6159037497,
+        "prob_profit_pct": 100.0
+      },
+      {
+        "score_lag_balls": 1,
+        "guard": "off",
+        "trades": 1239,
+        "roi_on_risk_pct": -1.3281180516,
+        "prob_profit_pct": 0.0
+      },
+      {
+        "score_lag_balls": 1,
+        "guard": "on",
+        "trades": 937,
+        "roi_on_risk_pct": 4.3807613737,
+        "prob_profit_pct": 100.0
+      },
+      {
+        "score_lag_balls": 2,
+        "guard": "off",
+        "trades": 1244,
+        "roi_on_risk_pct": -1.6368082429,
+        "prob_profit_pct": 0.0
+      },
+      {
+        "score_lag_balls": 2,
+        "guard": "on",
+        "trades": 1007,
+        "roi_on_risk_pct": 3.4507983665,
+        "prob_profit_pct": 100.0
+      },
+      {
+        "score_lag_balls": 3,
+        "guard": "off",
+        "trades": 1244,
+        "roi_on_risk_pct": -1.9518858687,
+        "prob_profit_pct": 0.0
+      },
+      {
+        "score_lag_balls": 3,
+        "guard": "on",
+        "trades": 987,
+        "roi_on_risk_pct": 2.4434517683,
+        "prob_profit_pct": 99.8
       }
     ]
   },

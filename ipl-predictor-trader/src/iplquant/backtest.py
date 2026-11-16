@@ -34,7 +34,7 @@ import pandas as pd
 
 from . import odds as O
 from .models import logit, sigmoid
-from .trader import TraderConfig, decide
+from .trader import TraderConfig
 
 
 @dataclass
@@ -101,37 +101,54 @@ def load_odds_csv(path: str, d: pd.DataFrame) -> pd.DataFrame:
     return out.sort_values(["date", "match_id", "seq"], kind="stable").reset_index(drop=True)
 
 
-def run(d: pd.DataFrame, cfg: TraderConfig | None = None, bankroll: float = 100_000.0) -> pd.DataFrame:
+def run(d: pd.DataFrame, cfg: TraderConfig | None = None, bankroll: float = 100_000.0,
+        score_lag: int = 0, guard=None) -> pd.DataFrame:
     """Trade every match in ``d`` (needs p_a, back_a, lay_a, a_won). Stakes are sized
     off a fixed bankroll so results are additive and easy to read. Returns one row
-    per round-trip trade."""
+    per round-trip trade.
+
+    ``score_lag`` makes the trader's view of the match that many balls behind the
+    prices it trades at, which is what a slow score feed does. ``guard`` (a
+    ``live.StaleGuard``) then blocks any action when the price has moved further than
+    it allows since the last score the trader has seen.
+    """
+    from .live import PaperTrader
     cfg = cfg or TraderConfig()
     trades = []
     for mid, g in d.groupby("match_id", sort=False):
         p = g["p_a"].to_numpy(); back = g["back_a"].to_numpy(); lay = g["lay_a"].to_numpy()
         seq = g["seq"].to_numpy(); a_won = bool(g["a_won"].iloc[0]); season = int(g["season"].iloc[0])
-        pos, risk, n_trades, open_trade = O.Position(), 0.0, 0, None
+        mid_price = (1.0 / back + 1.0 / lay) / 2.0
+        pt = PaperTrader(cfg, bankroll, mid, season)
         for i in range(len(g)):
-            act = decide(float(p[i]), float(back[i]), float(lay[i]), pos, bankroll, cfg, risk)
-            if act.kind == "enter" and n_trades < cfg.max_trades_per_match:
-                pos = O.Position().add(act.bet)
-                risk, n_trades = act.risk, n_trades + 1
-                open_trade = {"match_id": mid, "season": season, "entry_seq": int(seq[i]),
-                              "side": act.bet.side, "entry_odds": act.bet.odds,
-                              "stake": act.bet.stake, "risk": risk, "entry_edge": act.edge}
-            elif act.kind == "exit" and open_trade is not None:
-                pos.add(act.bet)
-                pnl = pos.settle(a_won, cfg.commission)
-                trades.append(open_trade | {"exit_seq": int(seq[i]), "exit": act.reason,
-                                            "exit_odds": act.bet.odds, "pnl": pnl})
-                pos, risk, open_trade = O.Position(), 0.0, None
-        if open_trade is not None:                       # still open at the last ball
-            pnl = pos.settle(a_won, cfg.commission)
-            trades.append(open_trade | {"exit_seq": -1, "exit": "settled", "exit_odds": np.nan,
-                                        "pnl": pnl})
+            j = max(i - score_lag, 0)                  # the state the trader knows about
+            if guard is not None and abs(mid_price[i] - mid_price[j]) > guard.max_unexplained_move:
+                continue
+            pt.on_tick(float(p[j]), float(back[i]), float(lay[i]), tag=int(seq[i]))
+        pt.settle(a_won)
+        trades.extend(pt.trades)
     cols = ["match_id", "season", "entry_seq", "side", "entry_odds", "stake", "risk",
             "entry_edge", "exit_seq", "exit", "exit_odds", "pnl"]
     return pd.DataFrame(trades, columns=cols)
+
+
+def stale_score_test(oos: pd.DataFrame, cfg: TraderConfig | None = None, lags=(0, 1, 2, 3)) -> pd.DataFrame:
+    """What a lagging score feed costs, with and without the stale-data guard.
+
+    Uses the kindest realistic market (it knows exactly what the model knows, plus
+    random mispricing), so any damage shown comes from the lag alone."""
+    from .live import StaleGuard
+    cfg = cfg or TraderConfig()
+    d = simulate_market(to_team1(oos), MarketConfig(reference="model", info=0.0, noise_sd=0.10))
+    n = d["match_id"].nunique()
+    rows = []
+    for lag in lags:
+        for name, guard in (("off", None), ("on", StaleGuard())):
+            s = summarize(run(d, cfg, score_lag=lag, guard=guard), n)
+            rows.append({"score_lag_balls": lag, "guard": name, "trades": s.get("trades", 0),
+                         "roi_on_risk_pct": s.get("roi_on_risk_pct", 0.0),
+                         "prob_profit_pct": s.get("prob_profit_pct", 0.0)})
+    return pd.DataFrame(rows)
 
 
 def summarize(trades: pd.DataFrame, n_matches: int, bankroll: float = 100_000.0,

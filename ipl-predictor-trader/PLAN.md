@@ -50,8 +50,8 @@ it lowers held-out log loss; anything that does not is dropped and listed.
 - Venue: par score, chasing bias, boundary rate.
 - A "swing likelihood" estimate: how volatile the rest of this match is likely to be.
 
-Also: extend from IPL to all major T20 leagues (Big Bash, SA20, ILT20, PSL, CPL,
-The Hundred excluded as it is not T20). Needs the Cricsheet archive; this
+Also: extend from IPL to the other major T20 leagues (Big Bash, SA20, ILT20, PSL,
+CPL). Needs the Cricsheet archive; this
 environment currently blocks cricsheet.org, so I will ask you to approve that one
 host.
 
@@ -59,6 +59,11 @@ Done when: held-out log loss is reported per league, with a table of which facto
 earned their place.
 
 ### Phase 2 - Real-time engine, proven on replays
+
+Status: engine, guard, paper ledger and single-match replay are built (`live.py`,
+`ipl replay`). Measured cost of a score feed one ball late, on the kindest simulated
+market: +8.6% return becomes -1.3%; with the guard on, +4.4%. Still to do: a
+full-season replay and the connectors to a live score source and a live price source.
 
 - A live session: ball events in, model probability out, trade decisions out.
 - Replay mode: feed any past match through it ball by ball, as if live. This is how

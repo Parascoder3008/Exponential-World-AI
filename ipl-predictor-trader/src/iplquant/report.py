@@ -82,6 +82,8 @@ def evaluate(data_dir=None, test_seasons=None) -> dict:
         "simulated_market_grid": json.loads(grid.to_json(orient="records")),
         "hold_to_result_grid": json.loads(hold.to_json(orient="records")),
     }
+    out["trading"]["stale_score_test"] = json.loads(backtest.stale_score_test(oos, cfg).to_json(orient="records"))
+
     # ---- turnaround matches ------------------------------------------------
     out["swings"] = swings.analyse(oos)
     return out
@@ -187,6 +189,19 @@ def to_markdown(r: dict) -> str:
         L.append("\nWith about 100 high-variance trades per row, a 10-point ROI difference is roughly "
                  "one standard error. Treat the phase split as a question to test on real odds, "
                  "not as a result.\n")
+    st = r["trading"].get("stale_score_test")
+    if st:
+        L.append("## 6. What a slow score feed costs\n")
+        L.append("Same trading rule, same simulated market (the kind one: it knows what the model "
+                 "knows, plus random mispricing). The only change is that the trader sees the "
+                 "score a few balls late while trading at current prices. The guard blocks "
+                 "trading whenever the price has moved more than 3 points since the last score "
+                 "the trader has seen.\n")
+        L.append("| Score is behind by | Guard | Trades | ROI on money risked | Chance of profit |\n|---|---|---|---|---|")
+        for s in st:
+            L.append(f"| {s['score_lag_balls']} balls | {s['guard']} | {s['trades']} | "
+                     f"{s['roi_on_risk_pct']:+.1f}% | {s['prob_profit_pct']:.0f}% |")
+        L.append("\nOne ball is roughly 30 to 40 seconds of play.\n")
     return "\n".join(L) + "\n"
 
 

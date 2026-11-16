@@ -107,6 +107,19 @@ def cmd_swings(a):
         print(pd.DataFrame(r["with_costs"])[cols].round(2).to_string(index=False))
 
 
+def cmd_replay(a):
+    from . import data
+    from .live import replay
+    matches, balls = data.load(a.data)
+    r = replay(_bundle(a), matches, balls, a.match_id, ledger_path=a.ledger)
+    print(f"{r['batting_first']} batted first against {r['bowling_first']}; winner {r['winner']}")
+    print("Prices were simulated, so the profit figure is not evidence of anything.")
+    for t in r["trades"]:
+        print(f"  {t['side']:>4} {r['batting_first']} at {t['entry_odds']:.2f}, stake {t['stake']:,.0f}"
+              f" -> {t['exit']}: {t['pnl']:+,.0f}")
+    _print(r["summary"])
+
+
 def cmd_predict_match(a):
     b = _bundle(a)
     r = b.prematch_prob(a.team1, a.team2, a.venue, a.toss_winner, a.toss_decision)
@@ -240,6 +253,10 @@ def build_parser() -> argparse.ArgumentParser:
     sp = add("swings", cmd_swings, "how often matches turn around, and what backing both underdogs earns")
     sp.add_argument("--data"); sp.add_argument("--seasons", type=int, nargs="*")
     sp.add_argument("--thresholds", type=float, nargs="*", default=[2.5, 3.0, 4.0, 6.0])
+
+    sp = add("replay", cmd_replay, "run a past match through the live paper-trading engine")
+    sp.add_argument("match_id"); sp.add_argument("--data"); sp.add_argument("--model")
+    sp.add_argument("--ledger", help="append the paper ledger to this file")
 
     sp = add("predict-match", cmd_predict_match, "pre-match win probability")
     sp.add_argument("--team1", required=True); sp.add_argument("--team2", required=True)

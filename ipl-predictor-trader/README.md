@@ -89,7 +89,7 @@ A liquid exchange market on the IPL most likely sits in the bottom rows.
 cd ipl-predictor-trader
 pip install -e ".[app,dev]"
 ipl train                # ~15 seconds
-pytest -q                # 52 tests
+pytest -q                # 61 tests
 streamlit run app.py     # dashboard
 ```
 
@@ -117,6 +117,9 @@ ipl arb bookA:2.10,1.80 bookB:1.85,2.06 --stake 1000
 
 # How often matches turn around, and what backing both underdogs earns
 ipl swings
+
+# Run a past match through the live paper-trading engine, ball by ball
+ipl replay 1535465
 
 # Re-run the evaluation, or backtest on real odds once you have them
 ipl evaluate
@@ -164,6 +167,7 @@ src/iplquant/
   odds.py       odds maths, positions, hedging, arbitrage
   trader.py     the entry/exit rule
   backtest.py   market simulation, real-odds loader, backtest, summary
+  live.py       live scoreboard, stale-score guard, paper ledger, match replay
   swings.py     turnaround matches and the back-both-underdogs strategy
   report.py     evaluation -> reports/
   oddsfeed.py   The Odds API client (unverified)

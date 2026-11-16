@@ -108,3 +108,20 @@ By when the first bet was struck (threshold 3.0, fair prices):
 
 With about 100 high-variance trades per row, a 10-point ROI difference is roughly one standard error. Treat the phase split as a question to test on real odds, not as a result.
 
+## 6. What a slow score feed costs
+
+Same trading rule, same simulated market (the kind one: it knows what the model knows, plus random mispricing). The only change is that the trader sees the score a few balls late while trading at current prices. The guard blocks trading whenever the price has moved more than 3 points since the last score the trader has seen.
+
+| Score is behind by | Guard | Trades | ROI on money risked | Chance of profit |
+|---|---|---|---|---|
+| 0 balls | off | 508 | +8.6% | 100% |
+| 0 balls | on | 508 | +8.6% | 100% |
+| 1 balls | off | 1239 | -1.3% | 0% |
+| 1 balls | on | 937 | +4.4% | 100% |
+| 2 balls | off | 1244 | -1.6% | 0% |
+| 2 balls | on | 1007 | +3.5% | 100% |
+| 3 balls | off | 1244 | -2.0% | 0% |
+| 3 balls | on | 987 | +2.4% | 100% |
+
+One ball is roughly 30 to 40 seconds of play.
+
