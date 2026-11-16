@@ -9,6 +9,8 @@ Started from two public repos
 [sanidhyajadaun/IPL-Match-Winner-Prediction](https://github.com/sanidhyajadaun/IPL-Match-Winner-Prediction))
 and rebuilt the parts of them that do not hold up.
 
+**Where this is going:** see [PLAN.md](PLAN.md) for the roadmap to a live in-play trader.
+
 ## Read this first
 
 1. **Nothing here has been tested against real betting odds.** No free historical
@@ -87,7 +89,7 @@ A liquid exchange market on the IPL most likely sits in the bottom rows.
 cd ipl-predictor-trader
 pip install -e ".[app,dev]"
 ipl train                # ~15 seconds
-pytest -q                # 46 tests
+pytest -q                # 52 tests
 streamlit run app.py     # dashboard
 ```
 
@@ -112,6 +114,9 @@ ipl hedge --position "back@2.5x100" --back 1.98 --lay 2.00
 
 # Arbitrage check across bookmakers (book:oddsA,oddsB)
 ipl arb bookA:2.10,1.80 bookB:1.85,2.06 --stake 1000
+
+# How often matches turn around, and what backing both underdogs earns
+ipl swings
 
 # Re-run the evaluation, or backtest on real odds once you have them
 ipl evaluate
@@ -159,6 +164,7 @@ src/iplquant/
   odds.py       odds maths, positions, hedging, arbitrage
   trader.py     the entry/exit rule
   backtest.py   market simulation, real-odds loader, backtest, summary
+  swings.py     turnaround matches and the back-both-underdogs strategy
   report.py     evaluation -> reports/
   oddsfeed.py   The Odds API client (unverified)
   cli.py        the `ipl` command
