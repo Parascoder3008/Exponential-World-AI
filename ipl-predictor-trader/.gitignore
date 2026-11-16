@@ -1,0 +1,6 @@
+__pycache__/
+*.egg-info/
+.pytest_cache/
+.venv/
+# Trained model bundle: rebuilt in ~15 seconds by `ipl train`
+models/

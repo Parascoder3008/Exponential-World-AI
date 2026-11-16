@@ -1,0 +1,544 @@
+{
+  "test_seasons": [
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "data": {
+    "matches": 1243,
+    "standard_matches": 1201,
+    "first": "2008-04-18",
+    "last": "2026-05-31"
+  },
+  "prematch": {
+    "n_matches": 422,
+    "coin_flip": {
+      "log_loss": 0.6931471805599453,
+      "accuracy": 0.5
+    },
+    "elo_only": {
+      "log_loss": 0.6958149069371214,
+      "brier": 0.25132533675890567,
+      "auc": 0.4955893965031021,
+      "accuracy": 0.495260663507109
+    },
+    "model_before_toss": {
+      "log_loss": 0.6983682689616663,
+      "brier": 0.2525836208325204,
+      "auc": 0.49360406091370557,
+      "accuracy": 0.490521327014218
+    },
+    "model_after_toss": {
+      "log_loss": 0.6966938099561848,
+      "brier": 0.2517398484573208,
+      "auc": 0.4878962210941906,
+      "accuracy": 0.4976303317535545
+    },
+    "chasing_side_win_rate": 0.533175355450237
+  },
+  "inplay": {
+    "n_balls": 100205,
+    "n_matches": 415,
+    "model": {
+      "log_loss": 0.5317765851655836,
+      "brier": 0.18127491444155436,
+      "auc": 0.8005224521853276,
+      "accuracy": 0.7143256324534704
+    },
+    "reference_repo_style_baseline": {
+      "log_loss": 0.5819036057926413,
+      "brier": 0.19790847598302413,
+      "auc": 0.7701694017464326,
+      "accuracy": 0.6909136270645178
+    },
+    "prior_only": {
+      "log_loss": 0.6975020707224979,
+      "brier": 0.25213943461197286,
+      "auc": 0.5051947751566083,
+      "accuracy": 0.4958834389501522
+    },
+    "by_innings": {
+      "1": {
+        "model": {
+          "log_loss": 0.6336124314483019,
+          "brier": 0.2219480903035686,
+          "auc": 0.6893768369850064,
+          "accuracy": 0.6342798758506352
+        },
+        "baseline": {
+          "log_loss": 0.6884007411993288,
+          "brier": 0.24016060176115547,
+          "auc": 0.6595575704815606,
+          "accuracy": 0.6100476162936402
+        }
+      },
+      "2": {
+        "model": {
+          "log_loss": 0.4224798282711153,
+          "brier": 0.1376218553608156,
+          "auc": 0.8866312009835566,
+          "accuracy": 0.8002358685756848
+        },
+        "baseline": {
+          "log_loss": 0.4676040546681049,
+          "brier": 0.15256078665733908,
+          "auc": 0.8679240033177827,
+          "accuracy": 0.7777042125300009
+        }
+      }
+    },
+    "by_season": {
+      "2021": {
+        "model": 0.5314675571996418,
+        "baseline": 0.5445506362291876
+      },
+      "2022": {
+        "model": 0.5277125554821682,
+        "baseline": 0.5638394853998753
+      },
+      "2023": {
+        "model": 0.5876710697489648,
+        "baseline": 0.5988200146737419
+      },
+      "2024": {
+        "model": 0.4894663652821432,
+        "baseline": 0.5440520836222771
+      },
+      "2025": {
+        "model": 0.5316184080805724,
+        "baseline": 0.6206788747077331
+      },
+      "2026": {
+        "model": 0.5217058345924447,
+        "baseline": 0.6150306469893132
+      }
+    },
+    "calibration": [
+      {
+        "bin": "(0.0, 0.1]",
+        "n": 9520,
+        "predicted": 0.033587132142295695,
+        "observed": 0.03802521008403361
+      },
+      {
+        "bin": "(0.1, 0.2]",
+        "n": 6826,
+        "predicted": 0.1532782645406523,
+        "observed": 0.17843539408145326
+      },
+      {
+        "bin": "(0.2, 0.3]",
+        "n": 9018,
+        "predicted": 0.252004184692428,
+        "observed": 0.23885562208915503
+      },
+      {
+        "bin": "(0.3, 0.4]",
+        "n": 11544,
+        "predicted": 0.3518894584392015,
+        "observed": 0.36651074151074153
+      },
+      {
+        "bin": "(0.4, 0.5]",
+        "n": 16751,
+        "predicted": 0.4517549655458303,
+        "observed": 0.4541818398901558
+      },
+      {
+        "bin": "(0.5, 0.6]",
+        "n": 14120,
+        "predicted": 0.5478225484653008,
+        "observed": 0.5507082152974504
+      },
+      {
+        "bin": "(0.6, 0.7]",
+        "n": 9993,
+        "predicted": 0.6469250210478398,
+        "observed": 0.6773741619133393
+      },
+      {
+        "bin": "(0.7, 0.8]",
+        "n": 7629,
+        "predicted": 0.7505750650889284,
+        "observed": 0.7226373050203172
+      },
+      {
+        "bin": "(0.8, 0.9]",
+        "n": 6853,
+        "predicted": 0.8490111465049338,
+        "observed": 0.8466365095578579
+      },
+      {
+        "bin": "(0.9, 1.0]",
+        "n": 7951,
+        "predicted": 0.9553124272219413,
+        "observed": 0.9600050308137341
+      }
+    ]
+  },
+  "totals": {
+    "mae": 16.94447590749938,
+    "bias": 3.2992883108217566,
+    "naive_par_rate_mae": 19.065656278892295,
+    "coverage_1sd": 0.6492009330480212,
+    "coverage_2sd": 0.934937250592794
+  },
+  "trading": {
+    "config": {
+      "commission": 0.05,
+      "entry_edge": 0.04,
+      "exit_edge": 0.01,
+      "take_profit": null,
+      "stop_loss": 0.5,
+      "kelly_fraction": 0.25,
+      "max_risk_frac": 0.02,
+      "min_prob": 0.08,
+      "max_prob": 0.92,
+      "max_trades_per_match": 3,
+      "hedge_exits": true
+    },
+    "simulated_market_grid": [
+      {
+        "scenario": "Naive market: only as smart as the reference repos",
+        "reference": "baseline",
+        "info": 0.0,
+        "noise_sd": 0.1,
+        "noise_rho": 0.95,
+        "spread": 0.01,
+        "seed": 11,
+        "market_logloss": 0.5829375427,
+        "model_logloss": 0.5317765874,
+        "matches": 415,
+        "matches_traded": 412,
+        "trades": 1025,
+        "pnl": 282132.5998659251,
+        "pnl_pct_bankroll": 282.1325998659,
+        "roi_on_risk_pct": 15.3956219312,
+        "win_rate_pct": 39.9024390244,
+        "hedged_pct": 93.3658536585,
+        "green_both_sides_pct": 33.2682926829,
+        "red_both_sides_pct": 60.0975609756,
+        "held_to_result_pct": 6.6341463415,
+        "max_drawdown": 29594.0326889369,
+        "pnl_ci90": [
+          149889.8409578871,
+          418124.9974086404
+        ],
+        "prob_profit_pct": 100.0
+      },
+      {
+        "scenario": "Sharper overall, but blind to what this model sees",
+        "reference": "baseline",
+        "info": 0.45,
+        "noise_sd": 0.1,
+        "noise_rho": 0.95,
+        "spread": 0.01,
+        "seed": 11,
+        "market_logloss": 0.5163030894,
+        "model_logloss": 0.5317765874,
+        "matches": 415,
+        "matches_traded": 409,
+        "trades": 952,
+        "pnl": 352747.5874756958,
+        "pnl_pct_bankroll": 352.7475874757,
+        "roi_on_risk_pct": 19.7918059849,
+        "win_rate_pct": 30.1470588235,
+        "hedged_pct": 92.5420168067,
+        "green_both_sides_pct": 23.0042016807,
+        "red_both_sides_pct": 69.5378151261,
+        "held_to_result_pct": 7.4579831933,
+        "max_drawdown": 33058.9178497725,
+        "pnl_ci90": [
+          180564.8717073849,
+          525720.0214573396
+        ],
+        "prob_profit_pct": 100.0
+      },
+      {
+        "scenario": "Knows what this model knows, plus random mispricing",
+        "reference": "model",
+        "info": 0.0,
+        "noise_sd": 0.1,
+        "noise_rho": 0.95,
+        "spread": 0.01,
+        "seed": 11,
+        "market_logloss": 0.5329927816,
+        "model_logloss": 0.5317765874,
+        "matches": 415,
+        "matches_traded": 315,
+        "trades": 508,
+        "pnl": 67854.2781919531,
+        "pnl_pct_bankroll": 67.854278192,
+        "roi_on_risk_pct": 8.6159037497,
+        "win_rate_pct": 62.9921259843,
+        "hedged_pct": 99.4094488189,
+        "green_both_sides_pct": 62.4015748031,
+        "red_both_sides_pct": 37.0078740157,
+        "held_to_result_pct": 0.5905511811,
+        "max_drawdown": 6366.9072832966,
+        "pnl_ci90": [
+          47580.8021549112,
+          88686.3905791893
+        ],
+        "prob_profit_pct": 100.0
+      },
+      {
+        "scenario": "Knows more than this model, plus random mispricing",
+        "reference": "model",
+        "info": 0.3,
+        "noise_sd": 0.1,
+        "noise_rho": 0.95,
+        "spread": 0.01,
+        "seed": 11,
+        "market_logloss": 0.502552831,
+        "model_logloss": 0.5317765874,
+        "matches": 415,
+        "matches_traded": 402,
+        "trades": 836,
+        "pnl": 43703.3447045385,
+        "pnl_pct_bankroll": 43.7033447045,
+        "roi_on_risk_pct": 2.9145018467,
+        "win_rate_pct": 25.0,
+        "hedged_pct": 88.038277512,
+        "green_both_sides_pct": 13.995215311,
+        "red_both_sides_pct": 74.043062201,
+        "held_to_result_pct": 11.961722488,
+        "max_drawdown": 45076.7358990753,
+        "pnl_ci90": [
+          -83312.5421665461,
+          164745.4739647347
+        ],
+        "prob_profit_pct": 71.75
+      },
+      {
+        "scenario": "Knows more than this model, little mispricing",
+        "reference": "model",
+        "info": 0.3,
+        "noise_sd": 0.03,
+        "noise_rho": 0.95,
+        "spread": 0.01,
+        "seed": 11,
+        "market_logloss": 0.5016284931,
+        "model_logloss": 0.5317765874,
+        "matches": 415,
+        "matches_traded": 343,
+        "trades": 694,
+        "pnl": 14557.4684380445,
+        "pnl_pct_bankroll": 14.557468438,
+        "roi_on_risk_pct": 1.1487446578,
+        "win_rate_pct": 18.5878962536,
+        "hedged_pct": 85.446685879,
+        "green_both_sides_pct": 5.1873198847,
+        "red_both_sides_pct": 80.2593659942,
+        "held_to_result_pct": 14.553314121,
+        "max_drawdown": 55759.9245958277,
+        "pnl_ci90": [
+          -102267.1767164027,
+          134023.8403121817
+        ],
+        "prob_profit_pct": 55.95
+      },
+      {
+        "scenario": "Efficient: knows more, no mispricing",
+        "reference": "model",
+        "info": 0.3,
+        "noise_sd": 0.0,
+        "noise_rho": 0.95,
+        "spread": 0.01,
+        "seed": 11,
+        "market_logloss": 0.5014832004,
+        "model_logloss": 0.5317765874,
+        "matches": 415,
+        "matches_traded": 327,
+        "trades": 675,
+        "pnl": -24622.2585044967,
+        "pnl_pct_bankroll": -24.6222585045,
+        "roi_on_risk_pct": -1.9939057589,
+        "win_rate_pct": 17.6296296296,
+        "hedged_pct": 85.1851851852,
+        "green_both_sides_pct": 4.1481481481,
+        "red_both_sides_pct": 81.037037037,
+        "held_to_result_pct": 14.8148148148,
+        "max_drawdown": 66256.549326903,
+        "pnl_ci90": [
+          -137623.0211470455,
+          86254.0292589938
+        ],
+        "prob_profit_pct": 35.8
+      }
+    ],
+    "hold_to_result_grid": [
+      {
+        "scenario": "Naive market: only as smart as the reference repos",
+        "reference": "baseline",
+        "info": 0.0,
+        "noise_sd": 0.1,
+        "noise_rho": 0.95,
+        "spread": 0.01,
+        "seed": 11,
+        "market_logloss": 0.5829375427,
+        "model_logloss": 0.5317765874,
+        "matches": 415,
+        "matches_traded": 412,
+        "trades": 412,
+        "pnl": 294356.0631515412,
+        "pnl_pct_bankroll": 294.3560631515,
+        "roi_on_risk_pct": 38.2836080748,
+        "win_rate_pct": 51.4563106796,
+        "hedged_pct": 0.0,
+        "green_both_sides_pct": 0.0,
+        "red_both_sides_pct": 0.0,
+        "held_to_result_pct": 100.0,
+        "max_drawdown": 20375.2342018523,
+        "pnl_ci90": [
+          183255.9569932677,
+          408452.2261818723
+        ],
+        "prob_profit_pct": 100.0
+      },
+      {
+        "scenario": "Sharper overall, but blind to what this model sees",
+        "reference": "baseline",
+        "info": 0.45,
+        "noise_sd": 0.1,
+        "noise_rho": 0.95,
+        "spread": 0.01,
+        "seed": 11,
+        "market_logloss": 0.5163030894,
+        "model_logloss": 0.5317765874,
+        "matches": 415,
+        "matches_traded": 409,
+        "trades": 409,
+        "pnl": 212756.540537315,
+        "pnl_pct_bankroll": 212.7565405373,
+        "roi_on_risk_pct": 26.6843646797,
+        "win_rate_pct": 36.6748166259,
+        "hedged_pct": 0.0,
+        "green_both_sides_pct": 0.0,
+        "red_both_sides_pct": 0.0,
+        "held_to_result_pct": 100.0,
+        "max_drawdown": 44716.209628004,
+        "pnl_ci90": [
+          74126.6906570059,
+          352094.8054455937
+        ],
+        "prob_profit_pct": 99.65
+      },
+      {
+        "scenario": "Knows what this model knows, plus random mispricing",
+        "reference": "model",
+        "info": 0.0,
+        "noise_sd": 0.1,
+        "noise_rho": 0.95,
+        "spread": 0.01,
+        "seed": 11,
+        "market_logloss": 0.5329927816,
+        "model_logloss": 0.5317765874,
+        "matches": 415,
+        "matches_traded": 315,
+        "trades": 315,
+        "pnl": 14435.1812591555,
+        "pnl_pct_bankroll": 14.4351812592,
+        "roi_on_risk_pct": 2.9758188188,
+        "win_rate_pct": 49.2063492063,
+        "hedged_pct": 0.0,
+        "green_both_sides_pct": 0.0,
+        "red_both_sides_pct": 0.0,
+        "held_to_result_pct": 100.0,
+        "max_drawdown": 29941.553569107,
+        "pnl_ci90": [
+          -31350.2568537736,
+          62471.6524971076
+        ],
+        "prob_profit_pct": 70.7
+      },
+      {
+        "scenario": "Knows more than this model, plus random mispricing",
+        "reference": "model",
+        "info": 0.3,
+        "noise_sd": 0.1,
+        "noise_rho": 0.95,
+        "spread": 0.01,
+        "seed": 11,
+        "market_logloss": 0.502552831,
+        "model_logloss": 0.5317765874,
+        "matches": 415,
+        "matches_traded": 402,
+        "trades": 402,
+        "pnl": 39047.4990787118,
+        "pnl_pct_bankroll": 39.0474990787,
+        "roi_on_risk_pct": 5.1648805176,
+        "win_rate_pct": 40.7960199005,
+        "hedged_pct": 0.0,
+        "green_both_sides_pct": 0.0,
+        "red_both_sides_pct": 0.0,
+        "held_to_result_pct": 100.0,
+        "max_drawdown": 37377.4482655808,
+        "pnl_ci90": [
+          -49440.3416669196,
+          123272.564598761
+        ],
+        "prob_profit_pct": 76.4
+      },
+      {
+        "scenario": "Knows more than this model, little mispricing",
+        "reference": "model",
+        "info": 0.3,
+        "noise_sd": 0.03,
+        "noise_rho": 0.95,
+        "spread": 0.01,
+        "seed": 11,
+        "market_logloss": 0.5016284931,
+        "model_logloss": 0.5317765874,
+        "matches": 415,
+        "matches_traded": 343,
+        "trades": 343,
+        "pnl": 18818.6022015474,
+        "pnl_pct_bankroll": 18.8186022015,
+        "roi_on_risk_pct": 2.8242120457,
+        "win_rate_pct": 38.4839650146,
+        "hedged_pct": 0.0,
+        "green_both_sides_pct": 0.0,
+        "red_both_sides_pct": 0.0,
+        "held_to_result_pct": 100.0,
+        "max_drawdown": 33966.0201436796,
+        "pnl_ci90": [
+          -58642.3389431113,
+          102430.0482134501
+        ],
+        "prob_profit_pct": 63.25
+      },
+      {
+        "scenario": "Efficient: knows more, no mispricing",
+        "reference": "model",
+        "info": 0.3,
+        "noise_sd": 0.0,
+        "noise_rho": 0.95,
+        "spread": 0.01,
+        "seed": 11,
+        "market_logloss": 0.5014832004,
+        "model_logloss": 0.5317765874,
+        "matches": 415,
+        "matches_traded": 327,
+        "trades": 327,
+        "pnl": 13609.3969113748,
+        "pnl_pct_bankroll": 13.6093969114,
+        "roi_on_risk_pct": 2.1179797997,
+        "win_rate_pct": 37.6146788991,
+        "hedged_pct": 0.0,
+        "green_both_sides_pct": 0.0,
+        "red_both_sides_pct": 0.0,
+        "held_to_result_pct": 100.0,
+        "max_drawdown": 34955.4698161528,
+        "pnl_ci90": [
+          -68434.1352449169,
+          91665.7659384859
+        ],
+        "prob_profit_pct": 59.45
+      }
+    ]
+  }
+}
