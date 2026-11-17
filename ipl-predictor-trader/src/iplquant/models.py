@@ -155,6 +155,11 @@ class InPlayModel:
     C: float = INPLAY_C
     models: dict = field(default_factory=dict)
     leagues: list = field(default_factory=list)
+    inn1: list | None = None          # feature lists; None means the defaults above
+    inn2: list | None = None
+
+    def cols(self, inn: int) -> list:
+        return (self.inn1 or INN1) if inn == 1 else (self.inn2 or INN2)
 
     def _X(self, s: pd.DataFrame, cols: list) -> np.ndarray:
         base = s[cols].to_numpy(dtype=float)
@@ -164,19 +169,22 @@ class InPlayModel:
         dummies = np.column_stack([(lg == l).astype(float) for l in self.leagues])
         return np.hstack([base, dummies])
 
-    def fit(self, s: pd.DataFrame) -> "InPlayModel":
+    def fit(self, s: pd.DataFrame, weight: np.ndarray | None = None) -> "InPlayModel":
         self.leagues = sorted(s["league"].dropna().unique()) if "league" in s else []
-        for inn, cols in ((1, INN1), (2, INN2)):
-            d = s[s["innings"] == inn]
+        for inn in (1, 2):
+            mask = (s["innings"] == inn).to_numpy()
+            d = s[mask]
+            kw = {} if weight is None else {"logisticregression__sample_weight": np.asarray(weight)[mask]}
             self.models[inn] = make_pipeline(
                 StandardScaler(), LogisticRegression(C=self.C, max_iter=3000)
-            ).fit(self._X(d, cols), d["won"].to_numpy())
+            ).fit(self._X(d, self.cols(inn)), d["won"].to_numpy(), **kw)
         return self
 
     def predict(self, s: pd.DataFrame) -> np.ndarray:
         """P(the side batting now wins). An unknown league gets the average offset."""
         p = np.full(len(s), np.nan)
-        for inn, cols in ((1, INN1), (2, INN2)):
+        for inn in (1, 2):
+            cols = self.cols(inn)
             mask = (s["innings"] == inn).to_numpy()
             if mask.any():
                 p[mask] = self.models[inn].predict_proba(self._X(s.loc[mask], cols))[:, 1]

@@ -34,7 +34,7 @@ MATCH_COLUMNS = [
     "team1_players", "team2_players",
 ]
 BALL_COLUMNS = [
-    "match_id", "innings", "over", "batting_team", "batter", "bowler",
+    "match_id", "innings", "over", "batting_team", "batter", "non_striker", "bowler",
     "runs_batter", "runs_extras", "runs_total", "wide", "noball",
     "wicket", "player_out", "kind",
 ]
@@ -103,6 +103,7 @@ def parse_match(match_id: str, doc: dict, league: str = "ipl") -> tuple[dict, li
                     "over": over["over"],
                     "batting_team": inn["team"],
                     "batter": d["batter"],
+                    "non_striker": d.get("non_striker"),
                     "bowler": d["bowler"],
                     "runs_batter": d["runs"]["batter"],
                     "runs_extras": d["runs"]["extras"],
