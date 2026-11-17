@@ -71,3 +71,26 @@ Loop stopped: backlog exhausted (#12 cannot be tested without spending the exam
 seasons) and two consecutive iterations without an accepted gain.
 
 Rating: 5.0/10 (prediction 2/3, correctness 1/1, live readiness 2/2, real prices 0/4).
+
+## Trading rule change (2026-11-17): no re-entry on a side after its stop loss - adopted
+
+Prompted by the demo: in Perth Scorchers v Sydney Sixers the bot laid Perth, was
+stopped out, then laid Perth again and was stopped out again (-141.28). Tested on all
+679 IPL+BBL matches of 2021-2026 (out-of-sample model, simulated markets), not on that
+one match:
+
+| Simulated market | Rule | Trades | ROI on risk | P(profit) | Max drawdown |
+|---|---|---|---|---|---|
+| Knows what the model knows | current | 830 | +7.97% | 100% | 3,884 |
+| | no re-entry after stop | 816 | +8.36% | 100% | 3,737 |
+| Knows more than the model | current | 1,410 | +0.14% | 53% | 78,833 |
+| | no re-entry after stop | 806 | +0.85% | 60% | 63,973 |
+| Efficient | current | 1,054 | -5.23% | 13% | 127,661 |
+| | no re-entry after stop | 496 | -4.18% | 18% | 79,078 |
+| any | no trades beyond 80/20 | | mixed: worse in the middle row | | not adopted |
+
+Better in every scenario and roughly halves the worst drawdown in the efficient market,
+so it is now the default (`reenter_after_stop=False`). It does not turn the efficient
+market profitable: that still needs real prices to settle.
+
+Rating unchanged: 5.0/10.

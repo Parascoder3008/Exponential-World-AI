@@ -118,6 +118,7 @@ class PaperTrader:
     n_trades: int = 0
     open_trade: dict | None = None
     trades: list = field(default_factory=list)
+    stopped_sides: set = field(default_factory=set)
 
     def on_tick(self, p_a: float, back: float, lay: float, tag=None,
                 allow_entry: bool = True, execute=None, max_risk: float | None = None) -> Action:
@@ -131,6 +132,8 @@ class PaperTrader:
         if act.kind == "enter":
             if not allow_entry or self.n_trades >= self.cfg.max_trades_per_match:
                 return Action("hold", reason="entry blocked")
+            if not self.cfg.reenter_after_stop and act.bet.side in self.stopped_sides:
+                return Action("hold", reason="no re-entry after a stop loss")
             if max_risk is not None and act.risk > max_risk:
                 scale = max_risk / act.risk
                 act.bet = O.Bet(act.bet.side, act.bet.odds, act.bet.stake * scale, act.bet.tag)
@@ -156,6 +159,8 @@ class PaperTrader:
                     act.bet = filled
             self.position.add(act.bet)
             pnl = self.position.settle(True, self.cfg.commission)   # same either way once hedged
+            if act.reason == "stop loss":
+                self.stopped_sides.add(self.open_trade["side"])
             self.trades.append(self.open_trade | {"exit_seq": tag, "exit": act.reason,
                                                   "exit_odds": act.bet.odds, "pnl": pnl})
             self.position, self.risk, self.open_trade = O.Position(), 0.0, None

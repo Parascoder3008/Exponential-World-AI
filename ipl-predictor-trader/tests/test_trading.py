@@ -165,3 +165,16 @@ def test_odds_api_payload_parsing():
     assert oddsfeed.quotes(event) == {"bookx": (2.10, 1.80), "booky": (1.85, 2.06)}
     row = oddsfeed.summarize([event], 1000)[0]
     assert row["is_arb"] and row["books"] == 2
+
+
+def test_no_reentry_on_a_side_after_its_stop_loss():
+    from iplquant.live import PaperTrader
+    pt = PaperTrader(TraderConfig(stop_loss=0.3), 10_000, "m")
+    assert pt.on_tick(0.60, 1 / 0.505, 1 / 0.495).kind == "enter"          # back
+    assert pt.on_tick(0.60, 1 / 0.25, 1 / 0.24).reason == "stop loss"
+    blocked = pt.on_tick(0.60, 1 / 0.505, 1 / 0.495)
+    assert blocked.kind == "hold" and blocked.reason == "no re-entry after a stop loss"
+    assert pt.on_tick(0.30, 1 / 0.505, 1 / 0.495).kind == "enter"          # the other side is still allowed
+    again = PaperTrader(TraderConfig(stop_loss=0.3, reenter_after_stop=True), 10_000, "m")
+    again.on_tick(0.60, 1 / 0.505, 1 / 0.495); again.on_tick(0.60, 1 / 0.25, 1 / 0.24)
+    assert again.on_tick(0.60, 1 / 0.505, 1 / 0.495).kind == "enter"

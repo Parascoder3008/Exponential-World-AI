@@ -36,6 +36,7 @@ class TraderConfig:
     max_prob: float = 0.92
     max_trades_per_match: int = 3
     hedge_exits: bool = True        # False = value-bet and hold to settlement
+    reenter_after_stop: bool = False  # True = allow a new position on a side that was just stopped out
 
 
 @dataclass
