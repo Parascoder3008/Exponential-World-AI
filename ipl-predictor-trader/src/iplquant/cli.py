@@ -237,6 +237,14 @@ def cmd_dashboard(a):
         srv.shutdown()
 
 
+def cmd_demo(a):
+    from .exchange.demo import run_demo
+    res = run_demo(a.leagues, a.matches, a.ms, a.mode, a.port, a.signals, a.ledger,
+                   headless=a.headless)
+    total = sum(r.get("pnl", 0) for r in res)
+    print(f"\nDone: {len(res)} matches, result {total:+,.2f} (simulated prices).")
+
+
 def cmd_predict_match(a):
     b = _bundle(a)
     r = b.prematch_prob(a.team1, a.team2, a.venue, a.toss_winner, a.toss_decision)
@@ -416,6 +424,15 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("--password-file", help="where the hashed password is kept")
     sp.add_argument("--cert", help="TLS certificate file, to serve over HTTPS")
     sp.add_argument("--key", help="TLS private key file")
+
+    sp = add("demo", cmd_demo, "replay recent matches on the practice exchange with the bot trading them")
+    sp.add_argument("--leagues", nargs="+", default=["ipl", "bbl"])
+    sp.add_argument("--matches", type=int, default=6)
+    sp.add_argument("--ms", type=int, default=1200, help="milliseconds per ball")
+    sp.add_argument("--mode", choices=("advise", "paper", "execute"), default="execute")
+    sp.add_argument("--port", type=int, default=8777)
+    sp.add_argument("--signals", default="signals.jsonl"); sp.add_argument("--ledger", default="ledger.jsonl")
+    sp.add_argument("--headless", action="store_true", help="no visible browser window")
 
     sp = add("predict-match", cmd_predict_match, "pre-match win probability")
     sp.add_argument("--team1", required=True); sp.add_argument("--team2", required=True)

@@ -49,7 +49,7 @@
 </main>
 <script>
 (async () => {
-  const data = await (await fetch('data.json')).json();
+  const data = await (await fetch('data.json', { cache: 'no-store' })).json();
   const params = new URLSearchParams(location.search);
   const interval = Number(params.get('ms') || data.ms || 1000);
   let i = 0, slip = null;

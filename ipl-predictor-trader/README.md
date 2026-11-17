@@ -85,6 +85,16 @@ ipl bot --site practice_site.json --mode execute --yes-place-bets \
 
 Watch it read the score and prices, open a position, and hedge it on the page.
 
+Or run the whole thing on recent IPL and Big Bash matches in one go:
+
+```bash
+ipl demo --leagues ipl bbl --matches 6      # opens a browser window and trades each match
+ipl dashboard                               # in a second terminal, to watch the signals
+```
+
+The demo trains its model only on matches before the first one it replays, so the
+probabilities shown are genuine forecasts; the prices are simulated.
+
 ### 3. Calibrate your exchange site (once per site)
 
 ```bash

@@ -391,9 +391,13 @@ class Bundle:
         return out
 
 
-def prepare(data_dir=None):
-    """Load data and build every frame the models need."""
+def prepare(data_dir=None, until=None):
+    """Load data and build every frame the models need. With ``until`` (a date),
+    only matches played before it are used."""
     matches, balls = data.load(data_dir)
+    if until is not None:
+        matches = matches[matches["date"] < pd.Timestamp(until)].reset_index(drop=True)
+        balls = balls[balls["match_id"].isin(matches["match_id"])]
     F, state = features.build(matches, balls)
     pm = walk_forward_prematch(F)
     states = add_inplay_features(data.ball_states(matches, balls), pm, F)
@@ -401,8 +405,8 @@ def prepare(data_dir=None):
     return matches, balls, F, state, pm, states
 
 
-def train_bundle(data_dir=None) -> Bundle:
-    matches, balls, F, state, pm, states = prepare(data_dir)
+def train_bundle(data_dir=None, until=None) -> Bundle:
+    matches, balls, F, state, pm, states = prepare(data_dir, until)
     return Bundle(
         prematch=PreMatchModel().fit(F),
         inplay=fit_inplay(states),

@@ -82,3 +82,9 @@ def test_bundle_round_trip(bundle, tmp_path):
     path = bundle.save(tmp_path / "b.joblib")
     again = models.Bundle.load(path)
     assert chase(again) == pytest.approx(chase(bundle))
+
+
+def test_prepare_until_drops_later_matches():
+    matches, *_ , states = models.prepare(until="2020-01-01")
+    assert matches["date"].max() < __import__("pandas").Timestamp("2020-01-01")
+    assert states["date"].max() < __import__("pandas").Timestamp("2020-01-01")
