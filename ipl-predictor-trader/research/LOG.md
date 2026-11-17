@@ -23,3 +23,20 @@ close to what a linear model can extract. Next: a resources-remaining table, per
 calibration, a residual tree model, then scorecard features (who is batting/bowling).
 
 Rating: 5.0/10 (prediction 2/3, correctness 1/1, live readiness 2/2, real prices 0/4).
+
+## Iteration 2 (2026-11-17): structure tweaks - nothing accepted
+
+| Experiment | Tuning log loss | Delta | P(better) | IPL | BBL |
+|---|---|---|---|---|---|
+| Resources-remaining table, both innings | 0.5321 | -0.0001 | 0.57 | 0.5540 | 0.5050 |
+| Resources table, chase terms only | 0.5323 | +0.0002 | 0.30 | 0.5543 | 0.5053 |
+| Per-league calibration | 0.5361 | +0.0039 | 0.25 | 0.5676 | **0.4972** |
+| Residual trees, 60 x 4 leaves | 0.5359 | +0.0037 | 0.02 | 0.5572 | 0.5096 |
+| Residual trees, 150 x 8 leaves | 0.5405 | +0.0083 | 0.04 | 0.5615 | 0.5146 |
+
+Reading: the score line (runs, wickets, balls, target, par) is exhausted - fifteen
+variants, none reliably better. Calibration helped the Big Bash but hurt the IPL, which
+drifts more season to season; tested on its own as #13. The remaining upside is in
+who is batting and bowling (#9-11), which needs a live scorecard as well as the score.
+
+Rating: 5.0/10 (prediction 2/3, correctness 1/1, live readiness 2/2, real prices 0/4).
