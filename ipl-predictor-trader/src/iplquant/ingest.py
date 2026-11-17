@@ -12,8 +12,23 @@ from pathlib import Path
 
 import pandas as pd
 
+# Franchise T20 leagues used here: Cricsheet archive code -> name.
+LEAGUES = {
+    "ipl": "Indian Premier League",
+    "bbl": "Big Bash League",
+    "psl": "Pakistan Super League",
+    "cpl": "Caribbean Premier League",
+    "sat": "SA20",
+    "ilt": "International League T20",
+    "mlc": "Major League Cricket",
+    "bpl": "Bangladesh Premier League",
+    "lpl": "Lanka Premier League",
+    "ntb": "Vitality Blast",
+    "ssm": "Super Smash",
+}
+
 MATCH_COLUMNS = [
-    "match_id", "season", "date", "venue", "city", "team1", "team2",
+    "match_id", "league", "season", "date", "venue", "city", "team1", "team2",
     "toss_winner", "toss_decision", "winner", "result", "method",
     "win_by_runs", "win_by_wickets", "target_runs", "target_overs",
     "team1_players", "team2_players",
@@ -37,7 +52,7 @@ def _season(info: dict) -> int:
     return int(str(info["dates"][0])[:4])
 
 
-def parse_match(match_id: str, doc: dict) -> tuple[dict, list[dict]]:
+def parse_match(match_id: str, doc: dict, league: str = "ipl") -> tuple[dict, list[dict]]:
     info = doc["info"]
     teams = info["teams"]
     outcome = info.get("outcome", {})
@@ -55,6 +70,7 @@ def parse_match(match_id: str, doc: dict) -> tuple[dict, list[dict]]:
     players = info.get("players", {})
     match = {
         "match_id": match_id,
+        "league": league,
         "season": _season(info),
         "date": str(info["dates"][0]),
         "venue": info.get("venue"),
@@ -100,23 +116,54 @@ def parse_match(match_id: str, doc: dict) -> tuple[dict, list[dict]]:
     return match, balls
 
 
-def ingest(json_dir: str | Path, out_dir: str | Path) -> tuple[pd.DataFrame, pd.DataFrame]:
-    json_dir, out_dir = Path(json_dir), Path(out_dir)
-    files = sorted(json_dir.glob("*.json"))
-    if not files:
-        raise FileNotFoundError(f"no .json match files in {json_dir}")
-    matches, balls = [], []
-    for f in files:
+def _is_mens_t20(doc) -> bool:
+    if not isinstance(doc, dict) or "info" not in doc:
+        return False
+    info = doc["info"]
+    return info.get("gender", "male") == "male" and info.get("match_type", "T20") == "T20"
+
+
+def _read_dir(json_dir: Path, league: str, matches: list, balls: list) -> None:
+    for f in sorted(json_dir.glob("*.json")):
         with open(f, encoding="utf-8") as fh:
             doc = json.load(fh)
-        if not isinstance(doc, dict) or "info" not in doc:
+        if not _is_mens_t20(doc):
             continue
-        m, b = parse_match(f.stem, doc)
+        m, b = parse_match(f"{league}-{f.stem}", doc, league)
         matches.append(m)
         balls.extend(b)
+
+
+def _write(matches, balls, out_dir: Path):
     mdf = pd.DataFrame(matches, columns=MATCH_COLUMNS).sort_values(["date", "match_id"])
     bdf = pd.DataFrame(balls, columns=BALL_COLUMNS)
     out_dir.mkdir(parents=True, exist_ok=True)
     mdf.to_csv(out_dir / "matches.csv", index=False)
     bdf.to_csv(out_dir / "balls.csv.gz", index=False, compression="gzip")
     return mdf, bdf
+
+
+def ingest(json_dir: str | Path, out_dir: str | Path, league: str = "ipl") -> tuple[pd.DataFrame, pd.DataFrame]:
+    """One folder of match files from a single league."""
+    json_dir, out_dir = Path(json_dir), Path(out_dir)
+    if not any(json_dir.glob("*.json")):
+        raise FileNotFoundError(f"no .json match files in {json_dir}")
+    matches, balls = [], []
+    _read_dir(json_dir, league, matches, balls)
+    return _write(matches, balls, out_dir)
+
+
+def ingest_leagues(root: str | Path, out_dir: str | Path) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """``root`` holds one sub-folder per league, named by its code in ``LEAGUES``
+    (the unzipped ``<code>_json.zip`` archives from cricsheet.org/downloads)."""
+    root = Path(root)
+    matches, balls = [], []
+    found = []
+    for code in LEAGUES:
+        d = root / code
+        if d.is_dir() and any(d.glob("*.json")):
+            _read_dir(d, code, matches, balls)
+            found.append(code)
+    if not found:
+        raise FileNotFoundError(f"no league folders ({', '.join(LEAGUES)}) in {root}")
+    return _write(matches, balls, Path(out_dir))

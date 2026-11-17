@@ -1,14 +1,27 @@
 # Data source
 
-`matches.csv` and `balls.csv.gz` were built with `ipl ingest` from Cricsheet-format
-match JSON files: every IPL match from 2008-04-18 to the 2026 final on 2026-05-31
-(1,243 matches, 295,557 deliveries; super overs excluded).
+`matches.csv` and `balls.csv.gz` were built with `ipl ingest` from Cricsheet match JSON
+files: every men's match in 11 franchise T20 leagues up to 2026-09-20 (5,532 matches,
+1,288,266 deliveries; super overs excluded).
 
-- Original ball-by-ball records: [Cricsheet](https://cricsheet.org), by Stephen Rushe,
-  made available under the Open Data Commons Attribution License.
-- JSON files were taken from the mirror
-  [ritesh-ojha/IPL-DATASET](https://github.com/ritesh-ojha/IPL-DATASET) (MIT licence),
-  commit `5c638d9`, dated 2026-06-02.
+| Code | League | Matches |
+|---|---|---|
+| ipl | Indian Premier League | 1,243 |
+| ntb | Vitality Blast | 1,570 |
+| bbl | Big Bash League | 662 |
+| bpl | Bangladesh Premier League | 469 |
+| cpl | Caribbean Premier League | 445 |
+| psl | Pakistan Super League | 357 |
+| ssm | Super Smash | 270 |
+| lpl | Lanka Premier League | 143 |
+| ilt | International League T20 | 134 |
+| sat | SA20 | 130 |
+| mlc | Major League Cricket | 109 |
 
-To refresh: download `ipl_json.zip` from https://cricsheet.org/downloads/, unzip it,
-then run `ipl ingest <folder> --out data && ipl train && ipl evaluate`.
+Source: [Cricsheet](https://cricsheet.org), by Stephen Rushe, under the Open Data Commons
+Attribution License. Downloaded 2026-11-17 from https://cricsheet.org/downloads/
+(`<code>_json.zip`).
+
+To refresh: download the archives above, unzip each into a folder named by its code
+(`leagues/ipl`, `leagues/bbl`, ...), then run
+`ipl ingest leagues --out data && ipl train && ipl evaluate`.

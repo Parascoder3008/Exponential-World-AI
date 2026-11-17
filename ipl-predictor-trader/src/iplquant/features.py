@@ -76,9 +76,11 @@ class FeatureState:
     venue_team: dict = field(default_factory=_dd(_z2))
     team_venues: dict = field(default_factory=_dd(_d30))
     venue_chase: dict = field(default_factory=_dd(_z2))
-    league_chase: list = field(default_factory=_z2)
+    league_chase: dict = field(default_factory=_dd(_z2))
     venue_first: dict = field(default_factory=_dd(_d30))
-    league_first: deque = field(default_factory=_d60)
+    league_first: dict = field(default_factory=_dd(_d60))
+    team_league: dict = field(default_factory=dict)
+    venue_league: dict = field(default_factory=dict)
     bat: dict = field(default_factory=_dd(_z3))
     bowl: dict = field(default_factory=_dd(_z3))
     apps: dict = field(default_factory=_dd(float))
@@ -100,15 +102,23 @@ class FeatureState:
         self.season = season
 
     # ---- pieces ----------------------------------------------------------
-    def par_score(self, venue: str) -> float:
-        """Expected first-innings total here, shrunk toward the recent league average."""
-        league = float(np.mean(self.league_first)) if self.league_first else 160.0
+    def league_of(self, *teams, venue: str | None = None) -> str | None:
+        for t in teams:
+            if t in self.team_league:
+                return self.team_league[t]
+        return self.venue_league.get(venue)
+
+    def par_score(self, venue: str, league: str | None = None) -> float:
+        """Expected first-innings total here, shrunk toward the recent average of the
+        league being played (scoring levels differ a lot between leagues)."""
+        lf = self.league_first.get(league) if league else None
+        league_avg = float(np.mean(lf)) if lf else 160.0
         v = self.venue_first[venue]
         k = 8.0
-        return (sum(v) + k * league) / (len(v) + k)
+        return (sum(v) + k * league_avg) / (len(v) + k)
 
-    def chase_edge(self, venue: str) -> float:
-        lw, ln = self.league_chase
+    def chase_edge(self, venue: str, league: str | None = None) -> float:
+        lw, ln = self.league_chase[league] if league in self.league_chase else (0.0, 0.0)
         league = (lw + 10.0) / (ln + 20.0)
         w, n = self.venue_chase[venue]
         k = 12.0
@@ -146,9 +156,11 @@ class FeatureState:
     # ---- feature row -----------------------------------------------------
     def features(self, team1: str, team2: str, venue: str,
                  xi1: list[str] | None = None, xi2: list[str] | None = None,
-                 toss_winner: str | None = None, toss_decision: str | None = None) -> dict:
+                 toss_winner: str | None = None, toss_decision: str | None = None,
+                 league: str | None = None) -> dict:
         team1, team2 = normalize_team(team1), normalize_team(team2)
         venue = normalize_venue(venue)
+        league = league or self.league_of(team1, team2, venue=venue)
         toss_winner = normalize_team(toss_winner)
         xi1 = xi1 or self.last_xi.get(team1, [])
         xi2 = xi2 or self.last_xi.get(team2, [])
@@ -189,14 +201,18 @@ class FeatureState:
             bats_first = won if toss_decision == "bat" else -won
             f["toss_won"] = won
             f["bat_first"] = bats_first
-            f["chase_adv"] = -bats_first * self.chase_edge(venue) * 10
-        f["par"] = self.par_score(venue)
+            f["chase_adv"] = -bats_first * self.chase_edge(venue, league) * 10
+        f["par"] = self.par_score(venue, league)
+        f["league"] = league
         f["elo_prob"] = 1.0 / (1.0 + 10 ** (-f["elo"]))
         return f
 
     # ---- update after a result -------------------------------------------
     def update(self, row, first_innings: tuple | None, batting: dict, bowling: dict) -> None:
         t1, t2, venue, winner = row.team1, row.team2, row.venue, row.winner
+        league = getattr(row, "league", None)
+        if league:
+            self.team_league[t1] = self.team_league[t2] = self.venue_league[venue] = league
         xi1 = [p for p in row.team1_players.split("|") if p]
         xi2 = [p for p in row.team2_players.split("|") if p]
         if xi1:
@@ -231,9 +247,10 @@ class FeatureState:
             chased = 1.0 if winner != bat_first_team else 0.0
             vc = self.venue_chase[venue]
             vc[0] += chased; vc[1] += 1.0
-            self.league_chase[0] += chased; self.league_chase[1] += 1.0
+            lc = self.league_chase[league]
+            lc[0] += chased; lc[1] += 1.0
             self.venue_first[venue].append(total)
-            self.league_first.append(total)
+            self.league_first[league].append(total)
 
 
 def build(matches: pd.DataFrame, balls: pd.DataFrame) -> tuple[pd.DataFrame, FeatureState]:
@@ -251,13 +268,14 @@ def build(matches: pd.DataFrame, balls: pd.DataFrame) -> tuple[pd.DataFrame, Fea
         xi1 = [p for p in row.team1_players.split("|") if p]
         xi2 = [p for p in row.team2_players.split("|") if p]
         f = state.features(row.team1, row.team2, row.venue, xi1, xi2,
-                           row.toss_winner, row.toss_decision)
+                           row.toss_winner, row.toss_decision, getattr(row, "league", None))
         f["match_id"] = row.match_id
         f["y"] = (1.0 if row.winner == row.team1 else 0.0) if isinstance(row.winner, str) else np.nan
         rows.append(f)
         state.update(row, first_map.get(row.match_id),
                      batting.get(row.match_id, {}), bowling.get(row.match_id, {}))
     feats = pd.DataFrame(rows)
-    out = matches[["match_id", "season", "date", "team1", "team2", "venue", "winner",
+    feats = feats.drop(columns=["league"])
+    out = matches[["match_id", "league", "season", "date", "team1", "team2", "venue", "winner",
                    "standard"]].merge(feats, on="match_id")
     return out, state

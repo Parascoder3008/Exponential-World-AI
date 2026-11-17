@@ -26,6 +26,26 @@ def fair_odds(prob: float) -> float:
     return 1.0 / prob
 
 
+# Betfair price ladder: (upper bound of band, tick size).
+_LADDER = [(2.0, 0.01), (3.0, 0.02), (4.0, 0.05), (6.0, 0.1), (10.0, 0.2), (20.0, 0.5),
+           (30.0, 1.0), (50.0, 2.0), (100.0, 5.0), (1000.0, 10.0)]
+
+
+def to_tick(price: float, direction: str = "nearest") -> float:
+    """Round a price onto the exchange's valid price ladder (1.01 to 1000).
+    ``down`` gives the next valid price at or below, ``up`` at or above."""
+    import math
+    price = min(max(float(price), 1.01), 1000.0)
+    lo = 1.0
+    for hi, step in _LADDER:
+        if price <= hi + 1e-12:
+            n = (price - lo) / step
+            k = {"down": math.floor(n + 1e-9), "up": math.ceil(n - 1e-9)}.get(direction, round(n))
+            return round(min(max(lo + k * step, 1.01), 1000.0), 2)
+        lo = hi
+    return 1000.0
+
+
 def overround(odds_a: float, odds_b: float) -> float:
     """Bookmaker margin: how far the implied probabilities exceed 100%."""
     return implied_prob(odds_a) + implied_prob(odds_b) - 1.0

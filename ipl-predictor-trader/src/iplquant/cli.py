@@ -47,9 +47,15 @@ def _bundle(args):
 
 # ---- commands -------------------------------------------------------------
 def cmd_ingest(a):
-    from .ingest import ingest
-    m, b = ingest(a.json_dir, a.out)
+    from pathlib import Path
+    from .ingest import LEAGUES, ingest, ingest_leagues
+    src = Path(a.json_dir)
+    if any((src / code).is_dir() for code in LEAGUES):
+        m, b = ingest_leagues(src, a.out)
+    else:
+        m, b = ingest(src, a.out, league=a.league)
     print(f"wrote {len(m)} matches and {len(b)} deliveries to {a.out}")
+    print(m.groupby("league").size().to_string())
 
 
 def cmd_train(a):
@@ -118,6 +124,81 @@ def cmd_replay(a):
         print(f"  {t['side']:>4} {r['batting_first']} at {t['entry_odds']:.2f}, stake {t['stake']:,.0f}"
               f" -> {t['exit']}: {t['pnl']:+,.0f}")
     _print(r["summary"])
+
+
+def _site(path):
+    from .exchange.config import SiteConfig
+    try:
+        return SiteConfig.load(path)
+    except FileNotFoundError:
+        raise SystemExit(f"no site file at {path} - run `ipl calibrate` first")
+
+
+def cmd_calibrate(a):
+    from .exchange import calibrate
+    from .exchange.browser import BrowserExchange
+    from .exchange.config import SiteConfig
+    cfg = SiteConfig.load(a.out) if a.update else SiteConfig(name=a.name, url=a.url or "")
+    ex = BrowserExchange(cfg, headless=False).start()
+    try:
+        input("A browser window has opened. Log in yourself, open a LIVE match's match-odds "
+              "market, then press Enter here.")
+        cfg.url = ex.page.url
+        calibrate.run(ex.page, cfg, with_slip=not a.read_only)
+    finally:
+        print(f"\nSaved to {cfg.save(a.out)}. Missing for reading: {cfg.missing() or 'nothing'}; "
+              f"for placing bets: {cfg.missing(execute=True) or 'nothing'}")
+        ex.close()
+
+
+def cmd_bot(a):
+    from .exchange.bot import RiskLimits, TradingBot, load_aliases
+    from .exchange.browser import BrowserExchange
+    from .trader import TraderConfig
+    cfg = _site(a.site)
+    missing = cfg.missing(execute=a.mode == "execute")
+    if missing:
+        raise SystemExit(f"{a.site} is missing {missing}; run `ipl calibrate --update --out {a.site}`")
+    if a.mode == "execute" and not a.yes_place_bets:
+        raise SystemExit("execute mode clicks real bet slips on whatever account the browser is "
+                         "logged into. Re-run with --yes-place-bets once you have checked it is "
+                         "the account you mean.")
+    bundle = _bundle(a)
+    ex = BrowserExchange(cfg, headless=a.headless).start()
+    if not a.no_wait:
+        input("Browser open. Log in if needed and open the match-odds market of the match, "
+              "then press Enter to start.")
+    bot = TradingBot(ex, bundle, a.mode, a.batting_first, a.bowling_first, a.venue, a.league,
+                     TraderConfig(commission=a.commission, entry_edge=a.entry_edge),
+                     a.bankroll, RiskLimits(a.max_risk, a.daily_loss_limit),
+                     ledger_path=a.ledger, aliases=load_aliases(a.alias), record_path=a.record)
+    print(f"Mode: {a.mode}. Stop with Ctrl+C or by creating a file named STOP here.")
+    try:
+        _print(bot.run(poll_seconds=cfg.poll_seconds))
+    finally:
+        ex.close()
+
+
+def cmd_practice(a):
+    import tempfile
+    import time
+    from . import data
+    from .exchange import mock
+    matches, balls = data.load(a.data)
+    d = mock.build_ticks(_bundle(a), matches, balls, a.match_id)
+    site = mock.write_site(d, a.dir or tempfile.mkdtemp(prefix="practice-"), ms=a.ms)
+    srv = mock.serve(site, a.port)
+    mock.practice_site(a.port).save(a.site_out)
+    print(f"Practice exchange: http://127.0.0.1:{a.port}/index.html  ({d['title']})")
+    print(f"Site file for the bot: {a.site_out}")
+    print(f"Try: ipl bot --site {a.site_out} --mode paper --batting-first \"{d['batting_first']}\" "
+          f"--bowling-first \"{d['bowling_first']}\" --venue \"{d['venue']}\"")
+    print("The page restarts the match each time it is reloaded. Ctrl+C to stop the server.")
+    try:
+        while True:
+            time.sleep(1)
+    except KeyboardInterrupt:
+        srv.shutdown()
 
 
 def cmd_predict_match(a):
@@ -235,8 +316,10 @@ def build_parser() -> argparse.ArgumentParser:
         sp.add_argument("--stop-loss", type=float, default=0.5)
         sp.add_argument("--bankroll", type=float, default=100_000.0)
 
-    sp = add("ingest", cmd_ingest, "build data tables from Cricsheet match JSON files")
+    sp = add("ingest", cmd_ingest, "build data tables from Cricsheet match JSON files "
+                                   "(a folder of files, or a folder of league folders)")
     sp.add_argument("json_dir"); sp.add_argument("--out", default="data")
+    sp.add_argument("--league", default="ipl", help="league code when json_dir is a single league")
 
     sp = add("train", cmd_train, "train on all data and save the model bundle")
     sp.add_argument("--data"); sp.add_argument("--model")
@@ -257,6 +340,35 @@ def build_parser() -> argparse.ArgumentParser:
     sp = add("replay", cmd_replay, "run a past match through the live paper-trading engine")
     sp.add_argument("match_id"); sp.add_argument("--data"); sp.add_argument("--model")
     sp.add_argument("--ledger", help="append the paper ledger to this file")
+
+    sp = add("calibrate", cmd_calibrate, "click through your exchange page once to record where things are")
+    sp.add_argument("--url", help="exchange page to open (you can navigate after)")
+    sp.add_argument("--out", default="site.json"); sp.add_argument("--name", default="exchange")
+    sp.add_argument("--update", action="store_true", help="start from an existing --out file")
+    sp.add_argument("--read-only", action="store_true", help="skip the bet slip (advise/paper only)")
+
+    sp = add("bot", cmd_bot, "run the in-play trader on an exchange page in the browser")
+    sp.add_argument("--site", default="site.json")
+    sp.add_argument("--mode", choices=("advise", "paper", "execute"), default="advise")
+    sp.add_argument("--batting-first", required=True); sp.add_argument("--bowling-first", required=True)
+    sp.add_argument("--venue", required=True); sp.add_argument("--league", help="e.g. ipl, bbl, psl")
+    sp.add_argument("--alias", help="page name=team name pairs, e.g. 'MI=Mumbai Indians,CSK=Chennai Super Kings'")
+    sp.add_argument("--bankroll", type=float, default=10_000.0)
+    sp.add_argument("--max-risk", type=float, default=100.0, help="money at risk per new position")
+    sp.add_argument("--daily-loss-limit", type=float, default=300.0)
+    sp.add_argument("--commission", type=float, default=0.02)
+    sp.add_argument("--entry-edge", type=float, default=0.04)
+    sp.add_argument("--ledger", default="ledger.jsonl"); sp.add_argument("--model")
+    sp.add_argument("--record", help="also save every score and price reading to this CSV")
+    sp.add_argument("--headless", action="store_true"); sp.add_argument("--no-wait", action="store_true")
+    sp.add_argument("--yes-place-bets", action="store_true", help="required for execute mode")
+
+    sp = add("practice", cmd_practice, "serve a practice exchange that replays a past match")
+    sp.add_argument("match_id", nargs="?", default="ipl-1535465")
+    sp.add_argument("--port", type=int, default=8777); sp.add_argument("--ms", type=int, default=1500,
+                                                                        help="milliseconds per ball")
+    sp.add_argument("--site-out", default="practice_site.json"); sp.add_argument("--dir")
+    sp.add_argument("--data"); sp.add_argument("--model")
 
     sp = add("predict-match", cmd_predict_match, "pre-match win probability")
     sp.add_argument("--team1", required=True); sp.add_argument("--team2", required=True)

@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "iplquant"
 version = "0.1.0"
-description = "IPL win-probability models plus an odds-trading engine (value, green-up hedging, arbitrage) with a walk-forward backtester"
+description = "In-play win-probability models for franchise T20 leagues, an odds-trading engine and a browser bot for exchange sites"
 requires-python = ">=3.10"
 dependencies = [
   "numpy>=1.26",
@@ -17,6 +17,7 @@ dependencies = [
 
 [project.optional-dependencies]
 app = ["streamlit>=1.35"]
+browser = ["playwright>=1.45"]
 dev = ["pytest>=8"]
 
 [project.scripts]
@@ -24,6 +25,9 @@ ipl = "iplquant.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+iplquant = ["exchange/*.html"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

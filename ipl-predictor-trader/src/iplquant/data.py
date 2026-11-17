@@ -49,6 +49,8 @@ def load(data_dir: str | Path | None = None) -> tuple[pd.DataFrame, pd.DataFrame
     matches = pd.read_csv(data_dir / "matches.csv", dtype={"match_id": str})
     balls = pd.read_csv(data_dir / "balls.csv.gz", dtype={"match_id": str})
 
+    if "league" not in matches:
+        matches["league"] = "ipl"
     for col in ("team1", "team2", "toss_winner", "winner"):
         matches[col] = matches[col].map(normalize_team)
     matches["venue"] = matches["venue"].map(normalize_venue)
@@ -77,7 +79,7 @@ def ball_states(matches: pd.DataFrame, balls: pd.DataFrame) -> pd.DataFrame:
     The label ``won`` is 1 when the side batting at that moment went on to win.
     Only standard matches are returned.
     """
-    m = matches.loc[matches["standard"], ["match_id", "season", "date", "team1", "team2",
+    m = matches.loc[matches["standard"], ["match_id", "league", "season", "date", "team1", "team2",
                                             "winner", "target_runs", "venue"]]
     b = balls.merge(m, on="match_id", how="inner").reset_index(drop=True)
     g = b.groupby(["match_id", "innings"], sort=False)

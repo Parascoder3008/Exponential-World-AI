@@ -120,24 +120,66 @@ class PaperTrader:
     trades: list = field(default_factory=list)
 
     def on_tick(self, p_a: float, back: float, lay: float, tag=None,
-                allow_entry: bool = True) -> Action:
-        """Show the rule one (probability, price) observation and act on it."""
+                allow_entry: bool = True, execute=None, max_risk: float | None = None) -> Action:
+        """Show the rule one (probability, price) observation and act on it.
+
+        ``execute(bet) -> bool`` places the bet for real (or on a demo site); when it
+        returns False nothing is recorded. ``max_risk`` caps the money at risk on a new
+        position. Exits are never capped: they only ever reduce risk.
+        """
         act = decide(p_a, back, lay, self.position, self.bankroll, self.cfg, self.risk)
         if act.kind == "enter":
             if not allow_entry or self.n_trades >= self.cfg.max_trades_per_match:
                 return Action("hold", reason="entry blocked")
+            if max_risk is not None and act.risk > max_risk:
+                scale = max_risk / act.risk
+                act.bet = O.Bet(act.bet.side, act.bet.odds, act.bet.stake * scale, act.bet.tag)
+                act.risk = max_risk
+            if execute is not None:
+                filled = execute(act.bet)
+                if not filled:
+                    return Action("hold", reason="order not filled")
+                if isinstance(filled, O.Bet):
+                    act.bet = filled
+                    act.risk = filled.liability
             self.position = O.Position().add(act.bet)
             self.risk, self.n_trades = act.risk, self.n_trades + 1
             self.open_trade = {"match_id": self.match_id, "season": self.season, "entry_seq": tag,
                                "side": act.bet.side, "entry_odds": act.bet.odds,
                                "stake": act.bet.stake, "risk": self.risk, "entry_edge": act.edge}
         elif act.kind == "exit" and self.open_trade is not None:
+            if execute is not None:
+                filled = execute(act.bet)
+                if not filled:
+                    return Action("hold", reason="hedge not filled; will retry")
+                if isinstance(filled, O.Bet):
+                    act.bet = filled
             self.position.add(act.bet)
             pnl = self.position.settle(True, self.cfg.commission)   # same either way once hedged
             self.trades.append(self.open_trade | {"exit_seq": tag, "exit": act.reason,
                                                   "exit_odds": act.bet.odds, "pnl": pnl})
             self.position, self.risk, self.open_trade = O.Position(), 0.0, None
         return act
+
+    def flatten(self, back: float, lay: float, tag=None, execute=None) -> bool:
+        """Hedge any open position now, whatever the model says (kill switch)."""
+        if self.open_trade is None:
+            return True
+        bet = self.position.hedge(back, lay)
+        if bet is None:
+            return True
+        if execute is not None:
+            filled = execute(bet)
+            if not filled:
+                return False
+            if isinstance(filled, O.Bet):
+                bet = filled
+        self.position.add(bet)
+        pnl = self.position.settle(True, self.cfg.commission)
+        self.trades.append(self.open_trade | {"exit_seq": tag, "exit": "kill switch",
+                                              "exit_odds": bet.odds, "pnl": pnl})
+        self.position, self.risk, self.open_trade = O.Position(), 0.0, None
+        return True
 
     def settle(self, a_won: bool) -> None:
         """Match over: an unhedged position is settled on the result."""
@@ -163,7 +205,7 @@ class LiveSession:
         self.bundle = bundle
         self.teams = (batting_first, bowling_first)
         pm = bundle.prematch_prob(batting_first, bowling_first, venue, batting_first, "bat")
-        self.pm_a, self.par = pm["p_team1"], pm["par"]
+        self.pm_a, self.par, self.league = pm["p_team1"], pm["par"], pm.get("league")
         self.state = MatchState()
         self.guard = guard or StaleGuard()
         self.trader = PaperTrader(cfg or TraderConfig(), bankroll, match_id)
@@ -209,11 +251,12 @@ class LiveSession:
         runs18, wkts18 = s.last18()
         pm_bat = self.pm_a if s.innings == 1 else 1 - self.pm_a
         p_bat = self.bundle.inplay_prob(s.innings, s.score, s.wickets, s.balls_bowled, pm_bat,
-                                        self.par, s.target, runs18, wkts18)
+                                        self.par, s.target, runs18, wkts18, self.league)
         return p_bat if s.innings == 1 else 1 - p_bat
 
     # ---- price tick ----------------------------------------------------------
-    def on_price(self, ts: float, back_a: float, lay_a: float) -> dict:
+    def on_price(self, ts: float, back_a: float, lay_a: float, allow_entry: bool = True,
+                 execute=None, max_risk: float | None = None) -> dict:
         mid = (O.implied_prob(back_a) + O.implied_prob(lay_a)) / 2
         self.last_mid = mid
         if self.mid_at_score is None and self.score_ts is not None:
@@ -227,10 +270,13 @@ class LiveSession:
             # With stale data nothing new is opened and nothing is closed on the model's
             # say-so. An open position stays as it is until the data is fresh again.
             return out
-        act = self.trader.on_tick(p, back_a, lay_a, tag=ts)
+        act = self.trader.on_tick(p, back_a, lay_a, tag=ts, allow_entry=allow_entry,
+                                  execute=execute, max_risk=max_risk)
         out |= {"action": act.kind, "reason": act.reason}
         if act.kind in ("enter", "exit") and act.bet is not None:
             out |= {"side": act.bet.side, "odds": act.bet.odds, "stake": act.bet.stake}
+            if act.kind == "exit" and self.trader.trades:
+                out["locked"] = self.trader.trades[-1]["pnl"]
             self._log(out)
         return out
 
@@ -240,6 +286,9 @@ class LiveSession:
                    "pnl": self.trader.pnl, "blocked_ticks": self.blocked}
         self._log(summary)
         return summary
+
+    def log(self, row: dict) -> None:
+        self._log(row)
 
     def _log(self, row: dict) -> None:
         if self.ledger_path:

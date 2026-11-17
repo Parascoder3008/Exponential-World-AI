@@ -8,183 +8,297 @@
     2026
   ],
   "data": {
-    "matches": 1243,
-    "standard_matches": 1201,
+    "matches": 5532,
+    "standard_matches": 5016,
     "first": "2008-04-18",
-    "last": "2026-05-31"
+    "last": "2026-09-20"
   },
   "prematch": {
-    "n_matches": 422,
+    "n_matches": 2693,
     "coin_flip": {
       "log_loss": 0.6931471805599453,
       "accuracy": 0.5
     },
     "elo_only": {
-      "log_loss": 0.6958149069371214,
-      "brier": 0.25132533675890567,
-      "auc": 0.4955893965031021,
-      "accuracy": 0.495260663507109
+      "log_loss": 0.6864922896228174,
+      "brier": 0.24668635451319706,
+      "auc": 0.5727362900908468,
+      "accuracy": 0.5551429632380245
     },
     "model_before_toss": {
-      "log_loss": 0.6983682689616663,
-      "brier": 0.2525836208325204,
-      "auc": 0.49360406091370557,
-      "accuracy": 0.490521327014218
+      "log_loss": 0.684063781316426,
+      "brier": 0.2454705405657169,
+      "auc": 0.5806668729692093,
+      "accuracy": 0.5566282955811362
     },
     "model_after_toss": {
-      "log_loss": 0.6966938099561848,
-      "brier": 0.2517398484573208,
-      "auc": 0.4878962210941906,
-      "accuracy": 0.4976303317535545
+      "log_loss": 0.6833763070412957,
+      "brier": 0.24514263962952265,
+      "auc": 0.5786758692336598,
+      "accuracy": 0.5640549572966951
     },
-    "chasing_side_win_rate": 0.533175355450237
+    "by_league": {
+      "bbl": {
+        "matches": 283,
+        "log_loss": 0.6697853495030827,
+        "accuracy": 0.6219081272084805
+      },
+      "bpl": {
+        "matches": 203,
+        "log_loss": 0.6576358191754342,
+        "accuracy": 0.6502463054187192
+      },
+      "cpl": {
+        "matches": 198,
+        "log_loss": 0.6854902864425393,
+        "accuracy": 0.5959595959595959
+      },
+      "ilt": {
+        "matches": 133,
+        "log_loss": 0.6783052762233519,
+        "accuracy": 0.5639097744360902
+      },
+      "ipl": {
+        "matches": 422,
+        "log_loss": 0.7026885592442221,
+        "accuracy": 0.48104265402843605
+      },
+      "lpl": {
+        "matches": 118,
+        "log_loss": 0.7052734062833754,
+        "accuracy": 0.4661016949152542
+      },
+      "mlc": {
+        "matches": 108,
+        "log_loss": 0.6902597628858667,
+        "accuracy": 0.5833333333333334
+      },
+      "ntb": {
+        "matches": 733,
+        "log_loss": 0.6752478449964352,
+        "accuracy": 0.5893587994542974
+      },
+      "psl": {
+        "matches": 210,
+        "log_loss": 0.686732795653144,
+        "accuracy": 0.5285714285714286
+      },
+      "sat": {
+        "matches": 123,
+        "log_loss": 0.7097572055808647,
+        "accuracy": 0.4634146341463415
+      },
+      "ssm": {
+        "matches": 162,
+        "log_loss": 0.682504994547701,
+        "accuracy": 0.5987654320987654
+      }
+    },
+    "chasing_side_win_rate": 0.5213516524322317
   },
   "inplay": {
-    "n_balls": 100205,
-    "n_matches": 415,
+    "n_balls": 582858,
+    "n_matches": 2447,
     "model": {
-      "log_loss": 0.5317765851655836,
-      "brier": 0.18127491444155436,
-      "auc": 0.8005224521853276,
-      "accuracy": 0.7143256324534704
+      "log_loss": 0.510712765154203,
+      "brier": 0.1735545085763948,
+      "auc": 0.8177828626805633,
+      "accuracy": 0.7288361830840445
     },
     "reference_repo_style_baseline": {
-      "log_loss": 0.5819036057926413,
-      "brier": 0.19790847598302413,
-      "auc": 0.7701694017464326,
-      "accuracy": 0.6909136270645178
+      "log_loss": 0.6051001672070032,
+      "brier": 0.1984943139219415,
+      "auc": 0.7742693265853389,
+      "accuracy": 0.7010970081906742
     },
     "prior_only": {
-      "log_loss": 0.6975020707224979,
-      "brier": 0.25213943461197286,
-      "auc": 0.5051947751566083,
-      "accuracy": 0.4958834389501522
+      "log_loss": 0.6849167164470595,
+      "brier": 0.24590798140433043,
+      "auc": 0.5736415797073458,
+      "accuracy": 0.5580810420376833
     },
     "by_innings": {
       "1": {
         "model": {
-          "log_loss": 0.6336124314483019,
-          "brier": 0.2219480903035686,
-          "auc": 0.6893768369850064,
-          "accuracy": 0.6342798758506352
+          "log_loss": 0.6189303532184358,
+          "brier": 0.21533095394663118,
+          "auc": 0.7121719485509909,
+          "accuracy": 0.6519738251825479
         },
         "baseline": {
-          "log_loss": 0.6884007411993288,
-          "brier": 0.24016060176115547,
-          "auc": 0.6595575704815606,
-          "accuracy": 0.6100476162936402
+          "log_loss": 0.7229184111746627,
+          "brier": 0.24149888527683316,
+          "auc": 0.6632975284288567,
+          "accuracy": 0.6238111720977765
         }
       },
       "2": {
         "model": {
-          "log_loss": 0.4224798282711153,
-          "brier": 0.1376218553608156,
-          "auc": 0.8866312009835566,
-          "accuracy": 0.8002358685756848
+          "log_loss": 0.393268266145768,
+          "brier": 0.12821609561945047,
+          "auc": 0.9016385629817086,
+          "accuracy": 0.8122520240561262
         },
         "baseline": {
-          "log_loss": 0.4676040546681049,
-          "brier": 0.15256078665733908,
-          "auc": 0.8679240033177827,
-          "accuracy": 0.7777042125300009
+          "log_loss": 0.47723643558675793,
+          "brier": 0.15182306178823177,
+          "auc": 0.8669305074975734,
+          "accuracy": 0.7849724341980516
         }
+      }
+    },
+    "by_league": {
+      "bbl": {
+        "matches": 264,
+        "model": 0.5078739804165687,
+        "baseline": 0.5113872141749882
+      },
+      "bpl": {
+        "matches": 202,
+        "model": 0.48214057739308414,
+        "baseline": 0.832991992619214
+      },
+      "cpl": {
+        "matches": 182,
+        "model": 0.511896829198524,
+        "baseline": 0.575317039884628
+      },
+      "ilt": {
+        "matches": 132,
+        "model": 0.5012988255679177,
+        "baseline": 0.7117382576998775
+      },
+      "ipl": {
+        "matches": 415,
+        "model": 0.5344774335956454,
+        "baseline": 0.5840525397940488
+      },
+      "lpl": {
+        "matches": 110,
+        "model": 0.5144168560266725,
+        "baseline": 0.8430900764693045
+      },
+      "mlc": {
+        "matches": 102,
+        "model": 0.613551916873189,
+        "baseline": 0.8655620423285918
+      },
+      "ntb": {
+        "matches": 569,
+        "model": 0.49190806547095206,
+        "baseline": 0.5216004504693601
+      },
+      "psl": {
+        "matches": 207,
+        "model": 0.5430059892867851,
+        "baseline": 0.5652734270048296
+      },
+      "sat": {
+        "matches": 118,
+        "model": 0.47603146614715347,
+        "baseline": 0.5628785784195791
+      },
+      "ssm": {
+        "matches": 146,
+        "model": 0.47362844243059693,
+        "baseline": 0.5152673275900699
       }
     },
     "by_season": {
       "2021": {
-        "model": 0.5314675571996418,
-        "baseline": 0.5445506362291876
+        "model": 0.5152703816249273,
+        "baseline": 0.5700460038986611
       },
       "2022": {
-        "model": 0.5277125554821682,
-        "baseline": 0.5638394853998753
+        "model": 0.5159402503504233,
+        "baseline": 0.6327497191782026
       },
       "2023": {
-        "model": 0.5876710697489648,
-        "baseline": 0.5988200146737419
+        "model": 0.5149519805412796,
+        "baseline": 0.5616889384815461
       },
       "2024": {
-        "model": 0.4894663652821432,
-        "baseline": 0.5440520836222771
+        "model": 0.5064073014092957,
+        "baseline": 0.6584021560775201
       },
       "2025": {
-        "model": 0.5316184080805724,
-        "baseline": 0.6206788747077331
+        "model": 0.5038466858320437,
+        "baseline": 0.5898395894056006
       },
       "2026": {
-        "model": 0.5217058345924447,
-        "baseline": 0.6150306469893132
+        "model": 0.5099497362034319,
+        "baseline": 0.625070530710195
       }
     },
     "calibration": [
       {
         "bin": "(0.0, 0.1]",
-        "n": 9520,
-        "predicted": 0.033587132142295695,
-        "observed": 0.03802521008403361
+        "n": 62989,
+        "predicted": 0.03241438165554887,
+        "observed": 0.03776849926177587
       },
       {
         "bin": "(0.1, 0.2]",
-        "n": 6826,
-        "predicted": 0.1532782645406523,
-        "observed": 0.17843539408145326
+        "n": 41915,
+        "predicted": 0.15148537633439618,
+        "observed": 0.16445186687343433
       },
       {
         "bin": "(0.2, 0.3]",
-        "n": 9018,
-        "predicted": 0.252004184692428,
-        "observed": 0.23885562208915503
+        "n": 53237,
+        "predicted": 0.25213477967341147,
+        "observed": 0.25570561827300564
       },
       {
         "bin": "(0.3, 0.4]",
-        "n": 11544,
-        "predicted": 0.3518894584392015,
-        "observed": 0.36651074151074153
+        "n": 67860,
+        "predicted": 0.3521569581663476,
+        "observed": 0.3606100795755968
       },
       {
         "bin": "(0.4, 0.5]",
-        "n": 16751,
-        "predicted": 0.4517549655458303,
-        "observed": 0.4541818398901558
+        "n": 82185,
+        "predicted": 0.45108447892079206,
+        "observed": 0.4590983756159883
       },
       {
         "bin": "(0.5, 0.6]",
-        "n": 14120,
-        "predicted": 0.5478225484653008,
-        "observed": 0.5507082152974504
+        "n": 78611,
+        "predicted": 0.5481643382936044,
+        "observed": 0.5598453142689954
       },
       {
         "bin": "(0.6, 0.7]",
-        "n": 9993,
-        "predicted": 0.6469250210478398,
-        "observed": 0.6773741619133393
+        "n": 61044,
+        "predicted": 0.6472108082061123,
+        "observed": 0.6633903413930935
       },
       {
         "bin": "(0.7, 0.8]",
-        "n": 7629,
-        "predicted": 0.7505750650889284,
-        "observed": 0.7226373050203172
+        "n": 45317,
+        "predicted": 0.7486863590350366,
+        "observed": 0.7549705408566322
       },
       {
         "bin": "(0.8, 0.9]",
-        "n": 6853,
-        "predicted": 0.8490111465049338,
-        "observed": 0.8466365095578579
+        "n": 38792,
+        "predicted": 0.8486889474257012,
+        "observed": 0.8682460301093009
       },
       {
         "bin": "(0.9, 1.0]",
-        "n": 7951,
-        "predicted": 0.9553124272219413,
-        "observed": 0.9600050308137341
+        "n": 50908,
+        "predicted": 0.9605385850757702,
+        "observed": 0.9685903983656793
       }
     ]
   },
   "totals": {
-    "mae": 16.94447590749938,
-    "bias": 3.2992883108217566,
-    "naive_par_rate_mae": 19.065656278892295,
-    "coverage_1sd": 0.6492009330480212,
-    "coverage_2sd": 0.934937250592794
+    "mae": 16.336192395144913,
+    "bias": 2.747271411664355,
+    "naive_par_rate_mae": 18.228599908469803,
+    "coverage_1sd": 0.6776574527353344,
+    "coverage_2sd": 0.9411330333448713
   },
   "trading": {
     "config": {
@@ -209,23 +323,23 @@
         "noise_rho": 0.95,
         "spread": 0.01,
         "seed": 11,
-        "market_logloss": 0.5829375427,
-        "model_logloss": 0.5317765874,
-        "matches": 415,
-        "matches_traded": 412,
-        "trades": 1025,
-        "pnl": 282132.5998659251,
-        "pnl_pct_bankroll": 282.1325998659,
-        "roi_on_risk_pct": 15.3956219312,
-        "win_rate_pct": 39.9024390244,
-        "hedged_pct": 93.3658536585,
-        "green_both_sides_pct": 33.2682926829,
-        "red_both_sides_pct": 60.0975609756,
-        "held_to_result_pct": 6.6341463415,
-        "max_drawdown": 29594.0326889368,
+        "market_logloss": 0.6061268196,
+        "model_logloss": 0.510712769,
+        "matches": 2447,
+        "matches_traded": 2403,
+        "trades": 5849,
+        "pnl": 3239324.746116415,
+        "pnl_pct_bankroll": 3239.3247461164,
+        "roi_on_risk_pct": 30.6020410824,
+        "win_rate_pct": 40.4684561463,
+        "hedged_pct": 90.6137801334,
+        "green_both_sides_pct": 31.1335270986,
+        "red_both_sides_pct": 59.4802530347,
+        "held_to_result_pct": 9.3862198666,
+        "max_drawdown": 29443.4693803694,
         "pnl_ci90": [
-          149889.8409578871,
-          418124.9974086403
+          2830913.035622027,
+          3644074.94030749
         ],
         "prob_profit_pct": 100.0
       },
@@ -237,23 +351,23 @@
         "noise_rho": 0.95,
         "spread": 0.01,
         "seed": 11,
-        "market_logloss": 0.5163030894,
-        "model_logloss": 0.5317765874,
-        "matches": 415,
-        "matches_traded": 409,
-        "trades": 952,
-        "pnl": 352747.5874756958,
-        "pnl_pct_bankroll": 352.7475874757,
-        "roi_on_risk_pct": 19.7918059849,
-        "win_rate_pct": 30.1470588235,
-        "hedged_pct": 92.5420168067,
-        "green_both_sides_pct": 23.0042016807,
-        "red_both_sides_pct": 69.5378151261,
-        "held_to_result_pct": 7.4579831933,
-        "max_drawdown": 33058.9178497725,
+        "market_logloss": 0.5314586815,
+        "model_logloss": 0.510712769,
+        "matches": 2447,
+        "matches_traded": 2372,
+        "trades": 5616,
+        "pnl": 2221031.212201994,
+        "pnl_pct_bankroll": 2221.031212202,
+        "roi_on_risk_pct": 20.9770773848,
+        "win_rate_pct": 28.0982905983,
+        "hedged_pct": 91.2215099715,
+        "green_both_sides_pct": 19.4266381766,
+        "red_both_sides_pct": 71.7948717949,
+        "held_to_result_pct": 8.7784900285,
+        "max_drawdown": 68206.8242246553,
         "pnl_ci90": [
-          180564.8717073848,
-          525720.0214573395
+          1759005.021294159,
+          2683113.562100038
         ],
         "prob_profit_pct": 100.0
       },
@@ -265,23 +379,23 @@
         "noise_rho": 0.95,
         "spread": 0.01,
         "seed": 11,
-        "market_logloss": 0.5329927816,
-        "model_logloss": 0.5317765874,
-        "matches": 415,
-        "matches_traded": 315,
-        "trades": 508,
-        "pnl": 67854.2781919531,
-        "pnl_pct_bankroll": 67.854278192,
-        "roi_on_risk_pct": 8.6159037497,
-        "win_rate_pct": 62.9921259843,
-        "hedged_pct": 99.4094488189,
-        "green_both_sides_pct": 62.4015748031,
-        "red_both_sides_pct": 37.0078740157,
-        "held_to_result_pct": 0.5905511811,
-        "max_drawdown": 6366.9072832966,
+        "market_logloss": 0.5117413434,
+        "model_logloss": 0.510712769,
+        "matches": 2447,
+        "matches_traded": 1804,
+        "trades": 2862,
+        "pnl": 357775.3649148743,
+        "pnl_pct_bankroll": 357.7753649149,
+        "roi_on_risk_pct": 8.0285060224,
+        "win_rate_pct": 61.4255765199,
+        "hedged_pct": 99.1614255765,
+        "green_both_sides_pct": 60.7966457023,
+        "red_both_sides_pct": 38.3647798742,
+        "held_to_result_pct": 0.8385744235,
+        "max_drawdown": 5671.8773810717,
         "pnl_ci90": [
-          47580.8021549112,
-          88686.3905791893
+          304501.7239905855,
+          409728.1776976301
         ],
         "prob_profit_pct": 100.0
       },
@@ -293,25 +407,25 @@
         "noise_rho": 0.95,
         "spread": 0.01,
         "seed": 11,
-        "market_logloss": 0.502552831,
-        "model_logloss": 0.5317765874,
-        "matches": 415,
-        "matches_traded": 402,
-        "trades": 836,
-        "pnl": 43703.3447045384,
-        "pnl_pct_bankroll": 43.7033447045,
-        "roi_on_risk_pct": 2.9145018467,
-        "win_rate_pct": 25.0,
-        "hedged_pct": 88.038277512,
-        "green_both_sides_pct": 13.995215311,
-        "red_both_sides_pct": 74.043062201,
-        "held_to_result_pct": 11.961722488,
-        "max_drawdown": 45076.7358990753,
+        "market_logloss": 0.4831838814,
+        "model_logloss": 0.510712769,
+        "matches": 2447,
+        "matches_traded": 2367,
+        "trades": 5041,
+        "pnl": -117146.2356770656,
+        "pnl_pct_bankroll": -117.1462356771,
+        "roi_on_risk_pct": -1.3012599349,
+        "win_rate_pct": 23.62626463,
+        "hedged_pct": 89.763935727,
+        "green_both_sides_pct": 14.3423923825,
+        "red_both_sides_pct": 75.4215433446,
+        "held_to_result_pct": 10.236064273,
+        "max_drawdown": 211473.9390224499,
         "pnl_ci90": [
-          -83312.5421665461,
-          164745.4739647347
+          -416414.8774842962,
+          173714.8447766123
         ],
-        "prob_profit_pct": 71.75
+        "prob_profit_pct": 25.85
       },
       {
         "scenario": "Knows more than this model, little mispricing",
@@ -321,25 +435,25 @@
         "noise_rho": 0.95,
         "spread": 0.01,
         "seed": 11,
-        "market_logloss": 0.5016284931,
-        "model_logloss": 0.5317765874,
-        "matches": 415,
-        "matches_traded": 343,
-        "trades": 694,
-        "pnl": 14557.4684380445,
-        "pnl_pct_bankroll": 14.557468438,
-        "roi_on_risk_pct": 1.1487446578,
-        "win_rate_pct": 18.5878962536,
-        "hedged_pct": 85.446685879,
-        "green_both_sides_pct": 5.1873198847,
-        "red_both_sides_pct": 80.2593659942,
-        "held_to_result_pct": 14.553314121,
-        "max_drawdown": 55759.9245958277,
+        "market_logloss": 0.4822870541,
+        "model_logloss": 0.510712769,
+        "matches": 2447,
+        "matches_traded": 2018,
+        "trades": 4193,
+        "pnl": -360461.9033620917,
+        "pnl_pct_bankroll": -360.4619033621,
+        "roi_on_risk_pct": -4.7419273809,
+        "win_rate_pct": 16.4321488195,
+        "hedged_pct": 87.1690913427,
+        "green_both_sides_pct": 4.6267588839,
+        "red_both_sides_pct": 82.5423324589,
+        "held_to_result_pct": 12.8309086573,
+        "max_drawdown": 378815.7387129802,
         "pnl_ci90": [
-          -102267.1767164027,
-          134023.8403121817
+          -649000.375362809,
+          -78945.0516691982
         ],
-        "prob_profit_pct": 55.95
+        "prob_profit_pct": 1.9
       },
       {
         "scenario": "Efficient: knows more, no mispricing",
@@ -349,25 +463,25 @@
         "noise_rho": 0.95,
         "spread": 0.01,
         "seed": 11,
-        "market_logloss": 0.5014832004,
-        "model_logloss": 0.5317765874,
-        "matches": 415,
-        "matches_traded": 327,
-        "trades": 675,
-        "pnl": -24622.2585044967,
-        "pnl_pct_bankroll": -24.6222585045,
-        "roi_on_risk_pct": -1.9939057589,
-        "win_rate_pct": 17.6296296296,
-        "hedged_pct": 85.1851851852,
-        "green_both_sides_pct": 4.1481481481,
-        "red_both_sides_pct": 81.037037037,
-        "held_to_result_pct": 14.8148148148,
-        "max_drawdown": 66256.549326903,
+        "market_logloss": 0.4821405463,
+        "model_logloss": 0.510712769,
+        "matches": 2447,
+        "matches_traded": 1914,
+        "trades": 4049,
+        "pnl": -381546.1834082639,
+        "pnl_pct_bankroll": -381.5461834083,
+        "roi_on_risk_pct": -5.1657812032,
+        "win_rate_pct": 15.8804643122,
+        "hedged_pct": 86.7127685848,
+        "green_both_sides_pct": 3.655223512,
+        "red_both_sides_pct": 83.0575450729,
+        "held_to_result_pct": 13.2872314152,
+        "max_drawdown": 400284.0938278268,
         "pnl_ci90": [
-          -137623.0211470456,
-          86254.0292589938
+          -664248.6327351197,
+          -81122.4178302996
         ],
-        "prob_profit_pct": 35.8
+        "prob_profit_pct": 2.1
       }
     ],
     "hold_to_result_grid": [
@@ -379,23 +493,23 @@
         "noise_rho": 0.95,
         "spread": 0.01,
         "seed": 11,
-        "market_logloss": 0.5829375427,
-        "model_logloss": 0.5317765874,
-        "matches": 415,
-        "matches_traded": 412,
-        "trades": 412,
-        "pnl": 294356.0631515412,
-        "pnl_pct_bankroll": 294.3560631515,
-        "roi_on_risk_pct": 38.2836080748,
-        "win_rate_pct": 51.4563106796,
+        "market_logloss": 0.6061268196,
+        "model_logloss": 0.510712769,
+        "matches": 2447,
+        "matches_traded": 2403,
+        "trades": 2403,
+        "pnl": 2633064.3285627663,
+        "pnl_pct_bankroll": 2633.0643285628,
+        "roi_on_risk_pct": 58.1553922828,
+        "win_rate_pct": 49.5630461923,
         "hedged_pct": 0.0,
         "green_both_sides_pct": 0.0,
         "red_both_sides_pct": 0.0,
         "held_to_result_pct": 100.0,
-        "max_drawdown": 20375.2342018523,
+        "max_drawdown": 23283.9111617284,
         "pnl_ci90": [
-          183255.9569932677,
-          408452.2261818723
+          2288123.6869660662,
+          2986401.911736661
         ],
         "prob_profit_pct": 100.0
       },
@@ -407,25 +521,25 @@
         "noise_rho": 0.95,
         "spread": 0.01,
         "seed": 11,
-        "market_logloss": 0.5163030894,
-        "model_logloss": 0.5317765874,
-        "matches": 415,
-        "matches_traded": 409,
-        "trades": 409,
-        "pnl": 212756.540537315,
-        "pnl_pct_bankroll": 212.7565405373,
-        "roi_on_risk_pct": 26.6843646797,
-        "win_rate_pct": 36.6748166259,
+        "market_logloss": 0.5314586815,
+        "model_logloss": 0.510712769,
+        "matches": 2447,
+        "matches_traded": 2372,
+        "trades": 2372,
+        "pnl": 1970156.8337350606,
+        "pnl_pct_bankroll": 1970.1568337351,
+        "roi_on_risk_pct": 42.6791893278,
+        "win_rate_pct": 37.478920742,
         "hedged_pct": 0.0,
         "green_both_sides_pct": 0.0,
         "red_both_sides_pct": 0.0,
         "held_to_result_pct": 100.0,
-        "max_drawdown": 44716.209628004,
+        "max_drawdown": 49572.1270263982,
         "pnl_ci90": [
-          74126.6906570059,
-          352094.8054455937
+          1569862.7722434793,
+          2368370.313496057
         ],
-        "prob_profit_pct": 99.65
+        "prob_profit_pct": 100.0
       },
       {
         "scenario": "Knows what this model knows, plus random mispricing",
@@ -435,25 +549,25 @@
         "noise_rho": 0.95,
         "spread": 0.01,
         "seed": 11,
-        "market_logloss": 0.5329927816,
-        "model_logloss": 0.5317765874,
-        "matches": 415,
-        "matches_traded": 315,
-        "trades": 315,
-        "pnl": 14435.1812591555,
-        "pnl_pct_bankroll": 14.4351812592,
-        "roi_on_risk_pct": 2.9758188188,
-        "win_rate_pct": 49.2063492063,
+        "market_logloss": 0.5117413434,
+        "model_logloss": 0.510712769,
+        "matches": 2447,
+        "matches_traded": 1804,
+        "trades": 1804,
+        "pnl": 179920.5969861741,
+        "pnl_pct_bankroll": 179.9205969862,
+        "roi_on_risk_pct": 6.399294761,
+        "win_rate_pct": 51.2195121951,
         "hedged_pct": 0.0,
         "green_both_sides_pct": 0.0,
         "red_both_sides_pct": 0.0,
         "held_to_result_pct": 100.0,
-        "max_drawdown": 29941.553569107,
+        "max_drawdown": 31132.0430690183,
         "pnl_ci90": [
-          -31350.2568537736,
-          62471.6524971076
+          66765.4124221076,
+          298115.6492462056
         ],
-        "prob_profit_pct": 70.7
+        "prob_profit_pct": 99.3
       },
       {
         "scenario": "Knows more than this model, plus random mispricing",
@@ -463,25 +577,25 @@
         "noise_rho": 0.95,
         "spread": 0.01,
         "seed": 11,
-        "market_logloss": 0.502552831,
-        "model_logloss": 0.5317765874,
-        "matches": 415,
-        "matches_traded": 402,
-        "trades": 402,
-        "pnl": 39047.4990787118,
-        "pnl_pct_bankroll": 39.0474990787,
-        "roi_on_risk_pct": 5.1648805176,
-        "win_rate_pct": 40.7960199005,
+        "market_logloss": 0.4831838814,
+        "model_logloss": 0.510712769,
+        "matches": 2447,
+        "matches_traded": 2367,
+        "trades": 2367,
+        "pnl": -121664.8781413641,
+        "pnl_pct_bankroll": -121.6648781414,
+        "roi_on_risk_pct": -2.7249970942,
+        "win_rate_pct": 37.6848331221,
         "hedged_pct": 0.0,
         "green_both_sides_pct": 0.0,
         "red_both_sides_pct": 0.0,
         "held_to_result_pct": 100.0,
-        "max_drawdown": 37377.4482655808,
+        "max_drawdown": 236914.6063404959,
         "pnl_ci90": [
-          -49440.3416669196,
-          123272.564598761
+          -328355.2636432904,
+          82941.1891544755
         ],
-        "prob_profit_pct": 76.4
+        "prob_profit_pct": 15.95
       },
       {
         "scenario": "Knows more than this model, little mispricing",
@@ -491,25 +605,25 @@
         "noise_rho": 0.95,
         "spread": 0.01,
         "seed": 11,
-        "market_logloss": 0.5016284931,
-        "model_logloss": 0.5317765874,
-        "matches": 415,
-        "matches_traded": 343,
-        "trades": 343,
-        "pnl": 18818.6022015474,
-        "pnl_pct_bankroll": 18.8186022015,
-        "roi_on_risk_pct": 2.8242120457,
-        "win_rate_pct": 38.4839650146,
+        "market_logloss": 0.4822870541,
+        "model_logloss": 0.510712769,
+        "matches": 2447,
+        "matches_traded": 2018,
+        "trades": 2018,
+        "pnl": -171313.4319061305,
+        "pnl_pct_bankroll": -171.3134319061,
+        "roi_on_risk_pct": -4.395264221,
+        "win_rate_pct": 35.5302279485,
         "hedged_pct": 0.0,
         "green_both_sides_pct": 0.0,
         "red_both_sides_pct": 0.0,
         "held_to_result_pct": 100.0,
-        "max_drawdown": 33966.0201436796,
+        "max_drawdown": 245647.5805597839,
         "pnl_ci90": [
-          -58642.3389431113,
-          102430.0482134501
+          -376008.0392079948,
+          25958.732359909
         ],
-        "prob_profit_pct": 63.25
+        "prob_profit_pct": 7.65
       },
       {
         "scenario": "Efficient: knows more, no mispricing",
@@ -519,238 +633,238 @@
         "noise_rho": 0.95,
         "spread": 0.01,
         "seed": 11,
-        "market_logloss": 0.5014832004,
-        "model_logloss": 0.5317765874,
-        "matches": 415,
-        "matches_traded": 327,
-        "trades": 327,
-        "pnl": 13609.3969113748,
-        "pnl_pct_bankroll": 13.6093969114,
-        "roi_on_risk_pct": 2.1179797997,
-        "win_rate_pct": 37.6146788991,
+        "market_logloss": 0.4821405463,
+        "model_logloss": 0.510712769,
+        "matches": 2447,
+        "matches_traded": 1914,
+        "trades": 1914,
+        "pnl": -177786.9322067795,
+        "pnl_pct_bankroll": -177.7869322068,
+        "roi_on_risk_pct": -4.7449855067,
+        "win_rate_pct": 34.8484848485,
         "hedged_pct": 0.0,
         "green_both_sides_pct": 0.0,
         "red_both_sides_pct": 0.0,
         "held_to_result_pct": 100.0,
-        "max_drawdown": 34955.4698161528,
+        "max_drawdown": 250851.6103770671,
         "pnl_ci90": [
-          -68434.1352449169,
-          91665.7659384859
+          -375133.7119394236,
+          40191.3285656063
         ],
-        "prob_profit_pct": 59.45
+        "prob_profit_pct": 8.5
       }
     ],
     "stale_score_test": [
       {
         "score_lag_balls": 0,
         "guard": "off",
-        "trades": 508,
-        "roi_on_risk_pct": 8.6159037497,
+        "trades": 2862,
+        "roi_on_risk_pct": 8.0285060224,
         "prob_profit_pct": 100.0
       },
       {
         "score_lag_balls": 0,
         "guard": "on",
-        "trades": 508,
-        "roi_on_risk_pct": 8.6159037497,
+        "trades": 2862,
+        "roi_on_risk_pct": 8.0285060224,
         "prob_profit_pct": 100.0
       },
       {
         "score_lag_balls": 1,
         "guard": "off",
-        "trades": 1239,
-        "roi_on_risk_pct": -1.3281180516,
+        "trades": 7253,
+        "roi_on_risk_pct": -1.6892695994,
         "prob_profit_pct": 0.0
       },
       {
         "score_lag_balls": 1,
         "guard": "on",
-        "trades": 937,
-        "roi_on_risk_pct": 4.3807613737,
+        "trades": 5143,
+        "roi_on_risk_pct": 3.0922511145,
         "prob_profit_pct": 100.0
       },
       {
         "score_lag_balls": 2,
         "guard": "off",
-        "trades": 1244,
-        "roi_on_risk_pct": -1.6368082429,
+        "trades": 7307,
+        "roi_on_risk_pct": -1.9758263157,
         "prob_profit_pct": 0.0
       },
       {
         "score_lag_balls": 2,
         "guard": "on",
-        "trades": 1007,
-        "roi_on_risk_pct": 3.4507983665,
+        "trades": 5498,
+        "roi_on_risk_pct": 2.4667074503,
         "prob_profit_pct": 100.0
       },
       {
         "score_lag_balls": 3,
         "guard": "off",
-        "trades": 1244,
-        "roi_on_risk_pct": -1.9518858687,
+        "trades": 7324,
+        "roi_on_risk_pct": -2.2922451539,
         "prob_profit_pct": 0.0
       },
       {
         "score_lag_balls": 3,
         "guard": "on",
-        "trades": 987,
-        "roi_on_risk_pct": 2.4434517683,
-        "prob_profit_pct": 99.8
+        "trades": 5410,
+        "roi_on_risk_pct": 1.9293041625,
+        "prob_profit_pct": 100.0
       }
     ]
   },
   "swings": {
     "lead_changes": {
-      "matches": 415,
-      "both_sides_favourite_at_60": 0.5710843373493976,
-      "both_sides_favourite_at_70": 0.3783132530120482,
-      "both_sides_favourite_at_80": 0.19518072289156627,
-      "both_sides_favourite_at_90": 0.06506024096385542,
-      "winner_was_below_40": 0.5759036144578313,
-      "winner_was_below_30": 0.3927710843373494,
-      "winner_was_below_20": 0.21445783132530122,
-      "winner_was_below_10": 0.09397590361445783
+      "matches": 2447,
+      "both_sides_favourite_at_60": 0.6113608500204332,
+      "both_sides_favourite_at_70": 0.37065794850837763,
+      "both_sides_favourite_at_80": 0.20147118921127913,
+      "both_sides_favourite_at_90": 0.06824683285655905,
+      "winner_was_below_40": 0.6121781773600327,
+      "winner_was_below_30": 0.37637923988557415,
+      "winner_was_below_20": 0.2125051082958725,
+      "winner_was_below_10": 0.08908868001634655
     },
     "fair_prices": [
       {
         "threshold": 2.5,
-        "matches": 415,
-        "traded": 415,
+        "matches": 2447,
+        "traded": 2447,
         "traded_pct": 100.0,
-        "turnaround_pct": 57.10843373493976,
+        "turnaround_pct": 61.136085002043316,
         "turnaround_pct_if_prices_fair": 66.66666666666666,
-        "avg_profit_when_turned": 65.77078692364572,
-        "no_turn_first_bet_won_pct": 1.1235955056179776,
-        "avg_result_when_not_turned": -97.15941145164838,
-        "total_pnl": -1706.698737489377,
-        "roi_pct": -4.1125270782876555,
-        "matches_in_profit_pct": 57.59036144578313
+        "avg_profit_when_turned": 67.30858545760623,
+        "no_turn_first_bet_won_pct": 0.2103049421661409,
+        "avg_result_when_not_turned": -99.46447294231771,
+        "total_pnl": 6102.930076434759,
+        "roi_pct": 2.4940458015671267,
+        "matches_in_profit_pct": 61.21781773600327
       },
       {
         "threshold": 3.0,
-        "matches": 415,
-        "traded": 415,
+        "matches": 2447,
+        "traded": 2447,
         "traded_pct": 100.0,
-        "turnaround_pct": 44.096385542168676,
+        "turnaround_pct": 44.13567633837352,
         "turnaround_pct_if_prices_fair": 50.0,
-        "avg_profit_when_turned": 123.64423322573052,
-        "no_turn_first_bet_won_pct": 1.7241379310344827,
-        "avg_result_when_not_turned": -94.60631648595611,
-        "total_pnl": 678.2292555668624,
-        "roi_pct": 1.6342873628117167,
-        "matches_in_profit_pct": 45.06024096385542
+        "avg_profit_when_turned": 124.14792854319342,
+        "no_turn_first_bet_won_pct": 0.7315288953913679,
+        "avg_result_when_not_turned": -97.65098737129588,
+        "total_pnl": 590.8630900874062,
+        "roi_pct": 0.2414642787443426,
+        "matches_in_profit_pct": 44.54434000817327
       },
       {
         "threshold": 4.0,
-        "matches": 415,
-        "traded": 415,
+        "matches": 2447,
+        "traded": 2447,
         "traded_pct": 100.0,
-        "turnaround_pct": 28.674698795180724,
+        "turnaround_pct": 28.68818961994279,
         "turnaround_pct_if_prices_fair": 33.33333333333333,
-        "avg_profit_when_turned": 240.08626633299485,
-        "no_turn_first_bet_won_pct": 2.027027027027027,
-        "avg_result_when_not_turned": -91.42744844994864,
-        "total_pnl": 1507.7409524415834,
-        "roi_pct": 3.6331107287749,
-        "matches_in_profit_pct": 30.120481927710845
+        "avg_profit_when_turned": 241.90423668574348,
+        "no_turn_first_bet_won_pct": 0.9742120343839542,
+        "avg_result_when_not_turned": -95.69721624747527,
+        "total_pnl": 2825.1318015475445,
+        "roi_pct": 1.1545287296884121,
+        "matches_in_profit_pct": 29.38291785860237
       },
       {
         "threshold": 6.0,
-        "matches": 415,
-        "traded": 415,
-        "traded_pct": 100.0,
-        "turnaround_pct": 15.180722891566264,
+        "matches": 2447,
+        "traded": 2440,
+        "traded_pct": 99.71393543114017,
+        "turnaround_pct": 15.40983606557377,
         "turnaround_pct_if_prices_fair": 20.0,
-        "avg_profit_when_turned": 500.99058354844755,
-        "no_turn_first_bet_won_pct": 2.840909090909091,
-        "avg_result_when_not_turned": -81.09768079739764,
-        "total_pnl": 3016.023122868227,
-        "roi_pct": 7.2675255972728365,
-        "matches_in_profit_pct": 17.59036144578313
+        "avg_profit_when_turned": 489.3790949531422,
+        "no_turn_first_bet_won_pct": 1.6472868217054266,
+        "avg_result_when_not_turned": -88.13983838052467,
+        "total_pnl": 2085.9132849785665,
+        "roi_pct": 0.8548824938436749,
+        "matches_in_profit_pct": 16.80327868852459
       }
     ],
     "with_costs": [
       {
         "threshold": 2.5,
-        "matches": 415,
-        "traded": 415,
+        "matches": 2447,
+        "traded": 2447,
         "traded_pct": 100.0,
-        "turnaround_pct": 57.10843373493976,
+        "turnaround_pct": 61.136085002043316,
         "turnaround_pct_if_prices_fair": 66.66666666666666,
-        "avg_profit_when_turned": 59.19958001023704,
-        "no_turn_first_bet_won_pct": 1.1235955056179776,
-        "avg_result_when_not_turned": -97.27894910604762,
-        "total_pnl": -3285.352478450297,
-        "roi_pct": -7.916511996265776,
-        "matches_in_profit_pct": 57.59036144578313
+        "avg_profit_when_turned": 60.5924030290687,
+        "no_turn_first_bet_won_pct": 0.2103049421661409,
+        "avg_result_when_not_turned": -99.48713213809081,
+        "total_pnl": -3966.0277318375734,
+        "roi_pct": -1.6207714474203407,
+        "matches_in_profit_pct": 61.21781773600327
       },
       {
         "threshold": 3.0,
-        "matches": 415,
-        "traded": 415,
+        "matches": 2447,
+        "traded": 2447,
         "traded_pct": 100.0,
-        "turnaround_pct": 44.096385542168676,
+        "turnaround_pct": 44.13567633837352,
         "turnaround_pct_if_prices_fair": 50.0,
-        "avg_profit_when_turned": 112.65368277745762,
-        "no_turn_first_bet_won_pct": 1.7241379310344827,
-        "avg_result_when_not_turned": -94.86880533237945,
-        "total_pnl": -1393.938888837288,
-        "roi_pct": -3.3588888887645494,
-        "matches_in_profit_pct": 45.06024096385542
+        "avg_profit_when_turned": 113.09939163825284,
+        "no_turn_first_bet_won_pct": 0.7315288953913679,
+        "avg_result_when_not_turned": -97.7673405243355,
+        "total_pnl": -11500.611527453559,
+        "roi_pct": -4.699882111750535,
+        "matches_in_profit_pct": 44.54434000817327
       },
       {
         "threshold": 4.0,
-        "matches": 415,
-        "traded": 415,
+        "matches": 2447,
+        "traded": 2447,
         "traded_pct": 100.0,
-        "turnaround_pct": 28.674698795180724,
+        "turnaround_pct": 28.68818961994279,
         "turnaround_pct_if_prices_fair": 33.33333333333333,
-        "avg_profit_when_turned": 219.27424481932528,
-        "no_turn_first_bet_won_pct": 2.027027027027027,
-        "avg_result_when_not_turned": -91.92354819499919,
-        "total_pnl": -1115.7351322200523,
-        "roi_pct": -2.688518390891692,
-        "matches_in_profit_pct": 30.120481927710845
+        "avg_profit_when_turned": 220.89199614771627,
+        "no_turn_first_bet_won_pct": 0.9742120343839542,
+        "avg_result_when_not_turned": -95.95273239725189,
+        "total_pnl": -12371.336737507729,
+        "roi_pct": -5.0557158714784345,
+        "matches_in_profit_pct": 29.38291785860237
       },
       {
         "threshold": 6.0,
-        "matches": 415,
-        "traded": 415,
-        "traded_pct": 100.0,
-        "turnaround_pct": 15.180722891566264,
+        "matches": 2447,
+        "traded": 2440,
+        "traded_pct": 99.71393543114017,
+        "turnaround_pct": 15.40983606557377,
         "turnaround_pct_if_prices_fair": 20.0,
-        "avg_profit_when_turned": 453.54416687623046,
-        "no_turn_first_bet_won_pct": 2.840909090909091,
-        "avg_result_when_not_turned": -82.48163317369443,
-        "total_pnl": -460.25236393791965,
-        "roi_pct": -1.1090418408142642,
-        "matches_in_profit_pct": 17.59036144578313
+        "avg_profit_when_turned": 443.17643687217566,
+        "no_turn_first_bet_won_pct": 1.6472868217054266,
+        "avg_result_when_not_turned": -89.05714879645183,
+        "total_pnl": -17179.61485193854,
+        "roi_pct": -7.040825758991204,
+        "matches_in_profit_pct": 16.80327868852459
       }
     ],
     "by_phase": [
       {
         "phase": "1st innings, overs 1-10",
-        "trades": 240,
-        "turnaround_pct": 41.25,
-        "roi_pct": -5.803206106669747
+        "trades": 1696,
+        "turnaround_pct": 45.1061320754717,
+        "roi_pct": 2.2085166448473816
       },
       {
         "phase": "1st innings, overs 11-20",
-        "trades": 116,
-        "turnaround_pct": 48.275862068965516,
-        "roi_pct": 10.258473933449503
+        "trades": 504,
+        "turnaround_pct": 42.857142857142854,
+        "roi_pct": -4.594343580625041
       },
       {
         "phase": "2nd innings, overs 1-10",
-        "trades": 57,
-        "turnaround_pct": 47.368421052631575,
-        "roi_pct": 15.0786839760644
+        "trades": 242,
+        "turnaround_pct": 40.49586776859504,
+        "roi_pct": -3.621631991280206
       },
       {
         "phase": "2nd innings, overs 11-20",
-        "trades": 2,
-        "turnaround_pct": 50.0,
-        "roi_pct": 10.765379125894654
+        "trades": 5,
+        "turnaround_pct": 20.0,
+        "roi_pct": 7.44059339021528
       }
     ]
   }
