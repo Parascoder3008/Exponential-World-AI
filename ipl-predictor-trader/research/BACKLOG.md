@@ -16,8 +16,8 @@ a second page (a live scorecard) read by the bot.
 | 6 | Per-league calibration on the last training season | score line | done (rejected) |
 | 7 | Low-capacity boosted trees on the logistic model's residual | score line | done (rejected) |
 | 8 | Wickets x phase and required-rate x wickets interactions | score line | done (rejected) |
-| 9 | Batters at the crease: quality and how set (balls faced) | scorecard | todo |
-| 10 | Bowling resources left: overs remaining from the best bowlers | scorecard | todo |
-| 11 | Batting depth: quality of batters still to come | scorecard | todo |
-| 12 | Era terms for rule changes (IPL impact player 2023+, BBL power surge 2020+) | score line | todo, exam seasons only can show it |
-| 13 | Calibration for the Big Bash only (idea taken from #6's result, so it must also pass the exam seasons) | score line | todo |
+| 9 | Batters at the crease: quality and how set (balls faced) | scorecard | done (rejected) |
+| 10 | Bowling resources left: overs remaining from the best bowlers | scorecard | done (rejected) |
+| 11 | Batting depth: quality of batters still to come | scorecard | done (rejected) |
+| 12 | Era terms for rule changes (IPL impact player 2023+, BBL power surge 2020+) | score line | not run: tuning seasons hold no data from these eras, so testing it would spend the exam |
+| 13 | Calibration for the Big Bash only (idea taken from #6's result, so it must also pass the exam seasons) | score line | done (rejected) |

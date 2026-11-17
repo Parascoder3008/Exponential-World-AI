@@ -40,3 +40,34 @@ drifts more season to season; tested on its own as #13. The remaining upside is 
 who is batting and bowling (#9-11), which needs a live scorecard as well as the score.
 
 Rating: 5.0/10 (prediction 2/3, correctness 1/1, live readiness 2/2, real prices 0/4).
+
+## Iteration 3 (2026-11-17): who is batting and bowling - nothing accepted; loop stopped
+
+| Experiment | Tuning log loss | Delta | P(better) | IPL | BBL |
+|---|---|---|---|---|---|
+| Batters at the crease: quality and how set | 0.5340 | +0.0019 | 0.01 | 0.5564 | 0.5064 |
+| Quality of bowling overs still available | 0.5323 | +0.0001 | 0.38 | 0.5541 | 0.5053 |
+| Batting depth still to come | 0.5316 | -0.0006 | 0.82 | 0.5543 | 0.5036 |
+| All three together | 0.5333 | +0.0011 | 0.15 | 0.5552 | 0.5063 |
+| Big Bash-only calibration | 0.5289 | -0.0032 | 0.82 | 0.5547 | 0.4972 |
+
+Big Bash-only calibration on the exam seasons (checked because the idea came from
+iteration 2's results): 0.5329 -> 0.5508 overall, BBL 0.5225 -> **0.5746**. It looked
+good on tuning and fails badly out of sample - the reason the exam seasons stay locked.
+
+Reading:
+- Scorecard information (who is batting, bowling resources, depth) does not improve
+  the model reliably. So building a second live data source (a scorecard reader) is
+  not worth it. The exchange's score line is enough.
+- Across 3 iterations and 19 variants, nothing beat the current model on IPL and Big
+  Bash by a reliable margin. Model-side improvement is exhausted with the data
+  available.
+- The one thing that can move the rating now is evidence against real prices: does
+  the market misprice these matches by more than the spread and commission? That needs
+  `ipl bot --mode paper --record ticks.csv` on live Big Bash matches (from mid-December)
+  and IPL matches (from March).
+
+Loop stopped: backlog exhausted (#12 cannot be tested without spending the exam
+seasons) and two consecutive iterations without an accepted gain.
+
+Rating: 5.0/10 (prediction 2/3, correctness 1/1, live readiness 2/2, real prices 0/4).

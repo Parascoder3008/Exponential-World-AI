@@ -130,6 +130,21 @@ class FeatureState:
             return 1.25, 0.045
         return runs / balls, outs / balls
 
+    def player_rating(self, p: str) -> tuple:
+        """One player's ratings before the current match, shrunk to the league for
+        players with little history: (bat runs/ball, bat outs/ball, balls faced per
+        game, bowl runs/ball, bowl wickets/ball, balls bowled per game)."""
+        rpb0, dpb0 = self._league_rates()
+        n = self.apps[p]
+        runs, balls, outs = self.bat[p]
+        cr, cb, cw = self.bowl[p]
+        return ((runs + BAT_PRIOR_BALLS * rpb0 * 0.92) / (balls + BAT_PRIOR_BALLS),
+                (outs + BAT_PRIOR_BALLS * dpb0 * 1.10) / (balls + BAT_PRIOR_BALLS),
+                (balls + 12.0) / (n + 2.0),
+                (cr + BOWL_PRIOR_BALLS * rpb0 * 1.04) / (cb + BOWL_PRIOR_BALLS),
+                (cw + BOWL_PRIOR_BALLS * dpb0 * 0.90) / (cb + BOWL_PRIOR_BALLS),
+                (cb + 12.0) / (n + 2.0))
+
     def team_strength(self, xi: list[str]) -> dict:
         """Batting and bowling indices for an XI from decayed player records."""
         rpb0, dpb0 = self._league_rates()
@@ -253,9 +268,14 @@ class FeatureState:
             self.league_first[league].append(total)
 
 
-def build(matches: pd.DataFrame, balls: pd.DataFrame) -> tuple[pd.DataFrame, FeatureState]:
+def build(matches: pd.DataFrame, balls: pd.DataFrame, players: dict | None = None
+          ) -> tuple[pd.DataFrame, FeatureState]:
     """Walk the history once. Returns one feature row per match plus the final state
-    (which is what you use to price a fixture that has not been played yet)."""
+    (which is what you use to price a fixture that has not been played yet).
+
+    Pass a dict as ``players`` to also collect every playing XI member's ratings as
+    they stood before each match: ``players[match_id][name] = player_rating(...)``.
+    """
     batting, bowling = player_match_stats(balls)
     first = balls[balls["innings"] == 1].groupby("match_id").agg(
         team=("batting_team", "first"), runs=("runs_total", "sum"))
@@ -269,6 +289,9 @@ def build(matches: pd.DataFrame, balls: pd.DataFrame) -> tuple[pd.DataFrame, Fea
         xi2 = [p for p in row.team2_players.split("|") if p]
         f = state.features(row.team1, row.team2, row.venue, xi1, xi2,
                            row.toss_winner, row.toss_decision, getattr(row, "league", None))
+        if players is not None:
+            players[row.match_id] = {p: state.player_rating(p) for p in xi1 + xi2}
+            players[row.match_id]["_league_rates"] = state._league_rates()
         f["match_id"] = row.match_id
         f["y"] = (1.0 if row.winner == row.team1 else 0.0) if isinstance(row.winner, str) else np.nan
         rows.append(f)
