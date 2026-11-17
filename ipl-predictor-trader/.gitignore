@@ -1,0 +1,12 @@
+__pycache__/
+*.egg-info/
+.pytest_cache/
+.venv/
+# Trained model bundle: rebuilt in ~15 seconds by `ipl train`
+models/
+# Files the bot and dashboard write while running
+signals.jsonl
+ledger.jsonl
+ticks.csv
+practice_site.json
+STOP

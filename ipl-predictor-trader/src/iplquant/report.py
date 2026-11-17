@@ -1,0 +1,232 @@
+"""Walk-forward evaluation: model skill and trading-rule stress test."""
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+from sklearn.metrics import brier_score_loss, log_loss, roc_auc_score
+
+from . import backtest, models, swings
+from .trader import TraderConfig
+
+TEST_SEASONS = list(range(2021, 2027))
+DEFAULT_REPORT_DIR = Path(__file__).resolve().parents[2] / "reports"
+
+
+def _skill(y, p) -> dict:
+    return {"log_loss": float(log_loss(y, p)), "brier": float(brier_score_loss(y, p)),
+            "auc": float(roc_auc_score(y, p)), "accuracy": float(((p > 0.5) == (y == 1)).mean())}
+
+
+def evaluate(data_dir=None, test_seasons=None) -> dict:
+    test_seasons = test_seasons or TEST_SEASONS
+    matches, balls, F, state, pm, states = models.prepare(data_dir)
+    out: dict = {"test_seasons": test_seasons,
+                 "data": {"matches": int(len(matches)), "standard_matches": int(matches["standard"].sum()),
+                          "first": str(matches["date"].min().date()),
+                          "last": str(matches["date"].max().date())}}
+
+    # ---- pre-match --------------------------------------------------------
+    d = pm[pm["season"].isin(test_seasons) & pm["y"].notna()]
+    y = d["y"].to_numpy()
+    out["prematch"] = {
+        "n_matches": int(len(d)),
+        "coin_flip": {"log_loss": float(np.log(2)), "accuracy": 0.5},
+        "elo_only": _skill(y, d["elo_prob"].to_numpy()),
+        "model_before_toss": _skill(y, d["p_pre"].to_numpy()),
+        "model_after_toss": _skill(y, d["p_toss"].to_numpy()),
+    }
+    f = F[F["season"].isin(test_seasons) & F["y"].notna() & (F["bat_first"] != 0)]
+    out["prematch"]["by_league"] = {
+        str(lg): {"matches": int(len(g)), "log_loss": float(log_loss(g["y"], g["p_toss"], labels=[0, 1])),
+                  "accuracy": float(((g["p_toss"] > 0.5) == (g["y"] == 1)).mean())}
+        for lg, g in d.merge(F[["match_id", "league"]], on="match_id").groupby("league")}
+    out["prematch"]["chasing_side_win_rate"] = float(((f["bat_first"] < 0) == (f["y"] == 1)).mean())
+
+    # ---- in-play ----------------------------------------------------------
+    oos = models.walk_forward_inplay(states, test_seasons)
+    yb = oos["won"].to_numpy()
+    out["inplay"] = {
+        "n_balls": int(len(oos)), "n_matches": int(oos["match_id"].nunique()),
+        "model": _skill(yb, oos["p_model"].to_numpy()),
+        "reference_repo_style_baseline": _skill(yb, oos["p_base"].to_numpy()),
+        "prior_only": _skill(yb, oos["pm_prob"].to_numpy()),
+        "by_innings": {str(i): {"model": _skill(g["won"].to_numpy(), g["p_model"].to_numpy()),
+                                "baseline": _skill(g["won"].to_numpy(), g["p_base"].to_numpy())}
+                       for i, g in oos.groupby("innings")},
+        "by_league": {str(lg): {"matches": int(g["match_id"].nunique()),
+                                "model": float(log_loss(g["won"], g["p_model"])),
+                                "baseline": float(log_loss(g["won"], g["p_base"]))}
+                      for lg, g in oos.groupby("league")},
+        "by_season": {str(s): {"model": float(log_loss(g["won"], g["p_model"])),
+                               "baseline": float(log_loss(g["won"], g["p_base"]))}
+                      for s, g in oos.groupby("season")},
+    }
+    bins = pd.cut(oos["p_model"], np.linspace(0, 1, 11))
+    cal = oos.groupby(bins, observed=True).agg(n=("won", "size"), predicted=("p_model", "mean"),
+                                               observed=("won", "mean"))
+    out["inplay"]["calibration"] = [
+        {"bin": str(i), "n": int(r.n), "predicted": float(r.predicted), "observed": float(r.observed)}
+        for i, r in cal.iterrows()]
+
+    # ---- first-innings total ----------------------------------------------
+    tt = models.walk_forward_totals(states, test_seasons)
+    err = tt["final_total"] - tt["total_pred"]
+    naive = tt["final_total"] - (tt["score"] + tt["balls_left"] * tt["par"] / 120)
+    z = err / tt["total_sd"]
+    out["totals"] = {"mae": float(err.abs().mean()), "bias": float(err.mean()),
+                     "naive_par_rate_mae": float(naive.abs().mean()),
+                     "coverage_1sd": float((z.abs() < 1).mean()),
+                     "coverage_2sd": float((z.abs() < 1.96).mean())}
+
+    # ---- trading rule vs simulated markets ---------------------------------
+    cfg = TraderConfig()
+    grid = backtest.scenario_grid(oos, cfg)
+    hold = backtest.scenario_grid(oos, TraderConfig(hedge_exits=False))
+    out["trading"] = {
+        "config": cfg.__dict__,
+        "simulated_market_grid": json.loads(grid.to_json(orient="records")),
+        "hold_to_result_grid": json.loads(hold.to_json(orient="records")),
+    }
+    out["trading"]["stale_score_test"] = json.loads(backtest.stale_score_test(oos, cfg).to_json(orient="records"))
+
+    # ---- turnaround matches ------------------------------------------------
+    out["swings"] = swings.analyse(oos)
+    return out
+
+
+def to_markdown(r: dict) -> str:
+    pm, ip, tt = r["prematch"], r["inplay"], r["totals"]
+    L = []
+    L.append("# Evaluation report\n")
+    L.append(f"Generated by `ipl evaluate`. Data: {r['data']['matches']} men's franchise T20 matches "
+             f"({r['data']['first']} to {r['data']['last']}), {r['data']['standard_matches']} of them "
+             f"full 20-over games. Every figure below is walk-forward on seasons "
+             f"{r['test_seasons'][0]}-{r['test_seasons'][-1]}: each season is predicted by "
+             f"models trained only on earlier seasons.\n")
+    L.append("## 1. Pre-match winner\n")
+    L.append("| Model | Log loss | Accuracy |\n|---|---|---|")
+    L.append(f"| Coin flip | {pm['coin_flip']['log_loss']:.4f} | 50.0% |")
+    for k, name in (("elo_only", "Elo rating only"), ("model_before_toss", "Full model, before toss"),
+                    ("model_after_toss", "Full model, after toss")):
+        L.append(f"| {name} | {pm[k]['log_loss']:.4f} | {pm[k]['accuracy']*100:.1f}% |")
+    L.append(f"\n{pm['n_matches']} matches. Side batting second won "
+             f"{pm['chasing_side_win_rate']*100:.1f}% of them. Lower log loss is better; "
+             f"a difference under ~0.004 is inside the noise for a sample this size.\n")
+    if "by_league" in pm:
+        from .ingest import LEAGUES
+        L.append("| League | Matches | Log loss | Accuracy |\n|---|---|---|---|")
+        for lg, v in pm["by_league"].items():
+            L.append(f"| {LEAGUES.get(lg, lg)} | {v['matches']} | {v['log_loss']:.4f} | {v['accuracy']*100:.1f}% |")
+        L.append("")
+    L.append("## 2. In-play win probability\n")
+    L.append("| Model | Log loss | Brier | AUC |\n|---|---|---|---|")
+    for k, name in (("prior_only", "Pre-match prior, ignoring the scoreboard"),
+                    ("reference_repo_style_baseline", "Reference-repo style logistic regression"),
+                    ("model", "This model")):
+        L.append(f"| {name} | {ip[k]['log_loss']:.4f} | {ip[k]['brier']:.4f} | {ip[k]['auc']:.4f} |")
+    L.append(f"\n{ip['n_balls']:,} ball states from {ip['n_matches']} matches.\n")
+    L.append("| Innings | This model | Baseline |\n|---|---|---|")
+    for i, v in ip["by_innings"].items():
+        L.append(f"| {i} | {v['model']['log_loss']:.4f} | {v['baseline']['log_loss']:.4f} |")
+    if "by_league" in ip:
+        from .ingest import LEAGUES
+        L.append("\n| League | Matches | This model | Baseline |\n|---|---|---|---|")
+        for lg, v in ip["by_league"].items():
+            L.append(f"| {LEAGUES.get(lg, lg)} | {v['matches']} | {v['model']:.4f} | {v['baseline']:.4f} |")
+    L.append("\n| Season | This model | Baseline |\n|---|---|---|")
+    for s, v in ip["by_season"].items():
+        L.append(f"| {s} | {v['model']:.4f} | {v['baseline']:.4f} |")
+    L.append("\nCalibration (does a 70% call win 70% of the time?):\n")
+    L.append("| Predicted range | Balls | Mean predicted | Observed |\n|---|---|---|---|")
+    for c in ip["calibration"]:
+        L.append(f"| {c['bin']} | {c['n']:,} | {c['predicted']*100:.1f}% | {c['observed']*100:.1f}% |")
+    L.append("\n## 3. First-innings total\n")
+    L.append(f"Mean absolute error {tt['mae']:.1f} runs (projecting at the venue par rate: "
+             f"{tt['naive_par_rate_mae']:.1f}). Bias {tt['bias']:+.1f}. Actual total fell within "
+             f"one predicted standard deviation {tt['coverage_1sd']*100:.0f}% of the time "
+             f"(ideal 68%) and within two {tt['coverage_2sd']*100:.0f}% (ideal 95%).\n")
+    L.append("## 4. Trading rule against simulated markets\n")
+    L.append("**These are not real-money results.** No historical exchange odds were available, so "
+             "market prices are simulated. The table shows how the result depends on how sharp "
+             "the market is. Compare the two log-loss columns: when the market's is lower, the "
+             "market is the better forecaster.\n")
+    L.append("| Simulated market | Market log loss | Model log loss | Trades | "
+             "ROI on money risked | Green both sides | Red both sides | Held to result | "
+             "Chance of profit |\n|---|---|---|---|---|---|---|---|---|")
+    for g in r["trading"]["simulated_market_grid"]:
+        if not g["trades"]:
+            L.append(f"| {g['scenario']} | {g['market_logloss']:.3f} | {g['model_logloss']:.3f} | 0 | "
+                     f"n/a | n/a | n/a | n/a | n/a |")
+            continue
+        L.append(f"| {g['scenario']} | {g['market_logloss']:.3f} | {g['model_logloss']:.3f} | "
+                 f"{g['trades']} | {g['roi_on_risk_pct']:+.1f}% | {g['green_both_sides_pct']:.0f}% | "
+                 f"{g['red_both_sides_pct']:.0f}% | {g['held_to_result_pct']:.0f}% | "
+                 f"{g['prob_profit_pct']:.0f}% |")
+    L.append("\nSame rule without hedging (value bet, hold to the result):\n")
+    L.append("| Simulated market | Trades | ROI on money risked | Chance of profit |\n|---|---|---|---|")
+    for g in r["trading"]["hold_to_result_grid"]:
+        if not g["trades"]:
+            L.append(f"| {g['scenario']} | 0 | n/a | n/a |")
+            continue
+        L.append(f"| {g['scenario']} | {g['trades']} | {g['roi_on_risk_pct']:+.1f}% | "
+                 f"{g['prob_profit_pct']:.0f}% |")
+    c = r["trading"]["config"]
+    L.append(f"\nRule settings: enter at {c['entry_edge']*100:.0f} points of edge, hedge when edge "
+             f"falls under {c['exit_edge']*100:.0f} point or locked loss reaches "
+             f"{(c['stop_loss'] or 0)*100:.0f}% of risk, {c['kelly_fraction']:.2f} Kelly capped at "
+             f"{c['max_risk_frac']*100:.0f}% of bankroll per trade, {c['commission']*100:.0f}% commission, "
+             f"1-point back/lay spread. \"Chance of profit\" resamples matches 2,000 times.\n")
+    sw = r.get("swings")
+    if sw:
+        lc = sw["lead_changes"]
+        L.append("## 5. Turnaround matches\n")
+        L.append("Prices here are the model's fair odds, not market odds.\n")
+        L.append(f"Of {lc['matches']} matches, both sides were at some point favourite at 60%+ in "
+                 f"{lc['both_sides_favourite_at_60']*100:.0f}%, at 70%+ in "
+                 f"{lc['both_sides_favourite_at_70']*100:.0f}%, at 80%+ in "
+                 f"{lc['both_sides_favourite_at_80']*100:.0f}% and at 90%+ in "
+                 f"{lc['both_sides_favourite_at_90']*100:.0f}%. The eventual winner had been below "
+                 f"30% in {lc['winner_was_below_30']*100:.0f}% of matches and below 10% in "
+                 f"{lc['winner_was_below_10']*100:.0f}%.\n")
+        L.append("Strategy: back whichever side first reaches the odds threshold (100 units), then "
+                 "back the other side if it later reaches the threshold too, sized so both "
+                 "outcomes pay the same.\n")
+        L.append("| Odds threshold | Matches that turned | Expected if prices are fair | "
+                 "Avg profit when it turned | Avg result when it did not | ROI at fair prices | "
+                 "ROI after spread and commission |\n|---|---|---|---|---|---|---|")
+        for f, c in zip(sw["fair_prices"], sw["with_costs"]):
+            L.append(f"| {f['threshold']:.1f} | {f['turnaround_pct']:.0f}% | "
+                     f"{f['turnaround_pct_if_prices_fair']:.0f}% | {f['avg_profit_when_turned']:+.0f} | "
+                     f"{f['avg_result_when_not_turned']:+.0f} | {f['roi_pct']:+.1f}% | {c['roi_pct']:+.1f}% |")
+        L.append("\nBy when the first bet was struck (threshold 3.0, fair prices):\n")
+        L.append("| First bet struck | Trades | Turned | ROI |\n|---|---|---|---|")
+        for ph in sw["by_phase"]:
+            L.append(f"| {ph['phase']} | {ph['trades']} | {ph['turnaround_pct']:.0f}% | {ph['roi_pct']:+.1f}% |")
+        L.append("\nEach trade either loses about the stake or wins one to five times it, so a row "
+                 "needs many hundreds of trades before its ROI means much. Treat the phase split as "
+                 "a question to test on real odds, not as a result.\n")
+    st = r["trading"].get("stale_score_test")
+    if st:
+        L.append("## 6. What a slow score feed costs\n")
+        L.append("Same trading rule, same simulated market (the kind one: it knows what the model "
+                 "knows, plus random mispricing). The only change is that the trader sees the "
+                 "score a few balls late while trading at current prices. The guard blocks "
+                 "trading whenever the price has moved more than 3 points since the last score "
+                 "the trader has seen.\n")
+        L.append("| Score is behind by | Guard | Trades | ROI on money risked | Chance of profit |\n|---|---|---|---|---|")
+        for s in st:
+            L.append(f"| {s['score_lag_balls']} balls | {s['guard']} | {s['trades']} | "
+                     f"{s['roi_on_risk_pct']:+.1f}% | {s['prob_profit_pct']:.0f}% |")
+        L.append("\nOne ball is roughly 30 to 40 seconds of play.\n")
+    return "\n".join(L) + "\n"
+
+
+def write(r: dict, out_dir=None) -> Path:
+    out_dir = Path(out_dir) if out_dir else DEFAULT_REPORT_DIR
+    out_dir.mkdir(parents=True, exist_ok=True)
+    (out_dir / "metrics.json").write_text(json.dumps(r, indent=2))
+    (out_dir / "REPORT.md").write_text(to_markdown(r))
+    return out_dir

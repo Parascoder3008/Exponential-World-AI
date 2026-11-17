@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Practice exchange</title>
+<style>
+  :root { --bg:#f6f7f9; --card:#fff; --ink:#1d2330; --muted:#677084; --back:#a6d8ff; --lay:#fac9d1; --line:#dfe3ea; }
+  body { margin:0; font:15px/1.4 system-ui, sans-serif; background:var(--bg); color:var(--ink); }
+  main { max-width:720px; margin:0 auto; padding:16px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px; margin-bottom:14px; }
+  #score { font-size:18px; font-weight:600; }
+  #status { color:var(--muted); }
+  table { width:100%; border-collapse:collapse; }
+  td { padding:8px 6px; border-top:1px solid var(--line); }
+  .price { width:84px; text-align:center; border:0; border-radius:6px; padding:8px 0; font-weight:600; cursor:pointer; font-size:15px; }
+  .back { background:var(--back); } .lay { background:var(--lay); }
+  #slip[hidden] { display:none; }
+  #slip label { display:inline-block; margin-right:10px; }
+  #slip input { width:90px; padding:6px; font-size:15px; }
+  #slip button { padding:7px 14px; font-size:15px; margin-right:6px; }
+  #bets li { margin:2px 0; }
+  .note { color:var(--muted); font-size:13px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="card">
+    <div id="title"></div>
+    <div id="score">-</div>
+    <div id="status" class="note"></div>
+  </div>
+  <div class="card">
+    <table id="market"><tbody></tbody></table>
+  </div>
+  <div class="card" id="slip" hidden>
+    <div id="slip-what"></div>
+    <label>Odds <input id="odds" inputmode="decimal"></label>
+    <label>Stake <input id="stake" inputmode="decimal"></label>
+    <div style="margin-top:8px">
+      <button id="place">Place bet</button><button id="cancel">Cancel</button>
+    </div>
+  </div>
+  <div class="card">
+    <strong>Your bets</strong>
+    <ul id="bets"></ul>
+    <div class="note">Practice exchange built for testing the bot. Replays a past match with simulated prices. No money involved.</div>
+  </div>
+</main>
+<script>
+(async () => {
+  const data = await (await fetch('data.json', { cache: 'no-store' })).json();
+  const params = new URLSearchParams(location.search);
+  const interval = Number(params.get('ms') || data.ms || 1000);
+  let i = 0, slip = null;
+  window.__mock = { bets: [], tick: () => i, data };
+  document.getElementById('title').textContent = data.title;
+  const tbody = document.querySelector('#market tbody');
+  data.runners.forEach((name, r) => {
+    const tr = document.createElement('tr');
+    tr.className = 'runner';
+    tr.innerHTML = `<td class="name">${name}</td>` +
+      `<td><button class="price back" data-r="${r}" data-side="back"></button></td>` +
+      `<td><button class="price lay" data-r="${r}" data-side="lay"></button></td>`;
+    tbody.appendChild(tr);
+  });
+  const cur = () => data.ticks[Math.min(i, data.ticks.length - 1)];
+  const render = () => {
+    const t = cur();
+    document.getElementById('score').textContent = t.score;
+    document.getElementById('status').textContent = t.status || '';
+    document.querySelectorAll('.price').forEach(b => {
+      const v = t[b.dataset.side][Number(b.dataset.r)];
+      b.textContent = v ? v.toFixed(2) : '-';
+    });
+  };
+  document.querySelectorAll('.price').forEach(b => b.addEventListener('click', () => {
+    const t = cur(), r = Number(b.dataset.r), side = b.dataset.side;
+    const v = t[side][r]; if (!v) return;
+    slip = { r, side };
+    document.getElementById('slip-what').textContent = `${side.toUpperCase()} ${data.runners[r]}`;
+    document.getElementById('odds').value = v.toFixed(2);
+    document.getElementById('stake').value = '';
+    document.getElementById('slip').hidden = false;
+  }));
+  document.getElementById('cancel').addEventListener('click', () => {
+    slip = null; document.getElementById('slip').hidden = true;
+  });
+  document.getElementById('place').addEventListener('click', () => {
+    if (!slip) return;
+    const odds = Number(document.getElementById('odds').value);
+    const stake = Number(document.getElementById('stake').value);
+    if (!(odds > 1) || !(stake > 0)) return;
+    const t = cur(), avail = t[slip.side][slip.r];
+    // Exchange matching: a back fills at or below the best back price on offer,
+    // a lay at or above the best lay price.
+    const matched = avail && (slip.side === 'back' ? odds <= avail + 1e-9 : odds >= avail - 1e-9);
+    const bet = { runner: data.runners[slip.r], side: slip.side, odds: matched ? avail : odds, stake, matched, tick: i };
+    window.__mock.bets.push(bet);
+    const li = document.createElement('li');
+    li.className = matched ? 'bet-matched' : 'bet-unmatched';
+    li.textContent = `${matched ? 'Matched' : 'Unmatched'}: ${slip.side.toUpperCase()} ${bet.runner} @ ${bet.odds.toFixed(2)}  stake ${stake.toFixed(2)}`;
+    document.getElementById('bets').appendChild(li);
+    slip = null; document.getElementById('slip').hidden = true;
+  });
+  render();
+  const timer = setInterval(() => {
+    if (i >= data.ticks.length - 1) { clearInterval(timer); return; }
+    i += 1; render();
+  }, interval);
+})();
+</script>
+</body>
+</html>

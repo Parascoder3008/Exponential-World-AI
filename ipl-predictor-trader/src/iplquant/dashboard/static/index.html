@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Signals</title>
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">Signals</div>
+  <span id="mode" class="pill"></span>
+  <span id="live" class="live"><i></i><span>Connecting</span></span>
+  <div class="spacer"></div>
+  <button id="sound" class="ghost" type="button" aria-pressed="false">Sound off</button>
+  <form method="post" action="/logout"><button class="ghost" type="submit">Log out</button></form>
+</header>
+
+<main>
+  <section id="banner" class="banner" hidden>
+    <div id="banner-label" class="banner-label"></div>
+    <div id="banner-text" class="banner-text"></div>
+    <div id="banner-sub" class="banner-sub"></div>
+  </section>
+
+  <section class="card">
+    <div class="match-head">
+      <div>
+        <div id="title" class="title">Waiting for the bot</div>
+        <div id="score" class="score muted">Start <code>ipl bot ... --signals signals.jsonl</code></div>
+      </div>
+      <div id="state" class="state muted"></div>
+    </div>
+    <table class="teams">
+      <thead><tr><th></th><th>Model</th><th>Market</th><th>Edge</th><th>Back</th><th>Lay</th></tr></thead>
+      <tbody>
+        <tr id="row-a"><td class="team"></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr id="row-b"><td class="team"></td><td></td><td></td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+    <svg id="chart" class="chart" viewBox="0 0 600 120" preserveAspectRatio="none" role="img"
+         aria-label="Model and market win probability for the side batting first over the match">
+      <line x1="0" y1="60" x2="600" y2="60" class="mid"/>
+      <polyline id="line-market" class="l-market" points=""/>
+      <polyline id="line-model" class="l-model" points=""/>
+    </svg>
+    <div class="legend"><span class="k-model"></span>Model <span class="k-market"></span>Market
+      <span class="muted" id="chart-note"></span></div>
+  </section>
+
+  <section class="stats">
+    <div class="stat"><div class="label">Position</div><div id="pos" class="value">Flat</div><div id="pos-sub" class="sub"></div></div>
+    <div class="stat"><div class="label">This match</div><div id="match-pnl" class="value">0.00</div><div id="match-sub" class="sub"></div></div>
+    <div class="stat"><div class="label">Today</div><div id="today" class="value">0.00</div><div id="today-sub" class="sub"></div></div>
+    <div class="stat"><div class="label">All time</div><div id="total" class="value">0.00</div><div id="total-sub" class="sub"></div></div>
+  </section>
+
+  <section class="card">
+    <div class="feed-head">
+      <div class="tabs" role="tablist">
+        <button type="button" role="tab" data-f="trades" aria-selected="true">Trades</button>
+        <button type="button" role="tab" data-f="all" aria-selected="false">Every signal</button>
+      </div>
+      <span id="count" class="muted"></span>
+    </div>
+    <div class="table-wrap">
+      <table class="feed">
+        <thead><tr><th>Time</th><th>Signal</th><th>Model</th><th>Market</th><th>Edge</th></tr></thead>
+        <tbody id="feed"></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+<script src="/static/app.js"></script>
+</body>
+</html>
