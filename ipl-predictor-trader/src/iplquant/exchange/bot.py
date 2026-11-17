@@ -60,7 +60,8 @@ class TradingBot:
                  venue: str, league: str | None = None, cfg: TraderConfig | None = None,
                  bankroll: float = 10_000.0, limits: RiskLimits | None = None,
                  ledger_path: str | Path | None = None, notify=print, clock=time.time,
-                 aliases: dict | None = None, record_path: str | Path | None = None):
+                 aliases: dict | None = None, record_path: str | Path | None = None,
+                 signals_path: str | Path | None = None):
         if mode not in MODES:
             raise ValueError(f"mode must be one of {MODES}")
         self.ex, self.mode, self.notify, self.clock = exchange, mode, notify, clock
@@ -76,9 +77,12 @@ class TradingBot:
         self.finished: dict | None = None
         self.unreadable = 0
         self.record_path = Path(record_path) if record_path else None
+        self.signals_path = Path(signals_path) if signals_path else None
+        self._sc = None
         self.session.log({"event": "start", "mode": mode, "batting_first": batting_first,
                           "bowling_first": bowling_first, "venue": venue,
                           "league": self.session.league, "limits": asdict(self.limits)})
+        self._signal({"event": "start", "action": "start", "reason": "bot started"})
 
     # ---- helpers -------------------------------------------------------------
     @property
@@ -141,8 +145,47 @@ class TradingBot:
     def _stop_requested(self) -> bool:
         return Path(self.limits.stop_file).exists()
 
+    # ---- signals ---------------------------------------------------------------
+    def _signal(self, out: dict) -> None:
+        """Append one line per poll to the signals file the dashboard reads: what the
+        bot saw, what the model said, and what it did and why."""
+        if self.signals_path is None:
+            return
+        s, tr, snap = self.session.state, self.session.trader, self.last_snap
+        row = {"t": round(self.clock(), 3), "match": tr.match_id, "mode": self.mode,
+               "team_a": self.team_a, "team_b": self.team_b, "league": self.session.league,
+               "score": snap.score_text if snap else None,
+               "innings": s.innings, "runs": s.score, "wickets": s.wickets, "balls": s.balls_bowled,
+               "target": s.target, "realised": round(tr.pnl, 2)}
+        for k in ("event", "action", "reason", "side", "odds", "stake", "locked", "fresh",
+                  "p_model", "p_market", "back", "lay", "a_won", "trades", "pnl", "why", "flat"):
+            if k in out and out[k] is not None:
+                v = out[k]
+                row[k] = round(v, 4) if isinstance(v, float) else v
+        if row.get("reason") == "no score yet":
+            row.pop("p_model", None)          # no score: the model has nothing to say
+        if "p_model" in row and "p_market" in row:
+            row["edge"] = round(row["p_model"] - row["p_market"], 4)
+        if snap is not None and self.idx_a is not None:
+            if "back" not in row:
+                row["back"], row["lay"] = snap.back[self.idx_a], snap.lay[self.idx_a]
+            row["back_b"], row["lay_b"] = snap.back[1 - self.idx_a], snap.lay[1 - self.idx_a]
+        if tr.open_trade is not None:
+            win, lose = tr.position.exposure()
+            row["pos_if_a_wins"], row["pos_if_a_loses"] = round(win, 2), round(lose, 2)
+            if row.get("back") and row.get("lay"):
+                row["locked_now"] = round(tr.position.locked(row["back"], row["lay"], tr.cfg.commission), 2)
+        self.signals_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(self.signals_path, "a", encoding="utf-8") as fh:
+            fh.write(json.dumps(row, default=str) + "\n")
+
     # ---- one poll ------------------------------------------------------------
     def step(self) -> dict:
+        out = self._step()
+        self._signal(out)
+        return out
+
+    def _step(self) -> dict:
         snap = self.ex.read()
         ts = self.clock()
         self.last_snap = snap
@@ -190,7 +233,8 @@ class TradingBot:
         if snap is not None and self.idx_a is not None and snap.back[self.idx_a] and snap.lay[self.idx_a]:
             ok = self.session.trader.flatten(snap.back[self.idx_a], snap.lay[self.idx_a],
                                              tag=self.clock(), execute=self._execute)
-        out = {"event": "stopped", "why": why, "flat": ok, "pnl": self.realised}
+        out = {"event": "stopped", "why": why, "flat": ok, "pnl": self.realised,
+               "action": "stopped", "reason": why}
         if not ok:
             self.notify("  ! could not hedge the open position - hedge it by hand on the page now")
         self.session.log(out)
@@ -209,11 +253,15 @@ class TradingBot:
         try:
             while self.finished is None:
                 self.step()
-                if max_seconds is not None and self.clock() - start > max_seconds:
-                    return self.stop("time limit")
+                if self.finished is None and max_seconds is not None and self.clock() - start > max_seconds:
+                    out = self.stop("time limit")
+                    self._signal(out)
+                    return out
                 sleep(poll_seconds)
         except KeyboardInterrupt:
-            return self.stop("stopped by you")
+            out = self.stop("stopped by you")
+            self._signal(out)
+            return out
         return self.finished
 
 

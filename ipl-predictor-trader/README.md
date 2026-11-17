@@ -120,6 +120,29 @@ moves without the score changing, the bot does not trade.
 `--alias` maps the names the site shows to the team names in the data, when they
 differ. `--batting-first` is the side that bats first: the model prices that side.
 
+### 5. Watch every signal on the dashboard
+
+```bash
+ipl dashboard            # first run asks you to choose a password
+```
+
+Open http://127.0.0.1:8800 and log in. The bot writes every poll to `signals.jsonl`
+and the page shows it live:
+
+- a banner with the bet to place now (advise mode) or the bet just placed;
+- model against market for both teams, with the edge and back/lay prices;
+- a chart of model and market over the match;
+- open position (what you win or lose either way, and what hedging now locks in),
+  this match, today and all-time results;
+- a feed of trade signals, or every signal including each hold and why.
+
+Run the dashboard from the same folder as the bot, or pass `--signals <path>`.
+Change the password with `ipl dashboard --set-password`. It is stored only as a
+scrypt hash in `~/.iplquant/dashboard.json`; five wrong attempts lock that device out
+for five minutes. To open it from your phone on the same Wi-Fi, use `--host 0.0.0.0`
+and browse to your computer's address; that is plain HTTP unless you pass `--cert`
+and `--key`, so only do it on a network you trust.
+
 ## Command line
 
 ```bash
@@ -203,6 +226,7 @@ src/iplquant/
   report.py     evaluation -> reports/
   oddsfeed.py   The Odds API client (unverified)
   exchange/     browser bot: site config, calibration, score reader, bot, practice exchange
+  dashboard/    password-protected live dashboard of every signal
   cli.py        the `ipl` command
 app.py          Streamlit dashboard
 ```

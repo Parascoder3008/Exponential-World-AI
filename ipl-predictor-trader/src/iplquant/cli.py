@@ -171,7 +171,8 @@ def cmd_bot(a):
     bot = TradingBot(ex, bundle, a.mode, a.batting_first, a.bowling_first, a.venue, a.league,
                      TraderConfig(commission=a.commission, entry_edge=a.entry_edge),
                      a.bankroll, RiskLimits(a.max_risk, a.daily_loss_limit),
-                     ledger_path=a.ledger, aliases=load_aliases(a.alias), record_path=a.record)
+                     ledger_path=a.ledger, aliases=load_aliases(a.alias), record_path=a.record,
+                     signals_path=a.signals)
     print(f"Mode: {a.mode}. Stop with Ctrl+C or by creating a file named STOP here.")
     try:
         _print(bot.run(poll_seconds=cfg.poll_seconds))
@@ -197,6 +198,41 @@ def cmd_practice(a):
     try:
         while True:
             time.sleep(1)
+    except KeyboardInterrupt:
+        srv.shutdown()
+
+
+def cmd_dashboard(a):
+    import getpass
+    from .dashboard.auth import MIN_LENGTH, PasswordStore
+    from .dashboard.server import make_server
+    store = PasswordStore(a.password_file)
+    if a.set_password or not store.is_set:
+        if not store.is_set:
+            print("No dashboard password yet. Choose one now.")
+        while True:
+            p1 = getpass.getpass(f"New password (at least {MIN_LENGTH} characters): ")
+            if p1 == getpass.getpass("Again: "):
+                try:
+                    store.set(p1)
+                    break
+                except ValueError as e:
+                    print(e)
+            else:
+                print("They did not match.")
+        print(f"Saved (hashed) to {store.path}")
+        if a.set_password:
+            return
+    if a.host not in ("127.0.0.1", "localhost", "::1") and not a.cert:
+        print("WARNING: other devices on your network can reach this page and it is plain HTTP, "
+              "so the password and signals cross the network unencrypted. Use --cert/--key "
+              "for HTTPS, or only do this on a network you trust.")
+    srv = make_server(a.signals, a.host, a.port, store, a.cert, a.key)
+    scheme = "https" if a.cert else "http"
+    shown = "127.0.0.1" if a.host in ("0.0.0.0", "::") else a.host
+    print(f"Dashboard: {scheme}://{shown}:{a.port}  (reading {a.signals}). Ctrl+C to stop.")
+    try:
+        srv.serve_forever()
     except KeyboardInterrupt:
         srv.shutdown()
 
@@ -360,6 +396,7 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("--entry-edge", type=float, default=0.04)
     sp.add_argument("--ledger", default="ledger.jsonl"); sp.add_argument("--model")
     sp.add_argument("--record", help="also save every score and price reading to this CSV")
+    sp.add_argument("--signals", default="signals.jsonl", help="every signal, for `ipl dashboard`")
     sp.add_argument("--headless", action="store_true"); sp.add_argument("--no-wait", action="store_true")
     sp.add_argument("--yes-place-bets", action="store_true", help="required for execute mode")
 
@@ -369,6 +406,16 @@ def build_parser() -> argparse.ArgumentParser:
                                                                         help="milliseconds per ball")
     sp.add_argument("--site-out", default="practice_site.json"); sp.add_argument("--dir")
     sp.add_argument("--data"); sp.add_argument("--model")
+
+    sp = add("dashboard", cmd_dashboard, "password-protected live dashboard of every signal")
+    sp.add_argument("--signals", default="signals.jsonl")
+    sp.add_argument("--host", default="127.0.0.1",
+                    help="0.0.0.0 to open it from your phone on the same Wi-Fi")
+    sp.add_argument("--port", type=int, default=8800)
+    sp.add_argument("--set-password", action="store_true", help="set or change the password and exit")
+    sp.add_argument("--password-file", help="where the hashed password is kept")
+    sp.add_argument("--cert", help="TLS certificate file, to serve over HTTPS")
+    sp.add_argument("--key", help="TLS private key file")
 
     sp = add("predict-match", cmd_predict_match, "pre-match win probability")
     sp.add_argument("--team1", required=True); sp.add_argument("--team2", required=True)
